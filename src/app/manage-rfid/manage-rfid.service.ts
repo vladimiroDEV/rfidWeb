@@ -1,5 +1,5 @@
 import { Injectable }     from '@angular/core';
-import { Anagrafica, Rfid, AnagraficaRfid, ClaimStep } from './manage-refid.models';
+import { Anagrafica, Rfid, AnagraficaRfid, ClaimStep, ManageRfidFormModel } from './manage-refid.models';
 
 
 @Injectable() 
@@ -22,6 +22,10 @@ export class ManageRfidFormService {
   getAnagrafica ():Anagrafica {return this.anagrafica}
   getRfid ():Rfid {return this.rfid}
   getAnagraficaRfid ():AnagraficaRfid {return this.anagraficaRfid}
+
+  getManageRfidFormModel() {
+      return new ManageRfidFormModel(this.getRfid(),this.getAnagrafica(),this.getAnagraficaRfid());
+  }
 
  
     

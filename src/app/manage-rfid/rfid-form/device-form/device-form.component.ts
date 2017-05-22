@@ -40,7 +40,7 @@ DeviceForm:FormGroup;
     }
 
      submit() {
-       this.manageRfidFormService.rfid.RfidCode = this.DeviceForm.value.refidCode;
+       this.manageRfidFormService.rfid.RfidCode = this.DeviceForm.value.rfidCode;
        this.manageRfidFormService.anagraficaRfid.Credit  = this.DeviceForm.value.credito;
        this.manageRfidFormService.anagraficaRfid.ExpiryDate = this.DeviceForm.value.ExpyreDate;
 

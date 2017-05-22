@@ -19,12 +19,15 @@ export class Rfid {
     UserId: number;
 }
 export class AnagraficaRfid {
-    Rfid: Rfid;
-    Anagrafica: Anagrafica;
     Credit: number;
     IsValid: boolean;
     ExpiryDate: Date;
 }
+
+export class ManageRfidFormModel {
+  constructor(private rfid:Rfid, private anagrafica: Anagrafica, private AnagRfid: AnagraficaRfid){}
+}
+
 
 
 
