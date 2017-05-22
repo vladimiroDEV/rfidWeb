@@ -21,8 +21,7 @@ export class Rfid {
 export class AnagraficaRfid {
     Rfid: Rfid;
     Anagrafica: Anagrafica;
-    CreditTotal: number;
-    RemainingCredit: number;
+    Credit: number;
     IsValid: boolean;
     ExpiryDate: Date;
 }

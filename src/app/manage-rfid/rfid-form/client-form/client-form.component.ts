@@ -34,6 +34,11 @@ DatiClienteForm:FormGroup;
   }
 
     submit() {
+
+        this.anagrafica.Email = this.DatiClienteForm.value.email;
+        this.anagrafica.Nome = this.DatiClienteForm.value.nome;
+        this.anagrafica.Cognome = this.DatiClienteForm.value.cognome;
+        this.anagrafica.Telefono = this.DatiClienteForm.value.telefono;
         this.onNext();
     }
 

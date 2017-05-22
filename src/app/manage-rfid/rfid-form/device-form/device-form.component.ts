@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Anagrafica, AnagraficaRfid } from '../../manage-refid.models';
+import { Anagrafica, AnagraficaRfid, Rfid } from '../../manage-refid.models';
 import { ManageRfidFormService } from '../../manage-rfid.service';
 
 @Component({
@@ -14,6 +14,7 @@ export class DeviceFormComponent implements OnInit {
 
  anagrafica:Anagrafica;
  anagraficaRfid:AnagraficaRfid;
+ refid:Rfid;
 DeviceForm:FormGroup;
   constructor(
     private manageRfidFormService:ManageRfidFormService,
@@ -29,6 +30,8 @@ DeviceForm:FormGroup;
       'credito': '',
       'ExpyreDate': '',
     });
+
+      console.log(this.manageRfidFormService);
   }
 
   back() {
@@ -37,6 +40,10 @@ DeviceForm:FormGroup;
     }
 
      submit() {
+       this.manageRfidFormService.rfid.RfidCode = this.DeviceForm.value.refidCode;
+       this.manageRfidFormService.anagraficaRfid.Credit  = this.DeviceForm.value.credito;
+       this.manageRfidFormService.anagraficaRfid.ExpiryDate = this.DeviceForm.value.ExpyreDate;
+
 
         console.log(this.manageRfidFormService);
     
