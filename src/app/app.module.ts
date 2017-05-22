@@ -13,6 +13,8 @@ import { TopUpComponent } from './manage-rfid/top-up/top-up.component';
 import { DisableComponent } from './manage-rfid/disable/disable.component';
 import { PaidComponent } from './manage-rfid/paid/paid.component';
 import { InfoComponent } from './manage-rfid/info/info.component';
+import { HomeComponent } from './home/home.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -25,12 +27,14 @@ import { InfoComponent } from './manage-rfid/info/info.component';
     TopUpComponent,
     DisableComponent,
     PaidComponent,
-    InfoComponent
+    InfoComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
