@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
@@ -15,6 +15,11 @@ import { PaidComponent } from './manage-rfid/paid/paid.component';
 import { InfoComponent } from './manage-rfid/info/info.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ActionsComponent } from './manage-rfid/actions/actions.component';
+import { ClientFormComponent } from './manage-rfid/rfid-form/client-form/client-form.component';
+import { DeviceFormComponent } from './manage-rfid/rfid-form/device-form/device-form.component';
+import { ManageRfidFormService } from './manage-rfid/manage-rfid.service';
+import { ClaimStep } from './manage-rfid/manage-refid.models';
 
 @NgModule({
   declarations: [
@@ -28,15 +33,19 @@ import { AppRoutingModule } from './app-routing.module';
     DisableComponent,
     PaidComponent,
     InfoComponent,
-    HomeComponent
+    HomeComponent,
+    ActionsComponent,
+    ClientFormComponent,
+    DeviceFormComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     AppRoutingModule,
+    ReactiveFormsModule ,
   ],
-  providers: [],
+ providers: [ManageRfidFormService, ClaimStep ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

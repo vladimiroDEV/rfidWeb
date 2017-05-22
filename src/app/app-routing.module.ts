@@ -9,12 +9,13 @@ import { InfoComponent } from './manage-rfid/info/info.component';
 import { SettingsComponent } from './settings/settings.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { HomeComponent } from './home/home.component';
+import { ActionsComponent } from './manage-rfid/actions/actions.component';
 
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'manage-rfid', component: ManageRfidComponent, children: [
-    { path: '', component: ManageRfidComponent },
+    { path: '', component: ActionsComponent },
     { path: 'new', component: RfidFormComponent },
     { path: 'paid', component: PaidComponent },
     { path: 'top-up', component: TopUpComponent, },

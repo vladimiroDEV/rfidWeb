@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ClaimStep } from '../manage-refid.models';
 
 @Component({
   selector: 'app-rfid-form',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RfidFormComponent implements OnInit {
 
-  constructor() { }
+wizard: ClaimStep;
+  constructor(private _claimStep:ClaimStep) { 
+    this.wizard = _claimStep;
+  }
 
   ngOnInit() {
   }
+
+  onNext = () => {
+        this.wizard.addStep();
+    }
+
+    onBack = () => {
+        this.wizard.subtractStep();
+    }
 
 }

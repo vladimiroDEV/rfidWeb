@@ -1,3 +1,2 @@
-<p>
-  rfid-form works!
-</p>
+<app-client-form *ngIf ="wizard.currentStep === 1" [onNext]="onNext" ></app-client-form>
+<app-device-form *ngIf ="wizard.currentStep === 2" [onBack]="onBack"></app-device-form>

@@ -1,0 +1,45 @@
+<!--component html goes here -->
+
+<div class="row">
+    <br /><br/>
+    <div class="col-md-6">
+        <button class="btn btn-sq-lg btn-success" [routerLink]="['/paid']">
+        <i class="fa fa-money fa-5x" aria-hidden="true"></i><br>
+        Paga Rfid</button>
+    </div>
+   
+    <div class="col-md-6">
+        
+      
+
+  <ul class="list-unstyled">
+                <li>
+                    <button (click)="createNew()"
+                     class="btn btn-primary btn-block">
+                             Nuovo
+                    </button>
+                    </li><br />
+                     <li>
+                    <button [routerLink]="['/top-up']"
+                     class="btn btn-primary btn-block">
+                             Ricarica Rfid
+                    </button>
+                    </li><br />
+                     <li>
+                    <button [routerLink]="['/band']"
+                     class="btn btn-primary btn-block">
+                             Modifica Rfid
+                    </button>
+                    </li><br />
+                     <li>
+                    <button [routerLink]="['/band']"
+                     class="btn btn-primary btn-block">
+                             Statistiche
+                    </button>
+                    </li>
+            </ul>
+    </div>
+    <div class="col-md-6"> 
+            {{rfids | json}}
+    </div>
+</div>
