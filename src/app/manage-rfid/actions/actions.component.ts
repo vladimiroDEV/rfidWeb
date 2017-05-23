@@ -19,4 +19,8 @@ export class ActionsComponent implements OnInit {
     this._router.navigate(['new'], {relativeTo: this._route});
   }
 
+  paid() {
+    this._router.navigate(['paid'], {relativeTo: this._route});
+  }
+
 }

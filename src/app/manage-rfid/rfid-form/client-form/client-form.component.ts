@@ -26,10 +26,10 @@ DatiClienteForm:FormGroup;
 
   ngOnInit() {
      this.DatiClienteForm = this.fb.group({
-      'email':'',
-      'nome': '',
-      'cognome': '',
-      'telefono': ''
+      'email':new FormControl(this.manageRfidFormService.anagrafica.Email),
+      'nome': new FormControl(this.manageRfidFormService.anagrafica.Nome),
+      'cognome': new FormControl(this.manageRfidFormService.anagrafica.Cognome),
+      'telefono': new FormControl(this.manageRfidFormService.anagrafica.Telefono)
     });
   }
 

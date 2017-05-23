@@ -3,7 +3,7 @@
 <div class="row">
     <br /><br/>
     <div class="col-md-6">
-        <button class="btn btn-sq-lg btn-success" [routerLink]="['/paid']">
+        <button class="btn btn-sq-lg btn-success" (click)="paid()">
         <i class="fa fa-money fa-5x" aria-hidden="true"></i><br>
         Paga Rfid</button>
     </div>
@@ -20,7 +20,7 @@
                     </button>
                     </li><br />
                      <li>
-                    <button [routerLink]="['/top-up']"
+                    <button 
                      class="btn btn-primary btn-block">
                              Ricarica Rfid
                     </button>

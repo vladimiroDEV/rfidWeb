@@ -1,3 +1,16 @@
-<p>
-  paid works!
-</p>
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="well">
+<h3>Dati Cliente</h3>
+     <form (ngSubmit)="readCode()"  [formGroup]="PaidForm" >
+        <div class="form-group">
+            <label for="code">Codice</label>
+            <input type="code" class="form-control" id="code" name="code" formControlName="code">
+   
+        </div>
+
+    </form>
+    </div>
+  </div>
+</div>
