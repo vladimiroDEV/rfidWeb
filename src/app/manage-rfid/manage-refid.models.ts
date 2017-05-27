@@ -3,32 +3,35 @@ import { Injectable } from '@angular/core';
 
 
 export class Anagrafica {
-    IdAnagrafica?: number;
+    AnagraficaID?: number;
     Email: string;
     Nome: string;
     Cognome: string;
     Telefono: number;
+    CreationDate:Date;
+
 
 }
 export class Rfid {
-    IdRfid?: number;
+    RfidID?: number;
     RfidCode: string;
     ExpirationDate: Date;
     CreationDate: Date;
+    LastModifiedDate:Date;
+    Credit:number;
+    AppUserID:number;
     Active: boolean;
-    UserId: number;
-}
-export class AnagraficaRfid {
-    Credit: number;
-    IsValid: boolean;
-    ExpiryDate: Date;
+    AnagraficaID?: number;
+    Anagrafica?:Anagrafica;
+
+
 }
 
 export class ManageRfidFormModel {
-  constructor(private rfid:Rfid, private anagrafica: Anagrafica, private AnagRfid: AnagraficaRfid){}
+  constructor(private rfid:Rfid, private anagrafica:Anagrafica){
+      this.rfid.Anagrafica = this.anagrafica;
+  }
 }
-
-
 
 
 @Injectable()

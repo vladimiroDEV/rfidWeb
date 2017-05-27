@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import { Anagrafica, AnagraficaRfid, Rfid } from '../../manage-refid.models';
+import { Anagrafica,  Rfid } from '../../manage-refid.models';
 import { ManageRfidFormService } from '../../manage-rfid.service';
 import { ManageRfidComponent } from '../../manage-rfid.component';
 
@@ -14,7 +14,6 @@ export class DeviceFormComponent implements OnInit {
 @Input() onBack;
 
  anagrafica:Anagrafica;
- anagraficaRfid:AnagraficaRfid;
  refid:Rfid;
 DeviceForm:FormGroup;
   constructor(
@@ -27,10 +26,9 @@ DeviceForm:FormGroup;
   ngOnInit() {
      this.DeviceForm = this.fb.group({
       'rfidCode':new FormControl(this.manageRfidFormService.rfid.RfidCode ),
-      'credito': new FormControl(this.manageRfidFormService.anagraficaRfid.Credit),
-      'ExpyreDate': new FormControl(this.manageRfidFormService.anagraficaRfid.ExpiryDate),
+      'credito': new FormControl(this.manageRfidFormService.rfid.Credit),
+      'ExpyreDate': new FormControl(this.manageRfidFormService.rfid.ExpirationDate),
     });
-
      
   }
 
@@ -45,18 +43,18 @@ DeviceForm:FormGroup;
 
      submit() {
       this.setValue();
-      this.manageRfidFormService.createRfid(this.manageRfidFormService.getManageRfidFormModel())
+      console.log(this.manageRfidFormService.getRfid());
 
-        console.log(this.manageRfidFormService);
-    
+     this.manageRfidFormService.createRfid(this.manageRfidFormService.getRfid())
 
+     
     }
 
     setValue() {
        this.manageRfidFormService.rfid.RfidCode = this.DeviceForm.value.rfidCode;
-       this.manageRfidFormService.rfid.UserId = 1 ;  // da sostituire con user id 
-       this.manageRfidFormService.anagraficaRfid.Credit  = this.DeviceForm.value.credito;
-       this.manageRfidFormService.anagraficaRfid.ExpiryDate = this.DeviceForm.value.ExpyreDate;
+       this.manageRfidFormService.rfid.AppUserID = 1 ;  // da sostituire con user id 
+       this.manageRfidFormService.rfid.Credit  = this.DeviceForm.value.credito;
+       this.manageRfidFormService.rfid.ExpirationDate= this.DeviceForm.value.ExpyreDate;
     }
 
 }
