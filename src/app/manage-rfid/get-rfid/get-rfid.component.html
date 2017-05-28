@@ -1,0 +1,12 @@
+ 
+ 
+ 
+  <form (ngSubmit)="readCode()"  [formGroup]="GetRfidForm" >
+        <div class="form-group">
+            <label for="code">Codice</label>
+            <input type="text" class="form-control" id="code" name="code" formControlName="code">
+            <button class="btn btn-success" type="submit">Leggi</button>
+   
+        </div>
+
+    </form>

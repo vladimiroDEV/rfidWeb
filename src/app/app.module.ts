@@ -20,6 +20,7 @@ import { ClientFormComponent } from './manage-rfid/rfid-form/client-form/client-
 import { DeviceFormComponent } from './manage-rfid/rfid-form/device-form/device-form.component';
 import { ManageRfidFormService } from './manage-rfid/manage-rfid.service';
 import { ClaimStep } from './manage-rfid/manage-refid.models';
+import { GetRfidComponent } from './manage-rfid/get-rfid/get-rfid.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ClaimStep } from './manage-rfid/manage-refid.models';
     ActionsComponent,
     ClientFormComponent,
     DeviceFormComponent,
+    GetRfidComponent,
   ],
   imports: [
     BrowserModule,

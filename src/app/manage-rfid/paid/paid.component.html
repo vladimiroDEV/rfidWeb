@@ -2,15 +2,28 @@
   <div class="col-md-12">
 
     <div class="well">
-<h3>Dati Cliente</h3>
-     <form (ngSubmit)="readCode()"  [formGroup]="PaidForm" >
-        <div class="form-group">
-            <label for="code">Codice</label>
-            <input type="code" class="form-control" id="code" name="code" formControlName="code">
-   
-        </div>
-
-    </form>
+      <app-get-rfid (readRfidEvent)="readRfid($event)"></app-get-rfid>
     </div>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="well">
+      <form [formGroup]="PaidForm" (ngSubmit)="paid()">
+        <div class="form-group">
+          <label for="importo">Importo</label>
+          <input type="text" class="form-control" id="importo" name="importo" formControlName="importo">
+          <button class="btn btn-success" type="submit">Paga</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <h3 *ngIf="(_rfid | json) !=({} | json)">Credito Disponibile: <span class="label label-info">{{_rfid.Credit}}</span></h3>
+  </div>
+</div>
+

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Anagrafica, Rfid, ClaimStep, ManageRfidFormModel } from './manage-refid.models';
 
 import { Headers, RequestOptions, Http } from '@angular/http';
+import { Observable } from "rxjs/Observable";
+import 'rxjs/add/operator/map';
 
 
 @Injectable()
@@ -38,13 +40,19 @@ export class ManageRfidFormService {
         let _headers = new Headers({ 'Content-Type': 'application/json' });
         let _options = new RequestOptions({ headers: _headers });
         return this._http.post(this._url, JSON.stringify(rfid), _options)
-            .subscribe(res => console.log(res.json()))
+              .subscribe(res => console.log(res.json()))
     }
     getRfidByCode() {
         let _headers = new Headers({ 'Content-Type': 'application/json' });
         let _options = new RequestOptions({ headers: _headers });
-        return this._http.get(this._url +'/code/'+ this.rfid.RfidCode, _options).subscribe(res=>res => console.log( " get Call " + res.json()) );
+        return this._http.get(this._url +'/code/'+ this.rfid.RfidCode, _options)
 
+    }
+    paidAction(rfid: Rfid) {
+         let _headers = new Headers({ 'Content-Type': 'application/json' });
+        let _options = new RequestOptions({ headers: _headers });
+        return this._http.post(this._url +'/paid/'+ this.rfid.RfidCode, JSON.stringify(rfid), _options)
+        .subscribe(res => console.log(res.json()))
     }
 
 

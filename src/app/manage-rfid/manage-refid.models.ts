@@ -13,12 +13,12 @@ export class Anagrafica {
 
 }
 export class Rfid {
-    RfidID?: number;
-    RfidCode: string;
+ public   RfidID?: number;
+  public  RfidCode: string;
     ExpirationDate: Date;
     CreationDate: Date;
     LastModifiedDate:Date;
-    Credit:number;
+ public   Credit:number;
     AppUserID:number;
     Active: boolean;
     AnagraficaID?: number;
