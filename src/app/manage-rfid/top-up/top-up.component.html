@@ -1,3 +1,39 @@
-<p>
-  top-up works!
-</p>
+<div class="row" *ngIf="readView">
+  <div class="col-md-12">
+
+    <div class="alert alert-info">
+      <app-get-rfid (readRfidEvent)="readRfid($event)"></app-get-rfid>
+    </div>
+  </div>
+</div>
+
+
+<div class="row" *ngIf="paidView">
+  <div class="col-md-12">
+    <div class="alert alert-info">
+      <form [formGroup]="TopUpForm" (ngSubmit)="topup()">
+        <div class="form-group">
+          <label for="importo">Importo</label>
+          <input type="number" class="form-control" id="importo" name="importo" formControlName="importo">
+          <button class="btn btn-success" type="submit">Ricarica</button>
+        </div>
+      </form>
+    </div>
+  </div>
+ 
+</div>
+ <div class="row" *ngIf="viewBoxInfo">
+   <div class="col-md-12">
+
+   <div class="alert alert-info" *ngIf="esitoRicaricaView">
+     <p>La ricarica è andata a buon fine</p>
+   </div>
+
+  <div class="col-md-12">
+    <h3 *ngIf="(_rfid | json) !=({} | json)">Credito Disponibile: <span class="label label-info">{{_rfid.Credit}}</span></h3>
+  </div>
+   </div>
+</div>
+
+
+

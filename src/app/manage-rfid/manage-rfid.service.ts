@@ -51,8 +51,8 @@ export class ManageRfidFormService {
     paidAction(rfid: Rfid) {
          let _headers = new Headers({ 'Content-Type': 'application/json' });
         let _options = new RequestOptions({ headers: _headers });
-        return this._http.post(this._url +'/paid/'+ this.rfid.RfidCode, JSON.stringify(rfid), _options)
-        .subscribe(res => console.log(res.json()))
+        return this._http.put(this._url +'/paid/'+ this.rfid.RfidCode, JSON.stringify(rfid), _options);
+        //.subscribe(res => console.log("OK"))
     }
 
 
