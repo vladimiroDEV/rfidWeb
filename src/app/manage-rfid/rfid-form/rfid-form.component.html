@@ -1,2 +1,49 @@
-<app-client-form *ngIf ="wizard.currentStep === 1" [onNext]="onNext" ></app-client-form>
-<app-device-form *ngIf ="wizard.currentStep === 2" [onBack]="onBack"></app-device-form>
+<!--<app-client-form *ngIf ="wizard.currentStep === 1" [onNext]="onNext" ></app-client-form>
+<app-device-form *ngIf ="wizard.currentStep === 2" [onBack]="onBack"></app-device-form>-->
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="well">
+            <form class="form-group">
+                 <fieldset>
+                    <legend>Dati utente</legend>
+                <div class="form-group">
+                    <label for="email">Email</label>
+              
+                    <input type="email" class="form-control input-sm" id="email" name="email" formControlName="email">
+
+                </div>
+                        <div class="form-group">
+                    <label for="telefono">Telefono</label>
+                    <input type="text" class="form-control input-sm" id="telefono" name="telefono" formControlName="telefono">
+
+                </div>
+
+               
+                    <div class="form-group">
+                    <label class="nome" for="nome">Nome</label>
+                    <input type="text" class="form-control  input-sm" id="nome" name="nome" formControlName="nome">
+
+                    </div>
+                    <div class="form-group">
+
+                    <label for="cognome">Cognome</label>
+                    <input type="text" class="form-control input-sm" id="cognome" name="cognome" formControlName="cognome">
+                    
+                </div>
+        
+                 </fieldset>
+                <fieldset class="form-group">
+                     <legend>Dispositivo</legend>
+                    <div class="form-group">
+                        <textarea rows="1" class="form-control input-sm" id="rfidCode" name="rfidCode" formControlName="rfidCode"></textarea>
+
+                    </div>
+                </fieldset>
+
+                <button class="btn btn-success" type="submit">Salva</button>
+            </form>
+        </div>
+    </div>
+</div>
