@@ -16,10 +16,7 @@ import { InfoComponent } from './manage-rfid/info/info.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ActionsComponent } from './manage-rfid/actions/actions.component';
-import { ClientFormComponent } from './manage-rfid/rfid-form/client-form/client-form.component';
-import { DeviceFormComponent } from './manage-rfid/rfid-form/device-form/device-form.component';
-import { ManageRfidFormService } from './manage-rfid/manage-rfid.service';
-import { ClaimStep } from './manage-rfid/manage-refid.models';
+import { ManageRfidService } from './manage-rfid/manage-rfid.service';
 import { GetRfidComponent } from './manage-rfid/get-rfid/get-rfid.component';
 import { ModifyComponent } from './manage-rfid/modify/modify.component';
 
@@ -37,8 +34,6 @@ import { ModifyComponent } from './manage-rfid/modify/modify.component';
     InfoComponent,
     HomeComponent,
     ActionsComponent,
-    ClientFormComponent,
-    DeviceFormComponent,
     GetRfidComponent,
     ModifyComponent,
   ],
@@ -49,7 +44,7 @@ import { ModifyComponent } from './manage-rfid/modify/modify.component';
     AppRoutingModule,
     ReactiveFormsModule ,
   ],
- providers: [ManageRfidFormService, ClaimStep ],
+ providers: [ManageRfidService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

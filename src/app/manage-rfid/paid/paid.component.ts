@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { ManageRfidFormService } from '../manage-rfid.service';
+import { ManageRfidService } from '../manage-rfid.service';
 import { Rfid } from '../manage-refid.models';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -23,7 +23,7 @@ PaidForm:FormGroup;
   constructor(
     private _router:Router,
     private _route:ActivatedRoute,
-    private manageRfidFormService:ManageRfidFormService,
+    private manageRfidFormService:ManageRfidService,
     private fb:FormBuilder) { }
 
   ngOnInit() {

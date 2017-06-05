@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ManageRfidFormService } from '../manage-rfid.service';
+import { ManageRfidService } from '../manage-rfid.service';
 import { Rfid } from '../manage-refid.models';
 
 @Component({
@@ -18,7 +18,7 @@ readView = false;
 paidView = false;
 esitoRicaricaView = false;
 viewBoxInfo = false;
-  constructor( private manageRfidFormService:ManageRfidFormService,
+  constructor( private manageRfidFormService:ManageRfidService,
     private fb:FormBuilder) { }
 
   ngOnInit() {
@@ -37,7 +37,7 @@ viewBoxInfo = false;
 
 
   topup(){
-  this._rfid.Credit = this._rfid.Credit + this.TopUpForm.value.importo;
+  this._rfid.Credit = (this._rfid.Credit) + this.TopUpForm.value.importo;
  this.manageRfidFormService.paidAction(this._rfid).subscribe(res=> {
     this.esitoRicaricaView = true;
     this.paidView = false;

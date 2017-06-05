@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="well">
-            <form class="form-group">
+            <form class="form-group"  (ngSubmit)="submit()"  [formGroup]="RfidForm">
                  <fieldset>
                     <legend>Dati utente</legend>
                 <div class="form-group">
@@ -47,3 +47,5 @@
         </div>
     </div>
 </div>
+
+{{_rfid | json}}

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Anagrafica, Rfid, ClaimStep, ManageRfidFormModel } from './manage-refid.models';
+import { Anagrafica, Rfid, } from './manage-refid.models';
 
 import { Headers, RequestOptions, Http } from '@angular/http';
 import { Observable } from "rxjs/Observable";
@@ -7,29 +7,22 @@ import 'rxjs/add/operator/map';
 
 
 @Injectable()
-export class ManageRfidFormService {
-    anagrafica: Anagrafica;
+export class ManageRfidService {
     rfid: Rfid
-    claimStep: ClaimStep;
+  
 
     private _url = "http://localhost:51279/api/rfid";
 
     constructor(private _http: Http) {
-     //   this.anagrafica = new Anagrafica();
-        this.rfid = new Rfid();
-        this.rfid.Anagrafica = new Anagrafica();
-        this.claimStep = new ClaimStep()
+        // this.rfid = new Rfid();
+        // this.rfid.Anagrafica = new Anagrafica();
 
     }
     destroy() {
-      //   this.anagrafica = new Anagrafica();
-        this.rfid = new Rfid();
-        this.claimStep = new ClaimStep()
+    //   this.rfid.Anagrafica = new Anagrafica();
+    //     this.rfid = new Rfid();
     }
 
-    nextStep(): number {
-        return this.claimStep.addStep();
-    }
 
     getRfid(): Rfid { return this.rfid }
 

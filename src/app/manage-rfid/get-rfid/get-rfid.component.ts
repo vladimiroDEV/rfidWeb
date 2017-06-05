@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Rfid } from '../manage-refid.models';
-import { ManageRfidFormService } from '../manage-rfid.service';
+import { ManageRfidService } from '../manage-rfid.service';
 
 @Component({
   selector: 'app-get-rfid',
@@ -14,7 +14,7 @@ export class GetRfidComponent implements OnInit {
 
 GetRfidForm:FormGroup;
   constructor(
-    private manageRfidFormService:ManageRfidFormService,
+    private manageRfidService:ManageRfidService,
     private fb:FormBuilder) { }
 
   ngOnInit() {
@@ -24,8 +24,8 @@ GetRfidForm:FormGroup;
   }
 
   readCode() {
-    this.manageRfidFormService.rfid.RfidCode = this.GetRfidForm.value.code;
-    this.manageRfidFormService.getRfidByCode().subscribe(item => {
+    this.manageRfidService.rfid.RfidCode = this.GetRfidForm.value.code;
+    this.manageRfidService.getRfidByCode().subscribe(item => {
       this.readRfidEvent.emit(item.json());
     });  
    
