@@ -1,0 +1,59 @@
+<div class="row" *ngIf="readRfidView">
+  <div class="col-md-12">
+    <div class="allert allert-info">
+
+       <form [formGroup]="ReadRfidForm" (ngSubmit)="getTotal(f)" #f="ngForm">
+        <fieldset>
+          <legend>Codice</legend>
+          <div class="form-group">
+            <input type="text" class="form-control" id="rfidCode" name="rfidCode" formControlName="rfidCode">
+          </div>
+        </fieldset>
+            <button class="btn btn-success">leggi</button>
+       </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="row" *ngIf="TotalInfoView">
+  <div class="col-md-12">
+    <div class="allert allert-info">
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Descrizione</th>
+      <th>DAta Ora </th>
+      <th>Prezzo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let transaction of allTransactions; let i = index">
+      <th scope="row">{{i}}</th>
+      <td>{{transaction.Descrizione}}</td>
+      <td>{{transaction.TransactionDate | date:'dd/MM/y H:mm'}}</td>
+      <td>€ {{transaction.Importo}}</td>
+    </tr>
+  </tbody>
+</table>
+     
+    </div>
+
+    
+  </div>
+</div>
+<div class="row" *ngIf="TotalInfoView">
+  <div class="col-md-12">
+    <button class="btn btn-success" type="button" (click)="paidTotal()">Paga il totale </button>
+  </div>
+</div>
+
+<div class="row" *ngIf="ResultInfoView">
+  <div class="col-md-12">
+    <p>
+    il pagamento è andata a buon fine!</p> <br />
+    <button class="btn btn-success"  routerLink="/manage-rfid">ok</button>
+  </div>
+</div>

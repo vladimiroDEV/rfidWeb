@@ -20,11 +20,8 @@ export class PaidComponent implements OnInit {
 
   allertErrorMessage = '';
 
-
-
-
-
   PaidForm: FormGroup;
+
   constructor(
     private _router: Router,
     private _route: ActivatedRoute,
@@ -36,11 +33,12 @@ export class PaidComponent implements OnInit {
     this.paidFormView = true;
   }
   paid(form: NgForm) {
-
+ this._paidModel = this.PaidForm.value;
     console.log(form);
-
+console.log( this._paidModel);
     if (form.valid) {
       this._paidModel = this.PaidForm.value;
+      
 
       this.manageRfidService.paidAction(this._paidModel)
         .subscribe(result => {

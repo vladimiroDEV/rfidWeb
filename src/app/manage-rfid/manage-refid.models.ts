@@ -32,6 +32,14 @@ export class PaidModel {
     Descrizione:string;
 }
 
+export class Transaction {
+    Operation:string;
+    TransactionDate: Date;
+    Importo: number;
+    Descrizione: string;
+
+}
+
 
 
 

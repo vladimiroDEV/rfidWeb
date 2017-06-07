@@ -23,8 +23,8 @@ export class ActionsComponent implements OnInit {
     this._router.navigate(['paid'], {relativeTo: this._route});
   }
   
-  topUp() {
-     this._router.navigate(['top-up'], {relativeTo: this._route});
+  totalAmount() {
+     this._router.navigate(['total'], {relativeTo: this._route});
   }
 
 }
