@@ -37,12 +37,12 @@ viewBoxInfo = false;
 
 
   topup(){
-  this._rfid.Credit = (this._rfid.Credit) + this.TopUpForm.value.importo;
- this.manageRfidFormService.paidAction(this._rfid).subscribe(res=> {
-    this.esitoRicaricaView = true;
-    this.paidView = false;
+//   this._rfid.Credit = (this._rfid.Credit) + this.TopUpForm.value.importo;
+//  //this.manageRfidFormService.paidAction(this._rfid).subscribe(res=> {
+//     this.esitoRicaricaView = true;
+//     this.paidView = false;
     
- });
+//  });
 }
 
 }

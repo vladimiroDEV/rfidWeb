@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { ManageRfidService } from '../manage-rfid.service';
-import { Rfid } from '../manage-refid.models';
+import { Rfid, PaidModel } from '../manage-refid.models';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,47 +11,69 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class PaidComponent implements OnInit {
 
-_rfid = new Rfid();
-readView = false;
-paidView = false;
-esitoPagamentoView = false;
-viewBoxInfo = false;
-allertCredito= false;
+  _rfid = new Rfid();
+  _paidModel = new PaidModel();
+
+  paidFormView = false;
+  esitoPagamentoView = false;
+  allertErrorView = false;
+
+  allertErrorMessage = '';
 
 
-PaidForm:FormGroup;
+
+
+
+  PaidForm: FormGroup;
   constructor(
-    private _router:Router,
-    private _route:ActivatedRoute,
-    private manageRfidFormService:ManageRfidService,
-    private fb:FormBuilder) { }
+    private _router: Router,
+    private _route: ActivatedRoute,
+    private manageRfidService: ManageRfidService,
+    private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.clearForm();
+    this.paidFormView = true;
+  }
+  paid(form: NgForm) {
+
+    console.log(form);
+
+    if (form.valid) {
+      this._paidModel = this.PaidForm.value;
+
+      this.manageRfidService.paidAction(this._paidModel)
+        .subscribe(result => {
+          this.esitoPagamentoView = true;
+          this.paidFormView = false;
+        },
+        err => {
+          if (err.status == 404) {
+            this.paidFormView = false;
+            this.allertErrorView = true;
+            this.allertErrorMessage = "Il dispositivo no è stato trovato nel sistema";
+          }
+        }
+        );
+
+    }
+
+  }
+
+  back() {
+    this.allertErrorMessage = '';
+    this.allertErrorView = false;
+    this.esitoPagamentoView = false;
+    this.paidFormView = true;
+    this.clearForm();
+
+  }
+  clearForm() {
     this.PaidForm = this.fb.group({
-     "importo":''
+      "importo": ['', Validators.required],
+      "descrizione": ['', Validators.required],
+      "rfidCode": ['', Validators.required],
     })
-    this.readView = true;
   }
 
-  readRfid(rfid:Rfid) { 
-    this._rfid = rfid;
-    this.readView = false;
-    this.paidView = true;
-    this.viewBoxInfo = true;
-  
-  }
-
-paid(){
- this.manageRfidFormService.paidAction(this._rfid).subscribe(res=> {
-
-   if(this._rfid.Credit - this.PaidForm.value.importo < 0) {
-     this.allertCredito = true;
-     return;
-   }
-    this.esitoPagamentoView = true;
-    this.paidView = false;
-    this._rfid.Credit = this._rfid.Credit - this.PaidForm.value.importo;
- });
-}
-  
 }

@@ -1,42 +1,65 @@
-<div class="row" *ngIf="readView">
+<div class="row" *ngIf="paidFormView">
   <div class="col-md-12">
 
     <div class="alert alert-info">
-      <app-get-rfid (readRfidEvent)="readRfid($event)"></app-get-rfid>
-    </div>
-  </div>
-</div>
 
-
-<div class="row" *ngIf="paidView">
-  <div class="col-md-12">
-    <div class="alert alert-info">
-      <form [formGroup]="PaidForm" (ngSubmit)="paid()">
+      <form [formGroup]="PaidForm" (ngSubmit)="paid(f)" #f="ngForm">
+         <fieldset>
+          <legend>Importo</legend>
         <div class="form-group">
-          <label for="importo">Importo</label>
-          <input type="number" class="form-control" id="importo" name="importo" formControlName="importo">
-          <button class="btn btn-success" type="submit" (click)="topUp()">Paga</button>
+          <!--<label for="importo">Importo</label>-->
+          <input type="number" class="form-control" id="importo" name="importo" formControlName="importo" placeholder="€">
+    <span class="help-block allertMessage" *ngIf="PaidForm.controls.importo.invalid && PaidForm.controls.importo.touched">Inserisci l'importo</span>
         </div>
+         </fieldset>
+              
+ <fieldset>
+          <legend>Descrizione</legend>
+        <div class="form-group">
+          <!--<label for="descrizione">Descrizione</label>-->
+          <textarea class="form-control" id="descrizione" name="descrizione" formControlName="descrizione"></textarea>
+           <span class="help-block allertMessage" *ngIf="PaidForm.controls.descrizione.invalid && PaidForm.controls.descrizione.touched">Inserisci la descrizione</span>
+        </div>
+ </fieldset>
+
+        <fieldset>
+          <legend>Codice</legend>
+          <div class="form-group">
+            <input type="text" class="form-control" id="rfidCode" name="rfidCode" formControlName="rfidCode">
+             <span class="help-block allertMessage" *ngIf="PaidForm.controls.rfidCode.invalid && PaidForm.controls.rfidCode.touched">Scansiona il dispositivo</span>
+          </div>
+        </fieldset>
+
+
+        <button class="btn btn-success" type="submit">Paga</button>
+        <button class="btn btn-danger pull-right" type="button" (click)="clearForm()">Ripulisci</button>
+
+
       </form>
+
     </div>
   </div>
- 
 </div>
- <div class="row" *ngIf="viewBoxInfo">
-   <div class="col-md-12">
 
-   <div class="alert alert-info" *ngIf="esitoPagamentoView">
-     <p>Il Pagamento è andato a buon fine</p>
-   </div>
-   <div class="alert alert-danger" *ngIf="allertCredito">
-     Attenzione il credito è insuficiente! <br/>
-     <button class="btn btn-success">Ricarica</button>
-   </div>
+
+<div class="row">
   <div class="col-md-12">
-    <h3 *ngIf="(_rfid | json) !=({} | json)">Credito Disponibile: <span class="label label-info">{{_rfid.Credit}}</span></h3>
+    <div class="alert alert-info" *ngIf="esitoPagamentoView">
+
+      <p>Il Pagamento è andato a buon fine</p>
+      <br />
+      <p>
+        <button class="btn btn-success" (click)="back()">Ok</button>
+      </p>
+    </div>
+    <div class="alert alert-danger" *ngIf="allertErrorView">
+
+      <p>{{allertErrorMessage}} </p>
+      <br/>
+      <button class="btn btn-danger" (click)="back()">Indietro</button>
+
+    </div>
+
+
+
   </div>
-   </div>
-</div>
-
-
-

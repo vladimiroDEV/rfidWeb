@@ -38,19 +38,14 @@ constructor(
 
  submit() {
         
-
-
        this._rfid.Anagrafica.Email = this.RfidForm.value.email;
         this._rfid.Anagrafica.Nome = this.RfidForm.value.nome;
        this._rfid.Anagrafica.Cognome = this.RfidForm.value.cognome;
         this._rfid.Anagrafica.Telefono = this.RfidForm.value.telefono;
         this._rfid.RfidCode = this.RfidForm.value.rfidCode;
-
-
-        this._rfid.LastModifiedDate =  new Date();
-        this._rfid.CreationDate =  new Date();
         this._rfid.AppUserID = 1;
         this._rfid.Credit = 0;
+        this._rfid.Active = true;
 
        this.manageRfidFormService.createRfid(this._rfid);
 

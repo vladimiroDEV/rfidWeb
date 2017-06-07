@@ -24,7 +24,12 @@ export class Rfid {
     AnagraficaID?: number;
     Anagrafica?:Anagrafica;
 
+}
 
+export class PaidModel {  
+    RfidCode:string;
+    Price:number;
+    Descrizione:string;
 }
 
 
