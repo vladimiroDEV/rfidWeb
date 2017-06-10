@@ -1,45 +1,46 @@
 <!--component html goes here -->
 
 <div class="row">
-    <br /><br/>
-    <div class="col-md-6">
-        <button class="btn btn-sq-lg btn-success" (click)="paid()">
+        <br /><br/>
+        <div class="col-md-6">
+                <button class="btn btn-sq-lg btn-success" (click)="paid()">
         <i class="fa fa-money fa-5x" aria-hidden="true"></i><br>
         Paga Rfid</button>
-    </div>
-   
-    <div class="col-md-6">
-        
-      
+        </div>
 
-  <ul class="list-unstyled">
-                <li>
-                    <button (click)="createNew()"
-                     class="btn btn-primary btn-block">
+        <div class="col-md-6">
+
+
+
+                <ul class="list-unstyled">
+                        <li>
+                                <button (click)="createNew()" class="btn btn-primary btn-block">
                              Nuovo
                     </button>
-                    </li><br />
-                     <li>
-                    <button 
-                     class="btn btn-primary btn-block" (click)="totalAmount()">
+                        </li><br />
+                        <li>
+                                <button class="btn btn-primary btn-block" (click)="totalAmount()">
                              Salda il conto
                     </button>
-                    </li><br />
-                     <li>
-                    <button [routerLink]="['/band']"
-                     class="btn btn-primary btn-block">
+                        </li><br />
+                         <li>
+                                <button (click)="manageUser()" class="btn btn-primary btn-block">
+                             Gestione utenti
+                    </button>
+                        </li><br />
+                        <li>
+                                <button [routerLink]="['/band']" class="btn btn-primary btn-block">
                              Modifica Rfid
                     </button>
-                    </li><br />
-                     <li>
-                    <button [routerLink]="['/band']"
-                     class="btn btn-primary btn-block">
+                        </li><br />
+                        <li>
+                                <button [routerLink]="['/band']" class="btn btn-primary btn-block">
                              Statistiche
                     </button>
-                    </li>
-            </ul>
-    </div>
-    <div class="col-md-6"> 
-           
-    </div>
+                        </li>
+                </ul>
+        </div>
+        <div class="col-md-6">
+
+        </div>
 </div>

@@ -8,8 +8,8 @@
           <legend>Importo</legend>
           <div class="form-group">
             <!--<label for="importo">Importo</label>-->
-            <input type="number" class="form-control" id="importo" name="importo" formControlName="importo" placeholder="€">
-            <span class="help-block allertMessage" *ngIf="PaidForm.controls.importo.invalid && PaidForm.controls.importo.touched">Inserisci l'importo</span>
+            <input type="number" class="form-control" id="price" name="price" formControlName="price" placeholder="€">
+            <span class="help-block allertMessage" *ngIf="PaidForm.controls.price.invalid && PaidForm.controls.price.touched">Inserisci l'importo</span>
           </div>
         </fieldset>
 
@@ -68,7 +68,6 @@
       <button class="btn btn-danger" (click)="back()">Indietro</button>
 
     </div>
-
-
-
   </div>
+
+</div>

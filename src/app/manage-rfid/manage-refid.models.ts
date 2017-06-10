@@ -39,6 +39,11 @@ export class Transaction {
     Descrizione: string;
 
 }
+export class UserDetailViewModel {
+    Anagrafica: Anagrafica;
+    Dispositivi: Rfid[];
+}
+
 
 
 

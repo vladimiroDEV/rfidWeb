@@ -68,7 +68,7 @@ console.log( this._paidModel);
   }
   clearForm() {
     this.PaidForm = this.fb.group({
-      "importo": ['', Validators.required],
+      "price": ['', Validators.required],
       "descrizione": ['', Validators.required],
       "rfidCode": ['', Validators.required],
     })

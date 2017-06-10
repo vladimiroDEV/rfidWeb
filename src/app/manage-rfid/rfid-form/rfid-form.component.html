@@ -1,11 +1,8 @@
-<!--<app-client-form *ngIf ="wizard.currentStep === 1" [onNext]="onNext" ></app-client-form>
-<app-device-form *ngIf ="wizard.currentStep === 2" [onBack]="onBack"></app-device-form>-->
 
-
-<div class="row">
+<div class="row" *ngIf="formView">
     <div class="col-md-12">
         <div class="well">
-            <form class="form-group"  (ngSubmit)="submit()"  [formGroup]="RfidForm">
+            <form class="form-group"  (ngSubmit)="submit()"  [formGroup]="RfidForm" *ngIf="formView">
                  <fieldset>
                     <legend>Dati utente</legend>
                 <div class="form-group">
@@ -48,7 +45,31 @@
     </div>
 </div>
 
-<div class="row">
+
+
+  <div class="row">
+  <div class="col-md-12">
+    <div class="alert alert-info" *ngIf="esitoSalvataggioView">
+
+      <p>Il Salvataggio è andato a buon fine</p>
+      <br />
+      <p>
+        <button class="btn btn-success"  routerLink="/manage-rfid">Ok</button>
+      </p>
+    </div>
+     <div class="alert alert-danger" *ngIf="allertErrorView">
+
+      <p>{{allertErrorMessage}} </p>
+      <br/>
+      <button class="btn btn-danger" (click)="back()">Indietro</button>
+
+    </div>
+   </div>
+
+</div>
+
+
+<div class="row" *ngIf="formView">
       <div class="col-md-4 offset-md-4 col-sm-4 offset-sm-4">
     
       <button class="btn btn-success" routerLink="/manage-rfid" >Menu prinipale</button>

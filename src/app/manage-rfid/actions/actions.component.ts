@@ -27,4 +27,8 @@ export class ActionsComponent implements OnInit {
      this._router.navigate(['total'], {relativeTo: this._route});
   }
 
+  manageUser() {
+     this._router.navigate(['manage-user'], {relativeTo: this._route});
+  }
+
 }

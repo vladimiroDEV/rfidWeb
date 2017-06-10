@@ -16,26 +16,15 @@ export class ManageRfidService {
     private _url = "http://localhost:51279/api/rfid";
 
     constructor(private _http: Http) {
-        // this.rfid = new Rfid();
-        // this.rfid.Anagrafica = new Anagrafica();
-
+      
     }
-    destroy() {
-    //   this.rfid.Anagrafica = new Anagrafica();
-    //     this.rfid = new Rfid();
-    }
-
-
-    getRfid(): Rfid { return this.rfid }
-
+  
 
 //http
 
     createRfid(rfid: Rfid) {
-        // let _headers = new Headers({ 'Content-Type': 'application/json' });
-        // let _options = new RequestOptions({ headers: _headers });
+
         return this._http.post(this._url+"/create", JSON.stringify(rfid), this._options)
-              .subscribe(res => console.log(res.json()))
     }
     getRfidByCode() {
         // let _headers = new Headers({ 'Content-Type': 'application/json' });
@@ -49,6 +38,13 @@ export class ManageRfidService {
 
     getAllTransactionRfid(rfidCode: string){
       return this._http.get(this._url +'/transactionsToConfirmRfidCode/'+ rfidCode,this._options);
+    }
+
+    getUserDetailByEmail(email:string) {
+        return this._http.get(this._url+ '/userdetailbymail/'+ email, this._options);
+    }
+     getUserDetailByRfidCode(code:string) {
+        return this._http.get(this._url+ '/userdetailbyrfidcode/'+ code, this._options);
     }
 
 
