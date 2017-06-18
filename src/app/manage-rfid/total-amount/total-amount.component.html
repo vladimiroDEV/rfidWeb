@@ -46,6 +46,7 @@
 </div>
 <div class="row" *ngIf="TotalInfoView">
   <div class="col-md-12">
+     <button class="btn btn-success" type="button" (click)="paidTotalReset()">Paga il totale e disassocia il dispositivo </button>
     <button class="btn btn-success" type="button" (click)="paidTotal()">Paga il totale </button>
   </div>
 </div>
@@ -53,7 +54,14 @@
 <div class="row" *ngIf="ResultInfoView">
   <div class="col-md-12">
     <p>
-    il pagamento è andata a buon fine!</p> <br />
+    L'operazione' è andata a buon fine!</p> <br />
+    <button class="btn btn-success"  routerLink="/manage-rfid">ok</button>
+  </div>
+</div>
+<div class="row" *ngIf="ResultErrorView">
+  <div class="col-md-12">
+    <p>
+    Ci sono stati dei errori riprovare </p> <br />
     <button class="btn btn-success"  routerLink="/manage-rfid">ok</button>
   </div>
 </div>

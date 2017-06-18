@@ -10,36 +10,56 @@ import { UserDetailViewModel } from '../manage-refid.models';
 })
 export class ManageUserComponent implements OnInit {
 
-ReadRfidForm:FormGroup;
-userDetailModel = new UserDetailViewModel();
+  ReadRfidForm: FormGroup;
+  userDetailModel = new UserDetailViewModel();
 
-userInfoView = false;
-readView= true;
+  userInfoView = false;
+  readView = true;
+  noDeviceUserView = false;
   constructor(
     private _manageRfidService: ManageRfidService,
-    private _fb:FormBuilder
+    private _fb: FormBuilder
 
   ) { }
 
   ngOnInit() {
     this.ReadRfidForm = this._fb.group({
-      'rfidCode':'',
-      'email':''
+      'rfidCode': '',
+      'email': ''
     })
   }
 
   getUserByDetail(form: NgForm) {
-     let email = '';
-     let rfidCode = '';
-      if(this.ReadRfidForm.value.email != '')
-        this._manageRfidService.getUserDetailByEmail(this.ReadRfidForm.value.email)
-        .subscribe(res=>{
-            this.userDetailModel = res.json();
+    let email = '';
+    let rfidCode = '';
+    if (this.ReadRfidForm.value.email != '')
+      this._manageRfidService.getUserDetailByEmail(this.ReadRfidForm.value.email)
+        .subscribe(res => {
+          this.userDetailModel = res.json();
+          this.userInfoView = true;
+          this.readView = false;
         },
-        err=>{
-           console.log(err);
+        err => {
+          console.log(err);
         });
-        
+
+    if (this.ReadRfidForm.value.rfidCode != '')
+      this._manageRfidService.getUserDetailByRfidCode(this.ReadRfidForm.value.rfidCode)
+        .subscribe(res => {
+          this.userDetailModel = res.json();
+          this.userInfoView = true;
+          this.readView = false;
+
+        },
+        err => {
+          this.readView = false;
+        this.noDeviceUserView = true;
+        });
+
   }
+
+   
+
+  
 
 }

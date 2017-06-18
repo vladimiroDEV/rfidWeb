@@ -46,6 +46,19 @@ export class ManageRfidService {
      getUserDetailByRfidCode(code:string) {
         return this._http.get(this._url+ '/userdetailbyrfidcode/'+ code, this._options);
     }
+   
+    paidTotal(code:string){
+         
+         return this._http.post(this._url+ '/paidTotal/'+ code, this._options);
+        
+
+    }
+     // esetRfid : dissassicia il disposistivo dall'utente
+      paidTotalReset(code:string, leaveRfid? :boolean){
+         return this._http.post(this._url+ '/paidTotalReset/'+ code, this._options);
+        
+
+    }
 
 
 }

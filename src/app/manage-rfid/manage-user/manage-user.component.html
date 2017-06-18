@@ -21,9 +21,18 @@
   </div>
 </div>
 
-{{userDetailModel | json}}
 
+<div class="row"  *ngIf="userInfoView">
+    <div class="col-md-12">
+    <div class="allert allert-info">
 
+      <label> Email : {{userDetailModel.Anagrafica.Email}}</label>
+      <label> Nome : {{userDetailModel.Anagrafica.Nome}}</label>
+      <label> Cognome : {{userDetailModel.Anagrafica.Cognome}}</label>
+      <label> Telefino : {{userDetailModel.Anagrafica.Telefono}}</label>
+    </div>
+    </div>
+</div>
 
 <div class="row" *ngIf="userInfoView">
   <div class="col-md-12">
@@ -36,14 +45,19 @@
       <th>Codice Dispositivo </th>
       <th>Data assegnazione </th>
       <th>Debito</th>
+      <th>Azioni<th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let transaction of allTransactions; let i = index">
+    <tr *ngFor="let rfid of userDetailModel.Dispositivi; let i = index">
       <th scope="row">{{i}}</th>
-      <td>{{transaction.Descrizione}}</td>
-      <td>{{transaction.TransactionDate | date:'dd/MM/y H:mm'}}</td>
-      <td>€ {{transaction.Importo}}</td>
+      <td>{{rfid.RfidCode}}</td>
+      <td>{{rfid.LastModifiedDate | date:'dd/MM/y H:mm'}}</td>
+      <td>€ {{rfid.Credit}}</td>
+      <td>
+        <button class="btn btn-info">Dettagli</button>
+        <button class="btn btn-success">Salda</button>      
+      <td>
     </tr>
   </tbody>
 </table>
@@ -63,6 +77,14 @@
   <div class="col-md-12">
     <p>
     il pagamento è andata a buon fine!</p> <br />
+    <button class="btn btn-success"  routerLink="/manage-rfid">ok</button>
+  </div>
+</div>
+
+<div class="row" *ngIf="noDeviceUserView">
+  <div class="col-md-12">
+    <p>
+   Non Stato trovato nessun utene associato a questo dispositivo </p> <br />
     <button class="btn btn-success"  routerLink="/manage-rfid">ok</button>
   </div>
 </div>
