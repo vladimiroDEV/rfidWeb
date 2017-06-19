@@ -55,12 +55,12 @@
       <td>{{rfid.LastModifiedDate | date:'dd/MM/y H:mm'}}</td>
       <td>€ {{rfid.Credit}}</td>
       <td>
-        <button class="btn btn-info">Dettagli</button>
-        <button class="btn btn-success">Salda</button>      
+        <button class="btn btn-info" (click) ="viewDetail(rfid.RfidCode)"  >Dettagli</button>   
       <td>
     </tr>
   </tbody>
 </table>
+<button class="btn btn-success">
      
     </div>
 

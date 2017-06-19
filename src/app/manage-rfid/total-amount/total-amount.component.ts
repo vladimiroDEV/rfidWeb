@@ -3,6 +3,7 @@ import { ManageRfidService } from '../manage-rfid.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Transaction } from '../manage-refid.models';
 import { Rfid } from 'app/manage-rfid/manage-refid.models';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-total-amount',
@@ -24,31 +25,34 @@ export class TotalAmountComponent implements OnInit {
   constructor(
     private _manageRfidService: ManageRfidService,
     private _fb: FormBuilder,
+    private _route: ActivatedRoute,
+    private _router: Router
 
   ) { }
 
   ngOnInit() {
-    this.readRfidView = true;
+    // controlla i parametri 
+    this._route.params
+      .subscribe((params: Params) => {
+        if (params['code'] != null) {
+          this.readRfidView = false;
+          this.getAllTransaztion(params['code']);
+        }
+        else {
+         
+          this.readRfidView = true;
 
-    this.ReadRfidForm = this._fb.group({
-      'rfidCode': ['', Validators.required]
-    });
+          this.ReadRfidForm = this._fb.group({
+            'rfidCode': ['', Validators.required]
+          });
+        }
+      });
+
   }
 
   getTotal() {
     if (this.ReadRfidForm.value.rfidCode != '')
-      this.rfidCode = this.ReadRfidForm.value.rfidCode;
-    this._manageRfidService.getAllTransactionRfid(this.ReadRfidForm.value.rfidCode)
-
-      .subscribe((res) => {
-        this.allTransactions = res.json();
-
-        this.TotalInfoView = true;
-        this.readRfidView = false;
-      },
-      err => {
-        console.log(err)
-      })
+      this.getAllTransaztion(this.ReadRfidForm.value.rfidCode);
   }
 
   paidTotal() {
@@ -80,5 +84,21 @@ export class TotalAmountComponent implements OnInit {
         this.ResultErrorView = true;
       });
   }
+  getAllTransaztion(rfideCode) {
+    this.rfidCode = rfideCode
+    this._manageRfidService.getAllTransactionRfid(rfideCode)
+
+      .subscribe((res) => {
+        this.allTransactions = res.json();
+
+        this.TotalInfoView = true;
+        this.readRfidView = false;
+      },
+      err => {
+        console.log(err)
+      })
+  }
 
 }
+
+

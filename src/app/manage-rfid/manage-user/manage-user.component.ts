@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ManageRfidService } from '../manage-rfid.service';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { UserDetailViewModel } from '../manage-refid.models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage-user',
@@ -18,7 +19,9 @@ export class ManageUserComponent implements OnInit {
   noDeviceUserView = false;
   constructor(
     private _manageRfidService: ManageRfidService,
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private _router:Router
+    
 
   ) { }
 
@@ -56,6 +59,11 @@ export class ManageUserComponent implements OnInit {
         this.noDeviceUserView = true;
         });
 
+  }
+
+  viewDetail(code:string){
+   
+    this._router.navigateByUrl('manage-rfid/detail/'+code,);
   }
 
    

@@ -19,6 +19,7 @@ const appRoutes: Routes = [
     { path: 'new', component: RfidFormComponent },
     { path: 'paid', component: PaidComponent },
     { path: 'info', component: InfoComponent, },
+    {path: 'detail/:code', component: TotalAmountComponent},
     {path: 'total', component: TotalAmountComponent},
     {path: 'manage-user', component: ManageUserComponent}
   ] },
