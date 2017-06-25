@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
 import { ManageRfidService } from '../manage-rfid.service';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { UserDetailViewModel } from '../manage-refid.models';
@@ -23,7 +23,9 @@ export class ManageUserComponent implements OnInit {
   constructor(
     private _manageRfidService: ManageRfidService,
     private _fb: FormBuilder,
-    private _router:Router
+    private _router:Router,
+    private _cd: ChangeDetectorRef 
+
     
 
   ) { }
@@ -39,20 +41,42 @@ export class ManageUserComponent implements OnInit {
   getUserByDetail(form: NgForm) {
     let email = '';
     let rfidCode = '';
-    if (this.ReadRfidForm.value.email != '')
-      this._manageRfidService.getUserDetailByEmail(this.ReadRfidForm.value.email)
-        .subscribe(res => {
-          this.userDetailModel = res.json();
-          this.userInfoView = true;
-          this.readView = false;
-          this.calculateTotal();
-        },
-        err => {
-          console.log(err);
-        });
+    if (this.ReadRfidForm.value.email != ''){
+       this.getuserDetailByEmail(this.ReadRfidForm.value.email);
+  }
+    else if (this.ReadRfidForm.value.rfidCode != ''){
+      this.getuserDetailByCode(this.ReadRfidForm.value.rfidCode );
+    }
+     
 
-    if (this.ReadRfidForm.value.rfidCode != '')
-      this._manageRfidService.getUserDetailByRfidCode(this.ReadRfidForm.value.rfidCode)
+  }
+  calculateTotal() {
+      this.userDetailModel.Dispositivi.forEach(dis=>{
+        this.total += dis.Credit;
+      })
+  }
+
+  viewDetail(code:string){
+    this.viewRfidDetail = false;
+    this.rfidCodeDetail = '';
+     this.rfidCodeDetail = code;
+    
+    this.viewRfidDetail = true;
+   
+  }
+
+  // events 
+
+  NotificationPaidTotal(){
+    this.getuserDetailByEmail(this.userDetailModel.Anagrafica.Email);
+     this.viewRfidDetail = false;
+  }
+
+  // methods 
+
+   
+  getuserDetailByCode(code:string ){
+ this._manageRfidService.getUserDetailByRfidCode(code)
         .subscribe(res => {
           this.userDetailModel = res.json();
           this.userInfoView = true;
@@ -64,24 +88,21 @@ export class ManageUserComponent implements OnInit {
           this.readView = false;
         this.noDeviceUserView = true;
         });
-
   }
-  calculateTotal() {
-      this.userDetailModel.Dispositivi.forEach(dis=>{
-        this.total += dis.Credit;
-      })
-  }
+    getuserDetailByEmail(email:string ){
+        this._manageRfidService.getUserDetailByEmail(email)
+        .subscribe(res => {
+          this.userDetailModel = res.json();
+          this.userInfoView = true;
+          this.readView = false;
+          
+          this._cd.markForCheck();
+        },
+        err => {
+          console.log(err);
+        });
 
-  viewDetail(code:string){
-    this.rfidCodeDetail = '';
-     this.rfidCodeDetail = code;
-    
-    this.viewRfidDetail = true;
-   
-  }
-
-   
-
+    }
   
 
 }

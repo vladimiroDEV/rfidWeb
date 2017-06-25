@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { ManageRfidService } from '../manage-rfid.service';
 import { Transaction } from '../manage-refid.models';
 
@@ -7,9 +7,10 @@ import { Transaction } from '../manage-refid.models';
   templateUrl: './rfid-detail.component.html',
   styleUrls: ['./rfid-detail.component.css']
 })
-export class RfidDetailComponent implements OnInit {
+export class RfidDetailComponent implements OnInit, OnChanges {
 
 @Input() rfidCode: string;
+ @Output() NotificationPaidTotal = new EventEmitter();
 
 ViewDeatail = true;
 ViewOperationMessages = false;
@@ -19,6 +20,13 @@ ViewOperationMessagesFaliure = false;
 totalToPay = 0;
 
   allTransactions: Transaction[] = [];
+
+ngOnChanges(changes: any) {
+
+    this.getAllTransaztion();
+
+}
+
   constructor(
     private _manageRfidService: ManageRfidService
   ) { }
@@ -43,10 +51,10 @@ totalToPay = 0;
       })
   }
  paidTotalReset() {
+
+  
     this._manageRfidService.paidTotalReset(this.rfidCode)
       .subscribe((res) => {
-        this.ViewDeatail = false;
-        this.ViewOperationMessages = true;
         this.ViewOperationMessagesSuccessed = true;
       },
       err => {
@@ -55,6 +63,13 @@ totalToPay = 0;
          true;
         this.ViewOperationMessagesFaliure = true;
       });
+  }
+
+  okclick() {
+    this.ViewOperationMessagesSuccessed = false;  
+    this.NotificationPaidTotal.emit();
+
+
   }
 
 }

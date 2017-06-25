@@ -71,7 +71,7 @@
 
     
 <div class="col-md-4" *ngIf="viewRfidDetail">
-  <app-rfid-detail [rfidCode]="rfidCodeDetail"></app-rfid-detail>
+  <app-rfid-detail [rfidCode]="rfidCodeDetail" (NotificationPaidTotal)="NotificationPaidTotal()"></app-rfid-detail>
 </div>
 
   

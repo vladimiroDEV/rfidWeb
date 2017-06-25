@@ -39,6 +39,31 @@
 
   </div>
 
+
+  <!-- Modal -->
+  <div 
+  class="modal fade"
+  [ngClass]="{'in': 'ViewOperationMessagesSuccessed'}"
+   id="myModal"
+    role="dialog" 
+    *ngIf="ViewOperationMessagesSuccessed"
+    [ngStyle]="{'display': 'ViewOperationMessagesSuccessed' ? 'block' : 'none'}">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+       
+        <div class="modal-body">
+          <p> L'operazione' è andata a buon fine!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" (click)="okclick()">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
 <div class="row" *ngIf="ViewOperationMessages">
   <div class="col-md-12" *ngIf="ViewOperationMessagesSuccessed">
     <p>
