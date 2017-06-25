@@ -48,11 +48,16 @@ export class ManageRfidService {
     }
    
   
-     // esetRfid : dissassicia il disposistivo dall'utente
-      paidTotalReset(code:string, leaveRfid? :boolean){
+     // esetRfid : dissassOcia il disposistivo dall'utente
+      paidTotalReset(code:string){
          return this._http.post(this._url+ '/paidTotalReset/'+ code, this._options);
         
+    }
 
+    // paga il totale 
+    // 
+    totalPaid(email:string){
+      return this._http.post(this._url+ '/paidTotal/'+ email, this._options);
     }
 
 

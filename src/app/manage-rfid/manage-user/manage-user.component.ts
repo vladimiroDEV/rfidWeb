@@ -64,6 +64,15 @@ export class ManageUserComponent implements OnInit {
     this.viewRfidDetail = true;
    
   }
+  totalPaid() {
+     this._manageRfidService.totalPaid(this.userDetailModel.Anagrafica.Email)
+     .subscribe(res=>{
+      console.log(res);
+     },
+     err=>{
+ console.log(err);
+     })
+  }
 
   // events 
 
