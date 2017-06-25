@@ -55,22 +55,7 @@ export class TotalAmountComponent implements OnInit {
       this.getAllTransaztion(this.ReadRfidForm.value.rfidCode);
   }
 
-  paidTotal() {
-
-    this._manageRfidService.paidTotal(this.rfidCode)
-      .subscribe((res) => {
-        this.ResultInfoView = true;
-        this.TotalInfoView = false;
-        this.ResultErrorView = false;
-      },
-      err => {
-        this.ResultInfoView = false;
-        this.TotalInfoView = false;
-        this.ResultErrorView = true;
-
-      });
-
-  }
+ 
   paidTotalReset() {
     this._manageRfidService.paidTotalReset(this.rfidCode)
       .subscribe((res) => {

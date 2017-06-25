@@ -13,10 +13,13 @@ export class ManageUserComponent implements OnInit {
 
   ReadRfidForm: FormGroup;
   userDetailModel = new UserDetailViewModel();
+  total: number;
+  rfidCodeDetail ='';
 
   userInfoView = false;
   readView = true;
   noDeviceUserView = false;
+  viewRfidDetail = false;
   constructor(
     private _manageRfidService: ManageRfidService,
     private _fb: FormBuilder,
@@ -30,6 +33,7 @@ export class ManageUserComponent implements OnInit {
       'rfidCode': '',
       'email': ''
     })
+    this.total = 0;
   }
 
   getUserByDetail(form: NgForm) {
@@ -41,6 +45,7 @@ export class ManageUserComponent implements OnInit {
           this.userDetailModel = res.json();
           this.userInfoView = true;
           this.readView = false;
+          this.calculateTotal();
         },
         err => {
           console.log(err);
@@ -52,6 +57,7 @@ export class ManageUserComponent implements OnInit {
           this.userDetailModel = res.json();
           this.userInfoView = true;
           this.readView = false;
+          this.calculateTotal();
 
         },
         err => {
@@ -60,10 +66,18 @@ export class ManageUserComponent implements OnInit {
         });
 
   }
+  calculateTotal() {
+      this.userDetailModel.Dispositivi.forEach(dis=>{
+        this.total += dis.Credit;
+      })
+  }
 
   viewDetail(code:string){
+    this.rfidCodeDetail = '';
+     this.rfidCodeDetail = code;
+    
+    this.viewRfidDetail = true;
    
-    this._router.navigateByUrl('manage-rfid/detail/'+code,);
   }
 
    

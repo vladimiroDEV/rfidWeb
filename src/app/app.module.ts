@@ -19,6 +19,8 @@ import { GetRfidComponent } from './manage-rfid/get-rfid/get-rfid.component';
 import { ModifyComponent } from './manage-rfid/modify/modify.component';
 import { TotalAmountComponent } from './manage-rfid/total-amount/total-amount.component';
 import { ManageUserComponent } from './manage-rfid/manage-user/manage-user.component';
+import { UserInfoComponent } from './manage-rfid/user-info/user-info.component';
+import { RfidDetailComponent } from './manage-rfid/rfid-detail/rfid-detail.component';
 
 
 @NgModule({
@@ -37,6 +39,8 @@ import { ManageUserComponent } from './manage-rfid/manage-user/manage-user.compo
     ModifyComponent,
     TotalAmountComponent,
     ManageUserComponent,
+    UserInfoComponent,
+    RfidDetailComponent,
 
   ],
   imports: [
