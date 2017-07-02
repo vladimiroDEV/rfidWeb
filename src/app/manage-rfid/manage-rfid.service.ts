@@ -14,6 +14,7 @@ export class ManageRfidService {
   
 
     private _url = "http://localhost:51279/api/rfid";
+    private _urlAnagrafica = "http://localhost:51279/api/Anagrafica";
 
     constructor(private _http: Http) {
       
@@ -58,6 +59,12 @@ export class ManageRfidService {
     // 
     totalPaid(email:string){
       return this._http.post(this._url+ '/paidTotal/'+ email, this._options);
+    }
+
+    // get mail likes 
+
+    getMailLikes(email:string) {
+         return this._http.get(this._urlAnagrafica+'/emailLikes/'+ email, this._options );
     }
 
 

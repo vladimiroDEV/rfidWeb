@@ -1,3 +1,16 @@
 textarea {
     resize: none;
 }
+.list-tipMail  {
+margin-top:5px;
+}
+.list-tipMail li {
+list-style-type: none;
+background-color: #fff;
+border-radius: 3px;
+border: 1px solid #fff;
+}
+.list-tipMail li:hover {
+  cursor: pointer;
+  border-color:  #5bc0de;
+}

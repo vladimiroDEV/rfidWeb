@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { ManageRfidService } from '../manage-rfid.service';
 import { Rfid, Anagrafica } from '../manage-refid.models';
 
+import 'rxjs/add/operator/debounceTime';
+
 
 @Component({
   selector: 'app-rfid-form',
@@ -14,13 +16,34 @@ export class RfidFormComponent implements OnInit {
   RfidForm: FormGroup;
 
   _rfid: Rfid;
+  _tipsMail :string[];
   esitoSalvataggioView = false;
   allertErrorView = false;
   allertErrorMessage = '';
   formView = true;
 
   ngOnInit() {
-    this.RfidForm = this.fb.group({
+   
+   this.initForm();
+
+   
+      this.RfidForm.controls['email'].valueChanges
+      .debounceTime(400)
+      .subscribe(mail=>{
+        console.log(mail);
+        this.manageRfidFormService.getMailLikes(mail)
+        .subscribe(data=>{
+          //console.log(data);
+
+          this._tipsMail = data.json();
+        },
+        err=> {this._tipsMail = []});
+        });
+ 
+  }
+
+  initForm() {
+ this.RfidForm = this.fb.group({
       'email': new FormControl(this._rfid.Anagrafica.Email),
       'nome': new FormControl(this._rfid.Anagrafica.Nome),
       'cognome': new FormControl(this._rfid.Anagrafica.Cognome),
@@ -47,6 +70,18 @@ export class RfidFormComponent implements OnInit {
   clearForm() {
 
   }
+
+  loadByEmail(mail:string) {
+    this.manageRfidFormService.getUserDetailByEmail(mail)
+    .subscribe(data => {
+      this._rfid.Anagrafica = data.json().Anagrafica;
+
+    this.initForm();
+      console.log(data.json().Anagrafica);
+      this._tipsMail = [];
+    })
+  }
+
 
 
   submit() {
