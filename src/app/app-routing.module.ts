@@ -10,6 +10,8 @@ import { HomeComponent } from './home/home.component';
 import { ActionsComponent } from './manage-rfid/actions/actions.component';
 import { TotalAmountComponent } from './manage-rfid/total-amount/total-amount.component';
 import { ManageUserComponent } from './manage-rfid/manage-user/manage-user.component';
+import { RegistrationFormComponent } from './account/registration-form/registration-form.component';
+import { LoginFormComponent } from './account/login-form/login-form.component';
 
 
 const appRoutes: Routes = [
@@ -26,6 +28,8 @@ const appRoutes: Routes = [
   { path: 'settings', component: SettingsComponent },
   { path: 'statistics', component: StatisticsComponent },
     { path: 'home', component: HomeComponent },
+      { path: 'register', component: RegistrationFormComponent},
+    { path: 'login', component: LoginFormComponent}
   
 ];
 
