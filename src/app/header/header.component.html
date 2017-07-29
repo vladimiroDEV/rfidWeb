@@ -12,7 +12,8 @@
         <li routerLinkActive="active"><a routerLink="/settings">Impostazioni</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">      
-          <li><a routerLink="/signin">Login</a></li>
+          <li  *ngIf="!status"><a routerLink="/login">Login</a></li>
+           <li  *ngIf="status"><a href="#" (click)="logout()">Logout</a></li>
       
         <li class="dropdown" appDropdown >
           <a style="cursor: pointer;" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>

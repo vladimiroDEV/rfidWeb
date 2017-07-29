@@ -37,6 +37,7 @@ export class ManageRfidService extends BaseService {
 //http
 
     createRfid(AnagraficaRfidDeviceModel: AnagraficaRfidDeviceModel) {
+        console.log(this._options);
         return this._http.post(this.baseUrl+"/create", JSON.stringify(AnagraficaRfidDeviceModel), this._options)
     }
     getRfidByCode() {

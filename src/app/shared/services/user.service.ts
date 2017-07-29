@@ -72,6 +72,7 @@ export class UserService extends BaseService {
     localStorage.removeItem('Rfid_AppliactionUserID');
     this.loggedIn = false;
     this._authNavStatusSource.next(false);
+    
   }
 
   isLoggedIn() {

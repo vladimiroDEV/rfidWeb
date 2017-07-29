@@ -31,7 +31,8 @@ export class PaidModel {
     Descrizione:string;
 }
 
-export class RfidDeviceTransaction {
+export class RfidDeviceTransaction
+ {
     
     RfidDeviceTransactionID:number;
    RfidDeviceCode:string;

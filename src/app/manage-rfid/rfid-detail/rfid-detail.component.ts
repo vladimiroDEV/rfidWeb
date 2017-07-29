@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { ManageRfidService } from '../manage-rfid.service';
-import { Transaction } from '../manage-refid.models';
+import { RfidDeviceTransaction } from '../manage-refid.models';
+
 
 @Component({
   selector: 'app-rfid-detail',
@@ -19,7 +20,7 @@ ViewOperationMessagesFaliure = false;
 
 totalToPay = 0;
 
-  allTransactions: Transaction[] = [];
+  allTransactions: RfidDeviceTransaction[] = [];
 
 ngOnChanges(changes: any) {
 

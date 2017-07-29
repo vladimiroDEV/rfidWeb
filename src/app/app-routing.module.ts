@@ -12,6 +12,7 @@ import { TotalAmountComponent } from './manage-rfid/total-amount/total-amount.co
 import { ManageUserComponent } from './manage-rfid/manage-user/manage-user.component';
 import { RegistrationFormComponent } from './account/registration-form/registration-form.component';
 import { LoginFormComponent } from './account/login-form/login-form.component';
+import { NotificationComponent } from './shared/components/notification/notification.component';
 
 
 const appRoutes: Routes = [
@@ -23,7 +24,8 @@ const appRoutes: Routes = [
     { path: 'info', component: InfoComponent, },
     {path: 'detail/:code', component: TotalAmountComponent},
     {path: 'total', component: TotalAmountComponent},
-    {path: 'manage-user', component: ManageUserComponent}
+    {path: 'manage-user', component: ManageUserComponent},
+    {path: 'notification', component:NotificationComponent}
   ] },
   { path: 'settings', component: SettingsComponent },
   { path: 'statistics', component: StatisticsComponent },

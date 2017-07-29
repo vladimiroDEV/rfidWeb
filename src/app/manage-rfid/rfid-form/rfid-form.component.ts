@@ -5,6 +5,9 @@ import { RfidDevice, Anagrafica, AnagraficaRfidDeviceModel } from '../manage-ref
 
 import 'rxjs/add/operator/debounceTime';
 import { ConfigService } from '../../shared/utils/config.service';
+import { NotificationService } from '../../shared/services/notification.service';
+import { Router } from '@angular/router';
+import { NotificationType } from '../../shared/models/SharedModels';
 
 
 @Component({
@@ -16,14 +19,29 @@ export class RfidFormComponent implements OnInit {
 
   RfidForm: FormGroup;
 
-  _rfid: RfidDevice
-  _anagrafica: Anagrafica;
  _anagraficaRfidDeviceModel: AnagraficaRfidDeviceModel;
   _tipsMail :string[];
   esitoSalvataggioView = false;
   allertErrorView = false;
   allertErrorMessage = '';
   formView = true;
+
+constructor(
+    private fb: FormBuilder,
+    private manageRfidFormService: ManageRfidService,
+    private _configServices: ConfigService,
+    private _notificationService: NotificationService,
+    private _router: Router
+
+  ) {
+
+    this._anagraficaRfidDeviceModel = new AnagraficaRfidDeviceModel();
+     this._anagraficaRfidDeviceModel.anagrafica = new Anagrafica();
+     this._anagraficaRfidDeviceModel.rfidDevice = new RfidDevice();
+
+     this._notificationService.clear();
+    
+  }
 
   ngOnInit() {
    
@@ -54,16 +72,7 @@ export class RfidFormComponent implements OnInit {
     });
   }
 
-  constructor(
-    private fb: FormBuilder,
-    private manageRfidFormService: ManageRfidService,
-    private _configServices: ConfigService
-  ) {
-    this._rfid = new RfidDevice();
-    this._anagrafica= new Anagrafica();
-    this._anagraficaRfidDeviceModel = new AnagraficaRfidDeviceModel();
-    
-  }
+  
 
   back() {
     this.allertErrorView = false;;
@@ -79,15 +88,13 @@ export class RfidFormComponent implements OnInit {
   loadByEmail(mail:string) {
     this.manageRfidFormService.getUserDetailByEmail(mail)
     .subscribe(data => {
-      this._anagrafica = data.json().Anagrafica;
+      this._anagraficaRfidDeviceModel.anagrafica = data.json().Anagrafica;
 
     this.initForm();
       console.log(data.json().Anagrafica);
       this._tipsMail = [];
     })
   }
-
-
 
   submit() {
 
@@ -100,16 +107,19 @@ export class RfidFormComponent implements OnInit {
     this._anagraficaRfidDeviceModel.rfidDevice.Credit = 0;
     this._anagraficaRfidDeviceModel.rfidDevice.Active = true;
 
+
+    console.log(this._anagraficaRfidDeviceModel);
     this.manageRfidFormService.createRfid(this._anagraficaRfidDeviceModel).subscribe(res => {
-      this.esitoSalvataggioView = true;
-      this.formView = false;
+       this._notificationService.setMessage("Operazione e termita con successo !!!");
+       this._notificationService.setNotificationType(NotificationType.success);
     },
       err => {
-        this.allertErrorView = true;
-        this.formView = false;
-        this.allertErrorMessage = 'errori durante il salvataggio';
 
+       this._notificationService.setMessage("Errori durante il salvataggio !!!");
+       this._notificationService.setNotificationType(NotificationType.success);
       });
+
+      this._router.navigate(['/manage-rfid/notification']);
 
   }
 }

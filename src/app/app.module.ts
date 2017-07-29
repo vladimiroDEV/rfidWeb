@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, XHRBackend } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -27,6 +27,9 @@ import { LoginFormComponent } from './account/login-form/login-form.component';
 import { EmailValidator } from './directives/email.validator.directive';
 import { UserService } from './shared/services/user.service';
 import { ConfigService } from './shared/utils/config.service';
+import { AuthenticateXHRBackend } from './shared/services/authenticate-xhr.backend';
+import { NotificationComponent } from './shared/components/notification/notification.component';
+import { NotificationService } from './shared/services/notification.service';
 
 
 @NgModule({
@@ -49,7 +52,7 @@ import { ConfigService } from './shared/utils/config.service';
     RfidDetailComponent,
     RegistrationFormComponent,
     EmailValidator, 
-    LoginFormComponent
+    LoginFormComponent, NotificationComponent
 
   ],
   imports: [
@@ -60,7 +63,14 @@ import { ConfigService } from './shared/utils/config.service';
     ReactiveFormsModule ,
     SharedModule
   ],
- providers: [ManageRfidService, UserService, ConfigService],
+ providers: [ManageRfidService,
+  UserService,
+   ConfigService,
+   { 
+    provide: XHRBackend, 
+    useClass: AuthenticateXHRBackend
+  },
+  NotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
