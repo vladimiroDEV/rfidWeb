@@ -47,16 +47,18 @@ export class UserService extends BaseService {
   }  
 
    login(userName, password) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-
+    // let headers = new Headers();
+    // headers.append('Content-Type', 'application/json');
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
     return this.http
       .post(
       this.baseUrl + '/auth/login',
-      JSON.stringify({ userName, password }),{ headers }
+      JSON.stringify({ userName, password }),options 
       )
       .map(res => res.json())
       .map(res => {
+       localStorage.setItem('Rfid_AppliactionUserID', res.Rfid_AppliactionUserID);
         localStorage.setItem('auth_token', res.auth_token);
         this.loggedIn = true;
         this._authNavStatusSource.next(true);
@@ -67,6 +69,7 @@ export class UserService extends BaseService {
 
   logout() {
     localStorage.removeItem('auth_token');
+    localStorage.removeItem('Rfid_AppliactionUserID');
     this.loggedIn = false;
     this._authNavStatusSource.next(false);
   }

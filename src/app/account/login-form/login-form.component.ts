@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { UserService } from '../../shared/services/user.service';
 import { Credentials } from '../../shared/models/credential.interface';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, NgForm, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-form',
@@ -32,12 +32,14 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
 
-    // subscribe to router event
+    // subscribe to router event 
     this.subscription = this.activatedRoute.queryParams.subscribe(
       (param: any) => {
          this.brandNew = param['brandNew'];   
          this.credentials.email = param['email'];         
-      });      
+      });   
+
+      this.initForm();   
   }
 
    ngOnDestroy() {
@@ -45,10 +47,12 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  login({ value, valid }: { value: Credentials, valid: boolean }) {
+  login({ value, valid }: { value: Credentials, valid: boolean }){
+    
     this.submitted = true;
     this.isRequesting = true;
     this.errors='';
+    console.log(value, valid);
     if (valid) {
       this.userService.login(value.email, value.password)
         .finally(() => this.isRequesting = false)
@@ -60,5 +64,13 @@ export class LoginFormComponent implements OnInit, OnDestroy {
         },
         error => this.errors = error);
     }
+  }
+
+   initForm() {
+    this.LoginForm = this.fb.group({
+      "email": ['', Validators.required],
+      "password": ['', Validators.required],
+     
+    })
   }
 }

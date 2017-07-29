@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Rfid } from "app/manage-rfid/manage-refid.models";
+import { RfidDevice } from "app/manage-rfid/manage-refid.models";
 
 @Component({
   selector: 'app-modify',
@@ -8,7 +8,7 @@ import { Rfid } from "app/manage-rfid/manage-refid.models";
 })
 export class ModifyComponent implements OnInit {
 
-_rfid  = new Rfid();
+_rfid  = new RfidDevice();
 readView = false;
   constructor() { }
 
@@ -16,7 +16,7 @@ readView = false;
   }
 
 
-    readRfid(rfid:Rfid) { 
+    readRfid(rfid:RfidDevice) { 
     this._rfid = rfid;
 
   

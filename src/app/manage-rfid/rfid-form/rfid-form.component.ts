@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { ManageRfidService } from '../manage-rfid.service';
-import { Rfid, Anagrafica } from '../manage-refid.models';
+import { RfidDevice, Anagrafica, AnagraficaRfidDeviceModel } from '../manage-refid.models';
 
 import 'rxjs/add/operator/debounceTime';
+import { ConfigService } from '../../shared/utils/config.service';
 
 
 @Component({
@@ -15,7 +16,9 @@ export class RfidFormComponent implements OnInit {
 
   RfidForm: FormGroup;
 
-  _rfid: Rfid;
+  _rfid: RfidDevice
+  _anagrafica: Anagrafica;
+ _anagraficaRfidDeviceModel: AnagraficaRfidDeviceModel;
   _tipsMail :string[];
   esitoSalvataggioView = false;
   allertErrorView = false;
@@ -26,7 +29,6 @@ export class RfidFormComponent implements OnInit {
    
    this.initForm();
 
-   
       this.RfidForm.controls['email'].valueChanges
       .debounceTime(400)
       .subscribe(mail=>{
@@ -44,20 +46,23 @@ export class RfidFormComponent implements OnInit {
 
   initForm() {
  this.RfidForm = this.fb.group({
-      'email': new FormControl(this._rfid.Anagrafica.Email),
-      'nome': new FormControl(this._rfid.Anagrafica.Nome),
-      'cognome': new FormControl(this._rfid.Anagrafica.Cognome),
-      'telefono': new FormControl(this._rfid.Anagrafica.Telefono),
-      'rfidCode': new FormControl(this._rfid.RfidCode)
+      'email': new FormControl(this._anagraficaRfidDeviceModel.anagrafica.Email),
+      'nome': new FormControl(this._anagraficaRfidDeviceModel.anagrafica.Nome),
+      'cognome': new FormControl(this._anagraficaRfidDeviceModel.anagrafica.Cognome),
+      'telefono': new FormControl(this._anagraficaRfidDeviceModel.anagrafica.Telefono),
+      'rfidCode': new FormControl(this._anagraficaRfidDeviceModel.rfidDevice.RfidDeviceCode)
     });
   }
 
   constructor(
     private fb: FormBuilder,
-    private manageRfidFormService: ManageRfidService
+    private manageRfidFormService: ManageRfidService,
+    private _configServices: ConfigService
   ) {
-    this._rfid = new Rfid();
-    this._rfid.Anagrafica = new Anagrafica()
+    this._rfid = new RfidDevice();
+    this._anagrafica= new Anagrafica();
+    this._anagraficaRfidDeviceModel = new AnagraficaRfidDeviceModel();
+    
   }
 
   back() {
@@ -74,7 +79,7 @@ export class RfidFormComponent implements OnInit {
   loadByEmail(mail:string) {
     this.manageRfidFormService.getUserDetailByEmail(mail)
     .subscribe(data => {
-      this._rfid.Anagrafica = data.json().Anagrafica;
+      this._anagrafica = data.json().Anagrafica;
 
     this.initForm();
       console.log(data.json().Anagrafica);
@@ -86,16 +91,16 @@ export class RfidFormComponent implements OnInit {
 
   submit() {
 
-    this._rfid.Anagrafica.Email = this.RfidForm.value.email;
-    this._rfid.Anagrafica.Nome = this.RfidForm.value.nome;
-    this._rfid.Anagrafica.Cognome = this.RfidForm.value.cognome;
-    this._rfid.Anagrafica.Telefono = this.RfidForm.value.telefono;
-    this._rfid.RfidCode = this.RfidForm.value.rfidCode;
-    this._rfid.AppUserID = 1;
-    this._rfid.Credit = 0;
-    this._rfid.Active = true;
+    this._anagraficaRfidDeviceModel.anagrafica.Email = this.RfidForm.value.email;
+    this._anagraficaRfidDeviceModel.anagrafica.Nome = this.RfidForm.value.nome;
+    this._anagraficaRfidDeviceModel.anagrafica.Cognome = this.RfidForm.value.cognome;
+    this._anagraficaRfidDeviceModel.anagrafica.Telefono = this.RfidForm.value.telefono;
+    this._anagraficaRfidDeviceModel.rfidDevice.RfidDeviceCode = this.RfidForm.value.rfidCode;
+    this._anagraficaRfidDeviceModel.rfidDevice.ApplicationUserID = this._configServices.getApplicationUserID();
+    this._anagraficaRfidDeviceModel.rfidDevice.Credit = 0;
+    this._anagraficaRfidDeviceModel.rfidDevice.Active = true;
 
-    this.manageRfidFormService.createRfid(this._rfid).subscribe(res => {
+    this.manageRfidFormService.createRfid(this._anagraficaRfidDeviceModel).subscribe(res => {
       this.esitoSalvataggioView = true;
       this.formView = false;
     },

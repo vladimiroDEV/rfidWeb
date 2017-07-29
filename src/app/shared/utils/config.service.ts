@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { RequestOptions, Headers } from '@angular/http';
  
 @Injectable()
 export class ConfigService {
@@ -12,5 +13,24 @@ export class ConfigService {
      getApiURI() {
          return this._apiURI;
      }    
+
+      getRequestOptions():RequestOptions {
+ 
+        let _headers = new Headers({ 'Accept': 'application/json' });
+
+       if(!localStorage.getItem('auth_token')){
+       let authToken = localStorage.getItem('auth_token');
+            _headers.append('Authorization', `Bearer ${authToken}`);
+       }
+        let options = new RequestOptions({ headers: _headers });
+        return options;
+    }
+    getApplicationUserID():string {
+
+        if(!localStorage.getItem('Rfid_AppliactionUserID')){
+            return localStorage.getItem('Rfid_AppliactionUserID');
+        }
+        return "";
+    }
 }
  

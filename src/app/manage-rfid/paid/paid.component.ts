@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { ManageRfidService } from '../manage-rfid.service';
-import { Rfid, PaidModel } from '../manage-refid.models';
+import { RfidDevice, PaidModel } from '../manage-refid.models';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class PaidComponent implements OnInit {
 
-  _rfid = new Rfid();
+  _rfid = new RfidDevice();
   _paidModel = new PaidModel();
 
   paidFormView = false;

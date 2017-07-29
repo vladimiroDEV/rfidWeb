@@ -1,70 +1,81 @@
 import { Injectable } from '@angular/core';
-import { Anagrafica, Rfid, PaidModel, Transaction } from './manage-refid.models';
+import { Anagrafica, RfidDevice, PaidModel, RfidDeviceTransaction, AnagraficaRfidDeviceModel } from './manage-refid.models';
 
 import { Headers, RequestOptions, Http } from '@angular/http';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
+import { BaseService } from '../shared/services/base.service';
+import { BehaviorSubject } from 'rxjs/Rx';
+import { ConfigService } from '../shared/utils/config.service';
 
 
 @Injectable()
-export class ManageRfidService {
-    rfid: Rfid
-     _headers = new Headers({ 'Content-Type': 'application/json' });
-    _options = new RequestOptions({ headers: this._headers });
-  
+export class ManageRfidService extends BaseService {
 
-    private _url = "http://localhost:51279/api/rfid";
-    private _urlAnagrafica = "http://localhost:51279/api/Anagrafica";
+  baseUrl: string = '';
+  // Observable navItem source
+  private _authNavStatusSource = new BehaviorSubject<boolean>(false);
+  // Observable navItem stream
+  authNavStatus$ = this._authNavStatusSource.asObservable();
 
-    constructor(private _http: Http) {
-      
+  private loggedIn = false;
+    rfid: RfidDevice
+  _options:RequestOptions;
+ 
+    constructor(private _http: Http, configService: ConfigService) {
+
+          super();
+    this.loggedIn = !!localStorage.getItem('auth_token');
+    // ?? not sure if this the best way to broadcast the status but seems to resolve issue on page refresh where auth status is lost in
+    // header component resulting in authed user nav links disappearing despite the fact user is still logged in
+    this._authNavStatusSource.next(this.loggedIn);
+    this.baseUrl = configService.getApiURI();
+     this._options= configService.getRequestOptions();
     }
   
 
 //http
 
-    createRfid(rfid: Rfid) {
-
-        return this._http.post(this._url+"/create", JSON.stringify(rfid), this._options)
+    createRfid(AnagraficaRfidDeviceModel: AnagraficaRfidDeviceModel) {
+        return this._http.post(this.baseUrl+"/create", JSON.stringify(AnagraficaRfidDeviceModel), this._options)
     }
     getRfidByCode() {
-        // let _headers = new Headers({ 'Content-Type': 'application/json' });
-        // let _options = new RequestOptions({ headers: _headers });
-        return this._http.get(this._url +'/code/'+ this.rfid.RfidCode, this._options)
+
+        return this._http.get(this.baseUrl +'/code/'+ this.rfid.RfidDeviceCode, this._options)
 
     }
     paidAction(paidModel: PaidModel) { 
-        return this._http.post(this._url +'/paid', JSON.stringify(paidModel), this._options);
+        return this._http.post(this.baseUrl +'/paid', JSON.stringify(paidModel), this._options);
     }
 
     getAllTransactionRfid(rfidCode: string){
-      return this._http.get(this._url +'/transactionsToConfirmRfidCode/'+ rfidCode,this._options);
+      return this._http.get(this.baseUrl +'/transactionsToConfirmRfidCode/'+ rfidCode,this._options);
     }
 
     getUserDetailByEmail(email:string) {
-        return this._http.get(this._url+ '/userdetailbymail/'+ email, this._options);
+        return this._http.get(this.baseUrl+ '/userdetailbymail/'+ email, this._options);
     }
      getUserDetailByRfidCode(code:string) {
-        return this._http.get(this._url+ '/userdetailbyrfidcode/'+ code, this._options);
+        return this._http.get(this.baseUrl+ '/userdetailbyrfidcode/'+ code, this._options);
     }
    
   
      // esetRfid : dissassOcia il disposistivo dall'utente
       paidTotalReset(code:string){
-         return this._http.post(this._url+ '/paidTotalReset/'+ code, this._options);
+         return this._http.post(this.baseUrl+ '/paidTotalReset/'+ code, this._options);
         
     }
 
     // paga il totale 
     // 
     totalPaid(email:string){
-      return this._http.post(this._url+ '/paidTotal/'+ email, this._options);
+      return this._http.post(this.baseUrl+ '/paidTotal/'+ email, this._options);
     }
 
     // get mail likes 
 
     getMailLikes(email:string) {
-         return this._http.get(this._urlAnagrafica+'/emailLikes/'+ email, this._options );
+         return this._http.get(this.baseUrl+'/Anagrafica/emailLikes/'+ email, this._options );
     }
 
 

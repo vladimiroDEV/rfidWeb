@@ -9,21 +9,20 @@ export class Anagrafica {
     Cognome: string;
     Telefono: number;
     CreationDate:Date;
+    LastModifiedDate?:Date;
 
 
 }
-export class Rfid {
-  RfidID?: number;
-   RfidCode: string;
+export class RfidDevice {
+  RfidDeviceID?: number;
+   RfidDeviceCode: string;
     ExpirationDate: Date;
     CreationDate: Date;
     LastModifiedDate:Date;
   Credit:number;
-    AppUserID:number;
+    ApplicationUserID:string;
     Active: boolean;
     AnagraficaID?: number;
-    Anagrafica?:Anagrafica;
-
 }
 
 export class PaidModel {  
@@ -32,8 +31,11 @@ export class PaidModel {
     Descrizione:string;
 }
 
-export class Transaction {
-    Operation:string;
+export class RfidDeviceTransaction {
+    
+    RfidDeviceTransactionID:number;
+   RfidDeviceCode:string;
+    TransactionOperation:string;
     TransactionDate: Date;
     Importo: number;
     Descrizione: string;
@@ -41,7 +43,12 @@ export class Transaction {
 }
 export class UserDetailViewModel {
     Anagrafica: Anagrafica;
-    Dispositivi: Rfid[];
+    Dispositivi: RfidDevice[];
+}
+
+export class AnagraficaRfidDeviceModel {
+     anagrafica: Anagrafica;
+     rfidDevice: RfidDevice;
 }
 
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ManageRfidService } from '../manage-rfid.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Transaction } from '../manage-refid.models';
-import { Rfid } from 'app/manage-rfid/manage-refid.models';
+import { RfidDeviceTransaction } from '../manage-refid.models';
+import { RfidDevice } from 'app/manage-rfid/manage-refid.models';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
@@ -18,7 +18,7 @@ export class TotalAmountComponent implements OnInit {
   ResultErrorView = false;
   rfidCode = "";
 
-  allTransactions: Transaction[] = [];
+  allTransactions: RfidDeviceTransaction[] = [];
 
   ReadRfidForm: FormGroup;
 
