@@ -25,6 +25,9 @@ export class RfidFormComponent implements OnInit {
   allertErrorView = false;
   allertErrorMessage = '';
   formView = true;
+f
+  _notificationMessage = "";
+  _notificationType= NotificationType.info;
 
 constructor(
     private fb: FormBuilder,
@@ -32,6 +35,7 @@ constructor(
     private _configServices: ConfigService,
     private _notificationService: NotificationService,
     private _router: Router
+    
 
   ) {
 
@@ -107,19 +111,14 @@ constructor(
     this._anagraficaRfidDeviceModel.rfidDevice.Credit = 0;
     this._anagraficaRfidDeviceModel.rfidDevice.Active = true;
 
-
-    console.log(this._anagraficaRfidDeviceModel);
     this.manageRfidFormService.createRfid(this._anagraficaRfidDeviceModel).subscribe(res => {
-       this._notificationService.setMessage("Operazione e termita con successo !!!");
-       this._notificationService.setNotificationType(NotificationType.success);
+       this._notificationMessage = "Operazione e termita con successo !!!";
+       this._notificationType = NotificationType.success;
     },
       err => {
+      this._notificationMessage = "Errori durante il salvataggio !!!";
+       this._notificationType = NotificationType.danger;
 
-       this._notificationService.setMessage("Errori durante il salvataggio !!!");
-       this._notificationService.setNotificationType(NotificationType.success);
       });
-
-      this._router.navigate(['/manage-rfid/notification']);
-
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { NotificationService } from '../../services/notification.service';
 import { NotificationType } from '../../models/SharedModels';
 
@@ -8,25 +8,50 @@ import { NotificationType } from '../../models/SharedModels';
   styleUrls: ['./notification.component.css']
 })
 export class NotificationComponent implements OnInit,OnDestroy {
-  _notificationMessage:string;
-  _notifiacationType:NotificationType;
+
+
+  @Input() notificationMessage:string;
+  @Input() notifiacationType:NotificationType;
 
   constructor(
-    private _notifiactionService:NotificationService
+    //private _notifiactionService:NotificationService
     
   ) { 
     
   }
 
   ngOnInit() {
-     console.log("initi");
-    console.log('Notification' +this._notifiactionService.getMessage());
-   this._notificationMessage = this._notifiactionService.getMessage();
-    this._notifiacationType = this._notifiactionService.getNotificationType();
+  //    console.log("initi");
+  //   console.log('Notification' +this._notifiactionService.getMessage());
+  //  this._notificationMessage = this._notifiactionService.getMessage();
+  //   this._notifiacationType = this._notifiactionService.getNotificationType();
 
   }
   ngOnDestroy() {
     console.log("destroy");
+  }
+
+  getAlertStyle() {
+  let style = "";
+    switch(this.notifiacationType) {
+      case NotificationType.danger:
+      style= "alert alert-dander";
+      break;
+       case NotificationType.info:
+      style= "alert alert-info";
+      break;
+       case NotificationType.success:
+      style= "alert alert-success";
+      break;
+       case NotificationType.warning:
+      style= "alert alert-warning";
+      break;
+      default:
+      style= "alert alert-info";
+     break;
+
+  }
+  return style;
   }
 
 }
