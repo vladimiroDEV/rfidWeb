@@ -16,14 +16,14 @@ export class ConfigService {
 
       getRequestOptions():RequestOptions {
  
-        let _headers = new Headers({ 'Content-Type': 'application/json' });  // old Accept 
+          let _headers = new Headers({ 'Content-Type': 'application/json' });  // old Accept 
 
-       if(localStorage.getItem('auth_token')){
-       let authToken = localStorage.getItem('auth_token');
-            _headers.append('Authorization', `Bearer ${authToken}`);
-       }
-        let options = new RequestOptions({ headers: _headers });
-        return options;
+          if (localStorage.getItem('auth_token')) {
+              let authToken = localStorage.getItem('auth_token');
+              _headers.append('Authorization', `Bearer ${authToken}`);
+          }
+          let options = new RequestOptions({ headers: _headers });
+          return options;
     }
     getApplicationUserID():string {
 

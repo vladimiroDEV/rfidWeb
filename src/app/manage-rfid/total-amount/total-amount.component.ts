@@ -17,6 +17,7 @@ export class TotalAmountComponent implements OnInit {
   ResultInfoView = false;
   ResultErrorView = false;
   rfidCode = "";
+  Totale:number = 0;
 
   allTransactions: RfidDeviceTransaction[] = [];
 
@@ -75,6 +76,10 @@ export class TotalAmountComponent implements OnInit {
 
       .subscribe((res) => {
         this.allTransactions = res.json();
+        this.allTransactions.forEach(operation => {
+          this.Totale += operation.Importo;
+        })
+
 
         this.TotalInfoView = true;
         this.readRfidView = false;

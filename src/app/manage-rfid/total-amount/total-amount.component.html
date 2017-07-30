@@ -17,7 +17,7 @@
 
 
 <div class="row" *ngIf="TotalInfoView">
-  <div class="col-md-12">
+  <div class="col-md-8 col-md-offset-2" >
     <div class="allert allert-info">
 
 <table class="table table-striped">
@@ -31,12 +31,20 @@
   </thead>
   <tbody>
     <tr *ngFor="let transaction of allTransactions; let i = index">
-      <th scope="row">{{i}}</th>
+      <td scope="row">{{i}}</td>
       <td>{{transaction.Descrizione}}</td>
       <td>{{transaction.TransactionDate | date:'dd/MM/y H:mm'}}</td>
       <td>€ {{transaction.Importo}}</td>
     </tr>
   </tbody>
+  <tfoot>
+    <tr>
+      <td></td>
+      <td></td>
+      <td><b>Totale:</b> </td> 
+      <td><b>€ {{Totale}}</b></td>
+   </tr>
+ </tfoot>
 </table>
      
     </div>
@@ -45,21 +53,21 @@
   </div>
 </div>
 <div class="row" *ngIf="TotalInfoView">
-  <div class="col-md-12">
+  <div class="col-md-8 col-md-offset-2">
      <button class="btn btn-success" type="button" (click)="paidTotalReset()">Restituisci il dispositivo </button>
 
   </div>
 </div>
 
 <div class="row" *ngIf="ResultInfoView">
-  <div class="col-md-12">
+  <div class="col-md-8 col-md-offset-2">
     <p>
     L'operazione' è andata a buon fine!</p> <br />
     <button class="btn btn-success"  routerLink="/manage-rfid">ok</button>
   </div>
 </div>
 <div class="row" *ngIf="ResultErrorView">
-  <div class="col-md-12">
+  <div class="col-md-8 col-md-offset-2">
     <p>
     Ci sono stati dei errori riprovare </p> <br />
     <button class="btn btn-success"  routerLink="/manage-rfid">ok</button>

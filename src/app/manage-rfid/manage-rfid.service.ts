@@ -68,6 +68,7 @@ export class ManageRfidService extends BaseService {
          return this._http.post(this.baseUrl+ '/RfidDevice/paidTotalReset/'+ code, this._options);
         
     }
+    
 
     // paga il totale 
     // 
