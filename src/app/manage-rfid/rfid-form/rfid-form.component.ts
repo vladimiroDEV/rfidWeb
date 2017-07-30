@@ -21,9 +21,6 @@ export class RfidFormComponent implements OnInit {
 
  _anagraficaRfidDeviceModel: AnagraficaRfidDeviceModel;
   _tipsMail :string[];
-  esitoSalvataggioView = false;
-  allertErrorView = false;
-  allertErrorMessage = '';
   formView = true;
 f
   _notificationMessage = "";
@@ -39,31 +36,15 @@ constructor(
 
   ) {
 
-    this._anagraficaRfidDeviceModel = new AnagraficaRfidDeviceModel();
+     this._anagraficaRfidDeviceModel = new AnagraficaRfidDeviceModel();
      this._anagraficaRfidDeviceModel.anagrafica = new Anagrafica();
-     this._anagraficaRfidDeviceModel.rfidDevice = new RfidDevice();
-
-     this._notificationService.clear();
-    
+     this._anagraficaRfidDeviceModel.device = new RfidDevice();
   }
 
   ngOnInit() {
    
    this.initForm();
-
-      this.RfidForm.controls['email'].valueChanges
-      .debounceTime(400)
-      .subscribe(mail=>{
-        console.log(mail);
-        this.manageRfidFormService.getMailLikes(mail)
-        .subscribe(data=>{
-          //console.log(data);
-
-          this._tipsMail = data.json();
-        },
-        err=> {this._tipsMail = []});
-        });
- 
+   this.watchEmilField()
   }
 
   initForm() {
@@ -72,31 +53,19 @@ constructor(
       'nome': new FormControl(this._anagraficaRfidDeviceModel.anagrafica.Nome),
       'cognome': new FormControl(this._anagraficaRfidDeviceModel.anagrafica.Cognome),
       'telefono': new FormControl(this._anagraficaRfidDeviceModel.anagrafica.Telefono),
-      'rfidCode': new FormControl(this._anagraficaRfidDeviceModel.rfidDevice.RfidDeviceCode)
+      'rfidCode': new FormControl(this._anagraficaRfidDeviceModel.device.RfidDeviceCode)
     });
   }
 
-  
-
-  back() {
-    this.allertErrorView = false;;
-    this.formView = true;
-    this.allertErrorMessage = '';
-    this.esitoSalvataggioView = false;
-  }
-
-  clearForm() {
-
-  }
-
   loadByEmail(mail:string) {
+    this._anagraficaRfidDeviceModel.anagrafica= new Anagrafica();
+    this._anagraficaRfidDeviceModel.device = new  RfidDevice();
     this.manageRfidFormService.getUserDetailByEmail(mail)
-    .subscribe(data => {
-      this._anagraficaRfidDeviceModel.anagrafica = data.json().Anagrafica;
-
+        .subscribe(data => {
+    this._anagraficaRfidDeviceModel.anagrafica = data.json().Anagrafica;
     this.initForm();
-      console.log(data.json().Anagrafica);
-      this._tipsMail = [];
+    this._tipsMail = [];
+    this.watchEmilField();
     })
   }
 
@@ -106,19 +75,32 @@ constructor(
     this._anagraficaRfidDeviceModel.anagrafica.Nome = this.RfidForm.value.nome;
     this._anagraficaRfidDeviceModel.anagrafica.Cognome = this.RfidForm.value.cognome;
     this._anagraficaRfidDeviceModel.anagrafica.Telefono = this.RfidForm.value.telefono;
-    this._anagraficaRfidDeviceModel.rfidDevice.RfidDeviceCode = this.RfidForm.value.rfidCode;
-    this._anagraficaRfidDeviceModel.rfidDevice.ApplicationUserID = this._configServices.getApplicationUserID();
-    this._anagraficaRfidDeviceModel.rfidDevice.Credit = 0;
-    this._anagraficaRfidDeviceModel.rfidDevice.Active = true;
+    this._anagraficaRfidDeviceModel.device.RfidDeviceCode = this.RfidForm.value.rfidCode;
+    this._anagraficaRfidDeviceModel.device.ApplicationUserID = this._configServices.getApplicationUserID();
+    this._anagraficaRfidDeviceModel.device.Credit = 0;
+    this._anagraficaRfidDeviceModel.device.Active = true;
 
     this.manageRfidFormService.createRfid(this._anagraficaRfidDeviceModel).subscribe(res => {
-       this._notificationMessage = "Operazione e termita con successo !!!";
-       this._notificationType = NotificationType.success;
+        this._notificationMessage = "Operazione e termita con successo !!!";
+        this._notificationType = NotificationType.success;
+        this.formView = false;
     },
       err => {
-      this._notificationMessage = "Errori durante il salvataggio !!!";
-       this._notificationType = NotificationType.danger;
-
+        this._notificationMessage = "Errori durante il salvataggio !!!";
+        this._notificationType = NotificationType.danger;
+        this.formView = false;
       });
   }
+
+   watchEmilField(){
+        this.RfidForm.controls['email'].valueChanges
+      .debounceTime(400)
+      .subscribe(mail=>{
+        this.manageRfidFormService.getMailLikes(mail)
+        .subscribe(data=>{
+          this._tipsMail = data.json();
+        },
+        err=> {this._tipsMail = [];  console.log(err);});
+        });
+     }
 }

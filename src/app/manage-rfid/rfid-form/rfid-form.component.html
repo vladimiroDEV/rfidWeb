@@ -2,13 +2,13 @@
 <div class="row" *ngIf="formView">
     <div class="col-md-6 col-md-offset-3">
         <div class="well">
-            <form class="form-group"  (ngSubmit)="submit()"  [formGroup]="RfidForm" *ngIf="formView" autocomplete="off">
+            <form class="form-group"  (ngSubmit)="submit()"  [formGroup]="RfidForm" autocomplete="off">
                  <fieldset>
                     <legend>Dati utente</legend>
                 <div class="form-group">
                     <label for="email">Email</label>
               
-                    <input type="email" class="form-control input-sm" id="email" name="email" formControlName="email">
+                    <input type="email" email required class="form-control input-sm" id="email" name="email" formControlName="email">
                    <ul *ngFor="let tipMail of _tipsMail" class="list-tipMail">
                        <li (click)="loadByEmail(tipMail)">{{tipMail}}</li>
 
@@ -38,38 +38,15 @@
                 <fieldset class="form-group">
                      <legend>Dispositivo</legend>
                     <div class="form-group">
-                        <textarea rows="1" class="form-control input-sm" id="rfidCode" name="rfidCode" formControlName="rfidCode"></textarea>
+                        <textarea rows="1" required class="form-control input-sm" id="rfidCode" name="rfidCode" formControlName="rfidCode"></textarea>
 
                     </div>
                 </fieldset>
 
-                <button class="btn btn-success" type="submit">Salva</button>
+                <button class="btn btn-success" [disabled]="!RfidForm.valid" type="submit">Salva</button>
             </form>
         </div>
     </div>
-</div>
-
-
-
-  <div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <div class="alert alert-info" *ngIf="esitoSalvataggioView">
-
-      <p>Il Salvataggio è andato a buon fine</p>
-      <br />
-      <p>
-        <button class="btn btn-success"  routerLink="/manage-rfid">Ok</button>
-      </p>
-    </div>
-     <div class="alert alert-danger" *ngIf="allertErrorView">
-
-      <p>{{allertErrorMessage}} </p>
-      <br/>
-      <button class="btn btn-danger" (click)="back()">Indietro</button>
-
-    </div>
-   </div>
-
 </div>
 
 
@@ -80,5 +57,13 @@
   
       </div>
   </div>
+  <div class="row" *ngIf="!formView">
+    <div class="col-md-6 col-md-offset-3">
 
-  <app-notification [notificationMessage] = "_notificationMessage" [notifiacationType]="_notificationType"></app-notification>
+  <app-notification
+   [notificationMessage] = "_notificationMessage"
+    [notifiacationType]="_notificationType">
+    </app-notification>
+
+    </div>
+  </div>

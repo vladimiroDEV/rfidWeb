@@ -44,28 +44,28 @@ export class ManageRfidService extends BaseService {
     }
     getRfidByCode() {
 
-        return this._http.get(this.baseUrl +'/code/'+ this.rfid.RfidDeviceCode, this._options)
+        return this._http.get(this.baseUrl +'/RfidDevice/code/'+ this.rfid.RfidDeviceCode, this._options)
 
     }
     paidAction(paidModel: PaidModel) { 
-        return this._http.post(this.baseUrl +'/paid', JSON.stringify(paidModel), this._options);
+        return this._http.post(this.baseUrl +'/RfidDevice/paid', JSON.stringify(paidModel), this._options);
     }
 
     getAllTransactionRfid(rfidCode: string){
-      return this._http.get(this.baseUrl +'/transactionsToConfirmRfidCode/'+ rfidCode,this._options);
+      return this._http.get(this.baseUrl +'/RfidDevice/transactionsToConfirmRfidCode/'+ rfidCode,this._options);
     }
 
     getUserDetailByEmail(email:string) {
-        return this._http.get(this.baseUrl+ '/userdetailbymail/'+ email, this._options);
+        return this._http.get(this.baseUrl+ '/RfidDevice/userdetailbymail/'+ email, this._options);
     }
      getUserDetailByRfidCode(code:string) {
-        return this._http.get(this.baseUrl+ '/userdetailbyrfidcode/'+ code, this._options);
+        return this._http.get(this.baseUrl+ '/RfidDevice/userdetailbyrfidcode/'+ code, this._options);
     }
    
   
      // esetRfid : dissassOcia il disposistivo dall'utente
       paidTotalReset(code:string){
-         return this._http.post(this.baseUrl+ '/paidTotalReset/'+ code, this._options);
+         return this._http.post(this.baseUrl+ '/RfidDevice/paidTotalReset/'+ code, this._options);
         
     }
 

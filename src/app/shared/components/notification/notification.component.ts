@@ -35,7 +35,7 @@ export class NotificationComponent implements OnInit,OnDestroy {
   let style = "";
     switch(this.notifiacationType) {
       case NotificationType.danger:
-      style= "alert alert-dander";
+      style= "alert alert-danger";
       break;
        case NotificationType.info:
       style= "alert alert-info";

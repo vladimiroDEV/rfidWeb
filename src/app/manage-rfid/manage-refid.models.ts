@@ -49,7 +49,7 @@ export class UserDetailViewModel {
 
 export class AnagraficaRfidDeviceModel {
      anagrafica: Anagrafica;
-     rfidDevice: RfidDevice;
+     device: RfidDevice;
 }
 
 

@@ -16,9 +16,9 @@ export class ConfigService {
 
       getRequestOptions():RequestOptions {
  
-        let _headers = new Headers({ 'Accept': 'application/json' });
+        let _headers = new Headers({ 'Content-Type': 'application/json' });  // old Accept 
 
-       if(!localStorage.getItem('auth_token')){
+       if(localStorage.getItem('auth_token')){
        let authToken = localStorage.getItem('auth_token');
             _headers.append('Authorization', `Bearer ${authToken}`);
        }
