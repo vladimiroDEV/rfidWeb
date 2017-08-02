@@ -92,6 +92,12 @@ constructor(
       });
   }
 
+  clearForm() {
+    this._anagraficaRfidDeviceModel.anagrafica = new Anagrafica();
+    this._anagraficaRfidDeviceModel.device = new RfidDevice();
+     this.initForm();
+  }
+
    watchEmilField(){
         this.RfidForm.controls['email'].valueChanges
       .debounceTime(400)

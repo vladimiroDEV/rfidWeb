@@ -27,7 +27,7 @@ export class ConfigService {
     }
     getApplicationUserID():string {
 
-        if(!localStorage.getItem('Rfid_AppliactionUserID')){
+        if(localStorage.getItem('Rfid_AppliactionUserID')){
             return localStorage.getItem('Rfid_AppliactionUserID');
         }
         return "";

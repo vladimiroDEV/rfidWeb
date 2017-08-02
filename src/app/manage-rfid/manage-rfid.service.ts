@@ -21,6 +21,7 @@ export class ManageRfidService extends BaseService {
   private loggedIn = false;
     rfid: RfidDevice
   _options:RequestOptions;
+  _applicationUserId= "";
  
     constructor(private _http: Http, configService: ConfigService) {
 
@@ -31,15 +32,16 @@ export class ManageRfidService extends BaseService {
     this._authNavStatusSource.next(this.loggedIn);
     this.baseUrl = configService.getApiURI();
      this._options= configService.getRequestOptions();
+     this._applicationUserId = configService.getApplicationUserID();
     }
   
 
 //http
 
     createRfid(anagraficaRfidDeviceModel: AnagraficaRfidDeviceModel) {
-        console.log(this._options);
-         console.log(anagraficaRfidDeviceModel);
-    
+       
+       anagraficaRfidDeviceModel.device.ApplicationUserID = this._applicationUserId;
+       
         return this._http.post(this.baseUrl+"/RfidDevice/create", JSON.stringify(anagraficaRfidDeviceModel), this._options)
     }
     getRfidByCode() {

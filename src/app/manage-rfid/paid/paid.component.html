@@ -1,73 +1,66 @@
-<div class="row" *ngIf="paidFormView">
-  <div class="col-md-6 col-md-offset-3">
+<div class="row">
+  <div class="col-md-2 col-md-offset-1">
+      <button class="btn btn-success" routerLink="/manage-rfid" >Menu prinipale</button>
+    </div>
+  <div class="col-md-6"  *ngIf="paidFormView">
 
-    <div class="alert alert-info">
+    <div class="well">
 
       <form [formGroup]="PaidForm" (ngSubmit)="paid(f)" #f="ngForm">
         <fieldset>
-          <legend>Importo</legend>
           <div class="form-group">
-            <!--<label for="importo">Importo</label>-->
-            <input type="number" class="form-control" id="price" name="price" formControlName="price" placeholder="€">
-            <span class="help-block allertMessage" *ngIf="PaidForm.controls.price.invalid && PaidForm.controls.price.touched">Inserisci l'importo</span>
+            <label for="importo" class="col-lg-2 control-label">Importo</label>
+            <div class="col-lg-10">
+              <input type="number" class="form-control" id="price" pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" name="price" formControlName="price" placeholder="€">
+              <span class="help-block allertMessage" *ngIf="PaidForm.controls.price.invalid && PaidForm.controls.price.touched">Inserisci l'importo corretto!</span>
+            </div>
+          </div>
+            <div class="clearfix"></div>
+          <br />
+
+
+          <div class="form-group">
+            <label for="descrizione" class="col-lg-2 control-label">Descrizione</label>
+            <div class="col-lg-10">
+              <textarea class="form-control" id="descrizione" name="descrizione" formControlName="descrizione"></textarea>
+              <span class="help-block allertMessage" *ngIf="PaidForm.controls.descrizione.invalid && PaidForm.controls.descrizione.touched">Inserisci la descrizione</span>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <br /><br />
+
+          <div class="form-group">
+            <label for="rfidCode" class="col-lg-2 control-label">Codice</label>
+            <div class="col-lg-10">
+              <input type="text" class="form-control" id="rfidCode" name="rfidCode" formControlName="rfidCode">
+              <span class="help-block allertMessage" *ngIf="PaidForm.controls.rfidCode.invalid && PaidForm.controls.rfidCode.touched">Scansiona il dispositivo</span>
+            </div>
           </div>
         </fieldset>
+        <div class="clearfix"></div>
+        <br /><br />
 
-        <fieldset>
-          <legend>Descrizione</legend>
-          <div class="form-group">
-            <!--<label for="descrizione">Descrizione</label>-->
-            <textarea class="form-control" id="descrizione" name="descrizione" formControlName="descrizione"></textarea>
-            <span class="help-block allertMessage" *ngIf="PaidForm.controls.descrizione.invalid && PaidForm.controls.descrizione.touched">Inserisci la descrizione</span>
+        <div class="row">
+          <div class="col-lg-10 col-md-offset-2">
+            <button class="btn btn-success" [disabled]="!PaidForm.valid" type="submit">Paga</button>
+            <button class="btn btn-danger pull-right" type="button" (click)="clearForm()">Ripulisci</button>
           </div>
-        </fieldset>
-
-        <fieldset>
-          <legend>Codice</legend>
-          <div class="form-group">
-            <input type="text" class="form-control" id="rfidCode" name="rfidCode" formControlName="rfidCode">
-            <span class="help-block allertMessage" *ngIf="PaidForm.controls.rfidCode.invalid && PaidForm.controls.rfidCode.touched">Scansiona il dispositivo</span>
-          </div>
-        </fieldset>
-
-
-        <button class="btn btn-success" type="submit">Paga</button>
-        <button class="btn btn-danger pull-right" type="button" (click)="clearForm()">Ripulisci</button>
-
+        </div>
 
       </form>
 
     </div>
   </div>
-  </div>
+ <div class="col-md-6" *ngIf="!paidFormView">
 
-  <div class="row"  *ngIf="paidFormView" >
-      <div class="col-md-4 col-md-offset-3">
-    
-      <button class="btn btn-success" routerLink="/manage-rfid" >Menu prinipale</button>
-  
-      </div>
-  </div>
-
-
-
-<div class="row">
-  <div class="col-md-12 col-md-offset-3">
-    <div class="alert alert-info" *ngIf="esitoPagamentoView">
-
-      <p>Il Pagamento è andato a buon fine</p>
-      <br />
-      <p>
-        <button class="btn btn-success"  routerLink="/manage-rfid">Ok</button>
-      </p>
-    </div>
-    <div class="alert alert-danger" *ngIf="allertErrorView">
-
-      <p>{{allertErrorMessage}} </p>
-      <br/>
-      <button class="btn btn-danger" (click)="back()">Indietro</button>
+        <app-notification [notificationMessage]="_notificationMessage" [notifiacationType]="_notificationType">
+        </app-notification>
 
     </div>
-  </div>
 
 </div>
+
+
+
+   
+

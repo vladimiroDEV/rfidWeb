@@ -1,69 +1,82 @@
-
-<div class="row" *ngIf="formView">
-    <div class="col-md-6 col-md-offset-3">
+<div class="row">
+    <div class="col-md-2 col-md-offset-1">
+        <button class="btn btn-success" routerLink="/manage-rfid">Menu prinipale</button>
+    </div>
+    <div class="col-md-6" *ngIf="formView">
         <div class="well">
-            <form class="form-group"  (ngSubmit)="submit()"  [formGroup]="RfidForm" autocomplete="off">
-                 <fieldset>
+            <form class="form-group" (ngSubmit)="submit()" [formGroup]="RfidForm" autocomplete="off">
+                <fieldset>
                     <legend>Dati utente</legend>
-                <div class="form-group">
-                    <label for="email">Email</label>
-              
-                    <input type="email" email required class="form-control input-sm" id="email" name="email" formControlName="email">
-                   <ul *ngFor="let tipMail of _tipsMail" class="list-tipMail">
-                       <li (click)="loadByEmail(tipMail)">{{tipMail}}</li>
+                    <div class="form-group">
+                        <label for="email" class="col-lg-2 control-label">Email</label>
+                        <div class="col-lg-10">
+                            <input type="email" email required class="form-control" id="email" name="email" formControlName="email">
+                              <span class="help-block allertMessage" *ngIf="RfidForm.controls.email.invalid && RfidForm.controls.email.touched">Campo Email è obbligatorio</span>
+                            <ul *ngFor="let tipMail of _tipsMail" class="list-tipMail">
+                                <li (click)="loadByEmail(tipMail)">{{tipMail}}</li>
 
-                   </ul>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br>
+                    <div class="form-group">
+                        <label for="telefono" class="col-lg-2 control-label">Telefono</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="telefono" name="telefono" formControlName="telefono">
+                        </div>
+                    </div>
 
-                </div>
-                        <div class="form-group">
-                    <label for="telefono">Telefono</label>
-                    <input type="text" class="form-control input-sm" id="telefono" name="telefono" formControlName="telefono">
+ <div class="clearfix"></div>
+                    <br>
+                    <div class="form-group">
+                        <label class="nome" for="nome" class="col-lg-2 control-label">Nome</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control " id="nome" name="nome" formControlName="nome">
+                        </div>
+
+                    </div>
+                     <div class="clearfix"></div>
+                    <br>
+                    <div class="form-group">
+
+                        <label for="cognome" class="col-lg-2 control-label">Cognome</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control " id="cognome" name="cognome" formControlName="cognome">
+                        </div>
+                    </div>
+                     <div class="clearfix"></div>
+                    <br>
+
+                </fieldset>
+                <fieldset class="form-group">
+                    <legend>Dispositivo</legend>
+                    <div class="form-group">
+                        <label for="rfidCode" class="col-lg-2 control-label">Codice</label>
+                        <div class="col-lg-10">
+                            <textarea rows="1" required class="form-control" id="rfidCode" name="rfidCode" formControlName="rfidCode"></textarea>
+                            <span class="help-block allertMessage" *ngIf="RfidForm.controls.rfidCode.invalid && RfidForm.controls.rfidCode.touched">Scansiona il dispositivo</span>
+                        </div>
+                    </div>
+                </fieldset>
+                 <div class="clearfix"></div>
+                    <br>
+                <div class="row">
+                     <button class="btn btn-success" [disabled]="!RfidForm.valid" type="submit">Salva</button>
+                      <button class="btn btn-danger pull-right" type="button" (click)="clearForm()">Ripulisci</button>
 
                 </div>
 
                
-                    <div class="form-group">
-                    <label class="nome" for="nome">Nome</label>
-                    <input type="text" class="form-control  input-sm" id="nome" name="nome" formControlName="nome">
-
-                    </div>
-                    <div class="form-group">
-
-                    <label for="cognome">Cognome</label>
-                    <input type="text" class="form-control input-sm" id="cognome" name="cognome" formControlName="cognome">
-                    
-                </div>
-        
-                 </fieldset>
-                <fieldset class="form-group">
-                     <legend>Dispositivo</legend>
-                    <div class="form-group">
-                        <textarea rows="1" required class="form-control input-sm" id="rfidCode" name="rfidCode" formControlName="rfidCode"></textarea>
-
-                    </div>
-                </fieldset>
-
-                <button class="btn btn-success" [disabled]="!RfidForm.valid" type="submit">Salva</button>
             </form>
         </div>
     </div>
-</div>
 
+    <div class="col-md-6" *ngIf="!formView">
 
-<div class="row" *ngIf="formView">
-      <div class="col-md-4  col-md-offset-3">
-    
-      <button class="btn btn-success" routerLink="/manage-rfid" >Menu prinipale</button>
-  
-      </div>
-  </div>
-  <div class="row" *ngIf="!formView">
-    <div class="col-md-6 col-md-offset-3">
-
-  <app-notification
-   [notificationMessage] = "_notificationMessage"
-    [notifiacationType]="_notificationType">
-    </app-notification>
+        <app-notification [notificationMessage]="_notificationMessage" [notifiacationType]="_notificationType">
+        </app-notification>
 
     </div>
-  </div>
+
+</div>

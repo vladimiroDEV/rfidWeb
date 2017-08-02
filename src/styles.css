@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+.alert-primary {
+    background-color: #0d87e9;
+    border-color: #0d87e9;
+    color: #ffffff;
+}
+.allertMessage{
+    color: red;
+}

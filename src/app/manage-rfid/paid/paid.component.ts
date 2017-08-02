@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { ManageRfidService } from '../manage-rfid.service';
 import { RfidDevice, PaidModel } from '../manage-refid.models';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NotificationType } from "app/shared/models/SharedModels";
 
 @Component({
   selector: 'app-paid',
@@ -14,11 +15,10 @@ export class PaidComponent implements OnInit {
   _rfid = new RfidDevice();
   _paidModel = new PaidModel();
 
-  paidFormView = false;
-  esitoPagamentoView = false;
-  allertErrorView = false;
+  _notificationMessage = "";
+  _notificationType = NotificationType.info;
+   paidFormView = false;
 
-  allertErrorMessage = '';
 
   PaidForm: FormGroup;
 
@@ -39,17 +39,21 @@ console.log( this._paidModel);
     if (form.valid) {
       this._paidModel = this.PaidForm.value;
       
-
       this.manageRfidService.paidAction(this._paidModel)
         .subscribe(result => {
-          this.esitoPagamentoView = true;
+         this._notificationMessage = "Il pagamento è andato a buon fine";
+         this._notificationType = NotificationType.success;
           this.paidFormView = false;
         },
         err => {
           if (err.status == 404) {
             this.paidFormView = false;
-            this.allertErrorView = true;
-            this.allertErrorMessage = "Il dispositivo no è stato trovato nel sistema";
+         this._notificationType = NotificationType.danger;
+          this._notificationMessage = "Il dispositivo no è stato trovato nel  oppure il dispositivo no è stato assegnato!";
+          }else {
+          this._notificationMessage = "Si sono verificati dei errori durnte il pagamento";
+           this._notificationType = NotificationType.danger;
+          this.paidFormView = false;
           }
         }
         );
@@ -59,9 +63,6 @@ console.log( this._paidModel);
   }
 
   back() {
-    this.allertErrorMessage = '';
-    this.allertErrorView = false;
-    this.esitoPagamentoView = false;
     this.paidFormView = true;
     this.clearForm();
 
