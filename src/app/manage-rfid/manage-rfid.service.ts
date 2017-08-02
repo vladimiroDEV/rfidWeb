@@ -53,8 +53,8 @@ export class ManageRfidService extends BaseService {
         return this._http.post(this.baseUrl +'/RfidDevice/paid', JSON.stringify(paidModel), this._options);
     }
 
-    getAllTransactionRfid(rfidCode: string){
-      return this._http.get(this.baseUrl +'/RfidDevice/transactionsToConfirmRfidCode/'+ rfidCode,this._options);
+    getAllTransactionsToPaydOff(rfidCode: string){
+      return this._http.get(this.baseUrl +'/RfidDevice/getAllTransactionsToPaydOff/'+ rfidCode,this._options);
     }
 
     getUserDetailByEmail(email:string) {

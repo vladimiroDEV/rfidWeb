@@ -4,10 +4,13 @@
 
        <form [formGroup]="ReadRfidForm" (ngSubmit)="getTotal(f)" #f="ngForm">
         <fieldset>
-          <legend>Codice</legend>
+          <legend>Dispositivo</legend>
           <div class="form-group">
+           <label for="importo" class="col-lg-2 control-label">Codice</label>
+            <div class="col-lg-10">
             <input type="text" class="form-control" id="rfidCode" name="rfidCode" formControlName="rfidCode">
-          </div>
+
+</div></div>
         </fieldset>
             <button class="btn btn-success">leggi</button>
        </form>

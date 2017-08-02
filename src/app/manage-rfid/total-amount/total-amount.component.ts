@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RfidDeviceTransaction } from '../manage-refid.models';
 import { RfidDevice } from 'app/manage-rfid/manage-refid.models';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { NotificationType } from "app/shared/models/SharedModels";
 
 @Component({
   selector: 'app-total-amount',
@@ -14,6 +15,10 @@ export class TotalAmountComponent implements OnInit {
 
   readRfidView = false;
   TotalInfoView = false;
+
+  _notificationMessage = "";
+  _notificationType = NotificationType.info
+  
   ResultInfoView = false;
   ResultErrorView = false;
   rfidCode = "";
@@ -72,7 +77,7 @@ export class TotalAmountComponent implements OnInit {
   }
   getAllTransaztion(rfideCode) {
     this.rfidCode = rfideCode
-    this._manageRfidService.getAllTransactionRfid(rfideCode)
+    this._manageRfidService.getAllTransactionsToPaydOff(rfideCode)
 
       .subscribe((res) => {
         this.allTransactions = res.json();
