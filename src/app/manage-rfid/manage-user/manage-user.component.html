@@ -2,7 +2,7 @@
 <div class="container">
 <div class="row" *ngIf="readView">
   <div class="col-md-6  col-md-offset-3">
-    <div class="allert allert-info">
+    <div class="well">
 
        <form [formGroup]="ReadRfidForm" (ngSubmit)="getUserByDetail(f)" #f="ngForm">
         <fieldset>
@@ -29,11 +29,13 @@
 
     <div class="col-md-3">
       <app-user-info [Anagrafica] ="userDetailModel.Anagrafica"></app-user-info>
+      <br>
+       <button class="btn btn-success" routerLink="/manage-rfid">Menu prinipale</button>
  
 </div>
 
 
-  <div class="col-md-5">
+  <div class="col-md-8">
   
 <h3>Elenco Dispositivi</h3>
 <table class="table table-striped">
@@ -49,19 +51,22 @@
   <tbody>
     <tr *ngFor="let rfid of userDetailModel.Dispositivi; let i = index">
       <td scope="row">{{i}}</td>
-      <td>{{rfid.RfidCode}}</td>
+      <td>{{rfid.RfidDeviceCode}}</td>
       <td>{{rfid.LastModifiedDate | date:'dd/MM/y H:mm'}}</td>
       <td>€ {{rfid.Credit}}</td>
       <td>
-        <button class="btn btn-info" (click) ="viewDetail(rfid.RfidCode)"  >Dettagli</button>   
+        <button class="btn btn-info" (click) ="viewDetail(rfid.RfidDeviceCode)">Dettagli</button>   
       <td>
     </tr>
     <tr>
+      <app-rfid-detail
+      [rfidCode]="rfidCodeDetail" 
+      (NotificationPaidTotal)="NotificationPaidTotal()"></app-rfid-detail>
     </tr>
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="5"><h3 class="pull-right">Totale € {{total}}</h3></td> 
+      <td colspan="5"><h4 class="pull-right">Totale € {{total}}</h4></td> 
     </tr>
   </tfoot>
 </table>

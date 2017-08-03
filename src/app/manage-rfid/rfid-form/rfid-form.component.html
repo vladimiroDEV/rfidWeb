@@ -54,7 +54,9 @@
                     <div class="form-group">
                         <label for="rfidCode" class="col-lg-2 control-label">Codice</label>
                         <div class="col-lg-10">
-                            <textarea rows="1" required class="form-control" id="rfidCode" name="rfidCode" formControlName="rfidCode"></textarea>
+                            <textarea rows="1"
+                            (keydown.enter) ="keypessEnter($event)"
+                             required class="form-control" id="rfidCode" name="rfidCode" formControlName="rfidCode"></textarea>
                             <span class="help-block allertMessage" *ngIf="RfidForm.controls.rfidCode.invalid && RfidForm.controls.rfidCode.touched">Scansiona il dispositivo</span>
                         </div>
                     </div>

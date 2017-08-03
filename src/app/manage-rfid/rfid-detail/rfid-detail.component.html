@@ -1,9 +1,7 @@
  
  
 
- <div class="allert allert-info" *ngIf="ViewDeatail">
-
-<h3>Dettaglio Operazioni</h3>
+ <div class="wells" *ngIf="ViewDeatail">
 <table class="table table-striped">
   <thead>
     <tr>
@@ -21,23 +19,16 @@
       <td><label>€ {{transaction.Importo}}</label></td>
     </tr>
   </tbody>
+  <tfoot>
+              <tr>
+            <td></td>
+            <td></td>
+            <td><b>Totale:</b> </td>
+            <td><b>€ {{totalToPay}}</b></td>
+          </tr>
+  </tfoot>
 </table>
-
-<!--Salda il conto -->
-<div class="row">
-  <div class="col-md-6">
-     <button class="btn btn-success" type="button" (click)="paidTotalReset()">Salda il Conto</button>
-  </div>
-
-   <div class="col-md-6">
-   <div class="alert alert-info pull-rigth">
-      Totale: € {{totalToPay}}
-   </div>
-  </div>
-
-     
-
-  </div>
+<button class="btn btn-success btn-xs" type="button" (click)="paidTotalReset()">Salda il Conto</button>
 
 
   <!-- Modal -->

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Output } from '@angular/core';
 import { ManageRfidService } from '../manage-rfid.service';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { UserDetailViewModel } from '../manage-refid.models';
@@ -15,6 +15,8 @@ export class ManageUserComponent implements OnInit {
   userDetailModel = new UserDetailViewModel();
   total: number;
   rfidCodeDetail ='';
+
+
 
   userInfoView = false;
   readView = true;
@@ -45,6 +47,8 @@ export class ManageUserComponent implements OnInit {
        this.getuserDetailByEmail(this.ReadRfidForm.value.email);
   }
     else if (this.ReadRfidForm.value.rfidCode != ''){
+
+      console.log(this.ReadRfidForm.value.rfidCode);
       this.getuserDetailByCode(this.ReadRfidForm.value.rfidCode );
     }
      
@@ -85,6 +89,7 @@ export class ManageUserComponent implements OnInit {
 
    
   getuserDetailByCode(code:string ){
+
  this._manageRfidService.getUserDetailByRfidCode(code)
         .subscribe(res => {
           this.userDetailModel = res.json();
@@ -104,6 +109,7 @@ export class ManageUserComponent implements OnInit {
           this.userDetailModel = res.json();
           this.userInfoView = true;
           this.readView = false;
+          this.calculateTotal();
           
           this._cd.markForCheck();
         },

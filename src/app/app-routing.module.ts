@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { ManageRfidComponent } from './manage-rfid/manage-rfid.component';
 import { RfidFormComponent } from './manage-rfid/rfid-form/rfid-form.component';
 import { PaidComponent } from './manage-rfid/paid/paid.component';
-import { InfoComponent } from './manage-rfid/info/info.component';
 import { SettingsComponent } from './settings/settings.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { HomeComponent } from './home/home.component';
@@ -21,7 +20,6 @@ const appRoutes: Routes = [
     { path: '', component: ActionsComponent },
     { path: 'new', component: RfidFormComponent },
     { path: 'paid', component: PaidComponent },
-    { path: 'info', component: InfoComponent, },
     {path: 'detail/:code', component: TotalAmountComponent},
     {path: 'total', component: TotalAmountComponent},
     {path: 'manage-user', component: ManageUserComponent},

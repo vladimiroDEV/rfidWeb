@@ -107,6 +107,18 @@ constructor(
           this._tipsMail = data.json();
         },
         err=> {this._tipsMail = [];  console.log(err);});
-        });
+      }); 
+      this.RfidForm.controls['rfidCode'].valueChanges
+      .subscribe(data=>{
+        console.log(data);
+      })
      }
+
+     keypessEnter(event) {
+       event.preventDefault();
+       console.log("Press Ener");
+       console.log(event);
+     }
+
+     
 }
