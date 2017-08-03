@@ -11,7 +11,8 @@
           <div class="form-group">
             <label for="importo" class="col-lg-2 control-label">Importo</label>
             <div class="col-lg-10">
-              <input type="number" class="form-control" id="price" pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" name="price" formControlName="price" placeholder="€">
+              <!--pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01"-->
+              <input type="number" class="form-control" id="price"   name="price" formControlName="price" placeholder="€">
               <span class="help-block allertMessage" *ngIf="PaidForm.controls.price.invalid && PaidForm.controls.price.touched">Inserisci l'importo corretto!</span>
             </div>
           </div>

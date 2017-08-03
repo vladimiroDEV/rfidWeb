@@ -18,9 +18,8 @@ export class TotalAmountComponent implements OnInit {
 
   _notificationMessage = "";
   _notificationType = NotificationType.info
+  _notificationView = false;
   
-  ResultInfoView = false;
-  ResultErrorView = false;
   rfidCode = "";
   Totale:number = 0;
 
@@ -65,14 +64,18 @@ export class TotalAmountComponent implements OnInit {
   paidTotalReset() {
     this._manageRfidService.paidTotalReset(this.rfidCode)
       .subscribe((res) => {
-        this.ResultInfoView = true;
+        this._notificationMessage ="L'operazione è andata a buon fine";
+        this._notificationType = NotificationType.success;
         this.TotalInfoView = false;
-        this.ResultErrorView = false;
+        this.readRfidView = false;
+        this._notificationView = true;
       },
       err => {
-        this.ResultInfoView = false;
+        this._notificationMessage ="L'operazione NON è andata a buon fine!";
+        this._notificationType = NotificationType.danger;
         this.TotalInfoView = false;
-        this.ResultErrorView = true;
+        this.readRfidView = false;
+        this._notificationView = true;
       });
   }
   getAllTransaztion(rfideCode) {
@@ -85,12 +88,23 @@ export class TotalAmountComponent implements OnInit {
           this.Totale += operation.Importo;
         })
 
-
         this.TotalInfoView = true;
         this.readRfidView = false;
+     
       },
       err => {
-        console.log(err)
+         if (err.status == 404) {
+        this._notificationMessage ="Questo disositivo non e associato a nessun utente!";
+         }
+         else {
+         this._notificationMessage ="Si è verificato un errore!";
+         }
+         this._notificationType = NotificationType.danger;
+        this.TotalInfoView = false;
+        this.readRfidView = false;
+        this._notificationView = true;
+
+         
       })
   }
 

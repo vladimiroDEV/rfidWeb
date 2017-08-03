@@ -50,10 +50,12 @@ export class ManageRfidService extends BaseService {
 
     }
     paidAction(paidModel: PaidModel) { 
+       
         return this._http.post(this.baseUrl +'/RfidDevice/paid', JSON.stringify(paidModel), this._options);
     }
 
     getAllTransactionsToPaydOff(rfidCode: string){
+        
       return this._http.get(this.baseUrl +'/RfidDevice/getAllTransactionsToPaydOff/'+ rfidCode,this._options);
     }
 
@@ -67,7 +69,8 @@ export class ManageRfidService extends BaseService {
   
      // esetRfid : dissassOcia il disposistivo dall'utente
       paidTotalReset(code:string){
-         return this._http.post(this.baseUrl+ '/RfidDevice/paidTotalReset/'+ code, this._options);
+          
+         return this._http.post(this.baseUrl+ '/RfidDevice/paidTotalReset', JSON.stringify(code), this._options);
         
     }
     

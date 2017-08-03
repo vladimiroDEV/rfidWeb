@@ -38,7 +38,7 @@ ngOnChanges(changes: any) {
 
    getAllTransaztion() {
     this.totalToPay = 0;
-    this._manageRfidService.getAllTransactionRfid(this.rfidCode)
+    this._manageRfidService.getAllTransactionsToPaydOff(this.rfidCode)
 
       .subscribe((res) => {
         this.allTransactions = res.json();
