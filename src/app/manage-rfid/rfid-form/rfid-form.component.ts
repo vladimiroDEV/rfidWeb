@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { ManageRfidService } from '../manage-rfid.service';
 import { RfidDevice, Anagrafica, AnagraficaRfidDeviceModel } from '../manage-refid.models';
@@ -13,7 +13,8 @@ import { NotificationType } from '../../shared/models/SharedModels';
 @Component({
   selector: 'app-rfid-form',
   templateUrl: './rfid-form.component.html',
-  styleUrls: ['./rfid-form.component.css']
+  styleUrls: ['./rfid-form.component.css'],
+ 
 })
 export class RfidFormComponent implements OnInit {
 
@@ -22,7 +23,9 @@ export class RfidFormComponent implements OnInit {
  _anagraficaRfidDeviceModel: AnagraficaRfidDeviceModel;
   _tipsMail :string[];
   formView = true;
-f
+  _enableDeviceInput = true;
+ 
+
   _notificationMessage = "";
   _notificationType= NotificationType.info;
 
@@ -30,8 +33,7 @@ constructor(
     private fb: FormBuilder,
     private manageRfidFormService: ManageRfidService,
     private _configServices: ConfigService,
-    private _notificationService: NotificationService,
-    private _router: Router
+    private _elemRef: ElementRef, 
     
 
   ) {
@@ -40,6 +42,8 @@ constructor(
      this._anagraficaRfidDeviceModel.anagrafica = new Anagrafica();
      this._anagraficaRfidDeviceModel.device = new RfidDevice();
   }
+
+  
 
   ngOnInit() {
    
@@ -53,8 +57,10 @@ constructor(
       'nome': new FormControl(this._anagraficaRfidDeviceModel.anagrafica.Nome),
       'cognome': new FormControl(this._anagraficaRfidDeviceModel.anagrafica.Cognome),
       'telefono': new FormControl(this._anagraficaRfidDeviceModel.anagrafica.Telefono),
-      'rfidCode': new FormControl(this._anagraficaRfidDeviceModel.device.RfidDeviceCode)
+      'rfidCode': new FormControl(this._anagraficaRfidDeviceModel.device.RfidDeviceCode),
     });
+
+    
   }
 
   loadByEmail(mail:string) {
@@ -93,9 +99,13 @@ constructor(
   }
 
   clearForm() {
+
+ this.ngOnInit();
+
     this._anagraficaRfidDeviceModel.anagrafica = new Anagrafica();
     this._anagraficaRfidDeviceModel.device = new RfidDevice();
      this.initForm();
+
   }
 
    watchEmilField(){
@@ -114,11 +124,7 @@ constructor(
       })
      }
 
-     keypessEnter(event) {
-       event.preventDefault();
-       console.log("Press Ener");
-       console.log(event);
-     }
+    
 
      
 }

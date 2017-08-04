@@ -27,6 +27,7 @@ import { ConfigService } from './shared/utils/config.service';
 import { AuthenticateXHRBackend } from './shared/services/authenticate-xhr.backend';
 import { NotificationComponent } from './shared/components/notification/notification.component';
 import { NotificationService } from './shared/services/notification.service';
+import { DeviceCodeInputDirective } from './shared/directives/device-code-input.directive';
 
 
 @NgModule({
@@ -46,7 +47,7 @@ import { NotificationService } from './shared/services/notification.service';
     RfidDetailComponent,
     RegistrationFormComponent,
     EmailValidator, 
-    LoginFormComponent, NotificationComponent
+    LoginFormComponent, NotificationComponent, DeviceCodeInputDirective
 
   ],
   imports: [
