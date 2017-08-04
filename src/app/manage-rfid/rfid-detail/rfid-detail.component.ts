@@ -37,14 +37,17 @@ ngOnChanges(changes: any) {
   }
 
    getAllTransaztion() {
-    this.totalToPay = 0;
+   
     this._manageRfidService.getAllTransactionsToPaydOff(this.rfidCode)
-
       .subscribe((res) => {
+         this.totalToPay = 0;
+        this.allTransactions =[];
         this.allTransactions = res.json();
+        console.log(this.allTransactions);
       
         this.allTransactions.forEach(el=> {
           this.totalToPay += el.Importo;
+          console.log(this.totalToPay);
         })
       },
       err => {

@@ -1,107 +1,98 @@
-
 <div class="container">
-<div class="row" *ngIf="readView">
-  <div class="col-md-6  col-md-offset-3">
-    <div class="well">
+  <div class="row" *ngIf="readView">
+    <div class="col-md-6  col-md-offset-3">
+      <div class="well">
 
-       <form [formGroup]="ReadRfidForm" (ngSubmit)="getUserByDetail(f)" #f="ngForm">
-        <fieldset>
-          <legend>Codice</legend>
-          <div class="form-group">
-            <input type="text" appDeviceCodeInput class="form-control" id="rfidCode" name="rfidCode" formControlName="rfidCode">
-          </div>
+        <form [formGroup]="ReadRfidForm" (ngSubmit)="getUserByDetail(f)" #f="ngForm">
+          <fieldset>
+            <legend>Codice</legend>
+            <div class="form-group">
+              <input type="text" appDeviceCodeInput class="form-control" id="rfidCode" name="rfidCode" formControlName="rfidCode">
+            </div>
           </fieldset>
           <fieldset>
             <legend>Email</legend>
-           <div class="form-group">
-            <input type="email" class="form-control" id="email" name="email" formControlName="email">
-          </div>
-        </fieldset>
-            <button class="btn btn-success">leggi</button>
-       </form>
+            <div class="form-group">
+              <input type="email" class="form-control" id="email" name="email" formControlName="email">
+            </div>
+          </fieldset>
+          <button class="btn btn-success">leggi</button>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 
 
 
-<div class="row"  *ngIf="userInfoView">
+  <div class="row" *ngIf="userInfoView">
 
     <div class="col-md-3">
-      <app-user-info [Anagrafica] ="userDetailModel.Anagrafica"></app-user-info>
+      <app-user-info [Anagrafica]="userDetailModel.Anagrafica"></app-user-info>
       <br>
-       <button class="btn btn-success" routerLink="/manage-rfid">Menu prinipale</button>
- 
-</div>
+      <button class="btn btn-success" routerLink="/manage-rfid">Menu prinipale</button>
 
-
-  <div class="col-md-8">
-  
-<h3>Elenco Dispositivi</h3>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Codice Dispositivo </th>
-      <th>Data assegnazione </th>
-      <th>Debito</th>
-      <th>Azioni<th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let rfid of userDetailModel.Dispositivi; let i = index">
-      <td scope="row">{{i}}</td>
-      <td>{{rfid.RfidDeviceCode}}</td>
-      <td>{{rfid.LastModifiedDate | date:'dd/MM/y H:mm'}}</td>
-      <td>€ {{rfid.Credit}}</td>
-      <td>
-        <button class="btn btn-info" (click) ="viewDetail(rfid.RfidDeviceCode)">Dettagli</button>   
-      <td>
-    </tr>
-    <tr>
-      <app-rfid-detail
-      [rfidCode]="rfidCodeDetail" 
-      (NotificationPaidTotal)="NotificationPaidTotal()"></app-rfid-detail>
-    </tr>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td colspan="5"><h4 class="pull-right">Totale € {{total}}</h4></td> 
-    </tr>
-  </tfoot>
-</table>
-<button class="btn btn-success" (click) = "totalPaid()"> Paga il totale  </button>
-     
     </div>
 
+
+    <div class="col-md-4">
+
+      <h3>Elenco Dispositivi</h3>
+<ul class="list-group">
+<li class="list-group-item"  *ngFor="let rfid of userDetailModel.Dispositivi; let i = index">
+      <div class="media">
+        <div class="media-left">
+
+          <img class="media-object" [src]="rfidLogoPath" alt="..." width="80">
+
+        </div>
+        <div class="media-body">
+          <h5  class="media-heading">Data :
+            
+          <span class="label label-success">{{rfid.LastModifiedDate | date:'dd/MM/y H:mm'}}</span></h5>
+            <h5>Debito  
+          <span class="label label-danger"> € {{rfid.Credit}}</span></h5>
+   
+        
+          <button class="btn btn-info btn-md pull-right" (click)="viewDetail(rfid.RfidDeviceCode)">Dettagli</button>
+        </div>
+      </div>
+</li>
+</ul>
     
-<div class="col-md-4" *ngIf="viewRfidDetail">
-  <app-rfid-detail [rfidCode]="rfidCodeDetail" (NotificationPaidTotal)="NotificationPaidTotal()"></app-rfid-detail>
-</div>
+    <h5 class="text-right">Totoale: €{{total}} </h5>
 
-  
-</div>
-<div class="row" *ngIf="TotalInfoView">
-  <div class="col-md-6  col-md-offset-3">
-    <button class="btn btn-success" type="button" (click)="paidTotal()">Paga il totale </button>
+      <button class="btn btn-success" (click)="totalPaid()"> Paga il totale  </button>
+
+    </div>
+
+
+    <div class="col-md-5" *ngIf="viewRfidDetail">
+      <app-rfid-detail [rfidCode]="rfidCodeDetail" (NotificationPaidTotal)="NotificationPaidTotal()"></app-rfid-detail>
+    </div>
+
+
   </div>
-</div>
-
-
-<div class="row" *ngIf="ResultInfoView">
-  <div class="col-md-6  col-md-offset-3">
-    <p>
-    il pagamento è andata a buon fine!</p> <br />
-    <button class="btn btn-success"  routerLink="/manage-rfid">ok</button>
+  <div class="row" *ngIf="TotalInfoView">
+    <div class="col-md-6  col-md-offset-3">
+      <button class="btn btn-success" type="button" (click)="paidTotal()">Paga il totale </button>
+    </div>
   </div>
-</div>
 
-<div class="row" *ngIf="noDeviceUserView">
-  <div class="col-md-6  col-md-offset-3">
-    <p>
-   Non Stato trovato nessun utene associato a questo dispositivo </p> <br />
-    <button class="btn btn-success"  routerLink="/manage-rfid">ok</button>
+
+  <div class="row" *ngIf="ResultInfoView">
+    <div class="col-md-6  col-md-offset-3">
+      <p>
+        il pagamento è andata a buon fine!</p> <br />
+      <button class="btn btn-success" routerLink="/manage-rfid">ok</button>
+    </div>
   </div>
-</div>
+
+  <div class="row" *ngIf="noDeviceUserView">
+    <div class="col-md-6  col-md-offset-3">
+      <p>
+        Non Stato trovato nessun utene associato a questo dispositivo </p> <br />
+      <button class="btn btn-success" routerLink="/manage-rfid">ok</button>
+    </div>
+  </div>
 
 </div>

@@ -13,8 +13,10 @@ export class ManageUserComponent implements OnInit {
 
   ReadRfidForm: FormGroup;
   userDetailModel = new UserDetailViewModel();
-  total: number;
+  total: number = 0;
+  _totalDevice:number = 0;
   rfidCodeDetail ='';
+  rfidLogoPath = '../../assets/images/device_rfid_logo.jpg';
 
 
 
@@ -55,6 +57,7 @@ export class ManageUserComponent implements OnInit {
 
   }
   calculateTotal() {
+    this.total =0;
       this.userDetailModel.Dispositivi.forEach(dis=>{
         this.total += dis.Credit;
       })
@@ -88,6 +91,8 @@ export class ManageUserComponent implements OnInit {
   // methods 
 
    
+
+   // restituisce i dispositivi associati all'utente
   getuserDetailByCode(code:string ){
 
  this._manageRfidService.getUserDetailByRfidCode(code)
@@ -114,7 +119,8 @@ export class ManageUserComponent implements OnInit {
           this._cd.markForCheck();
         },
         err => {
-          console.log(err);
+        this.readView = false;
+        this.noDeviceUserView = true;
         });
 
     }
