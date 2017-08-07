@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { RfidDevice } from "app/shared/models/manage-refid.models";
+import { DevicesService } from "app/manage-rfid/devices/devices.service";
 
 @Component({
   selector: 'app-devices-list',
@@ -9,11 +10,12 @@ import { RfidDevice } from "app/shared/models/manage-refid.models";
 export class DevicesListComponent implements OnInit {
 
 
-devicesList:RfidDevice[];
+@Input() _devicesList:RfidDevice[];
 
-  constructor() { }
+  constructor(private _devicesService: DevicesService) { }
 
   ngOnInit() {
+   
   }
 
 }

@@ -1,12 +1,19 @@
-<h4>Dispositivi</h4>
+
+
 
 <div class="row">
-  <div class="col-md-4">
-    <app-devices-list></app-devices-list>
+  <div class="col-md-10 col-md-offset-1">
+    <button class="btn btn-primary">Tutti  <span class="badge">{{_countAll}}</span></button>
+    <button class="btn btn-primary" >  Attivi <span class="badge">{{_countActive}}</span></button>
+    <button class="btn btn-primary" > Non Attivi <span class="badge">{{_countNotActive}}</span></button>
+  </div>
+</div>
+<br />
+<div class="row">
+
+  <div class="col-md-10 col-md-offset-1">
+    <app-devices-list [_devicesList]="_devicesList"></app-devices-list>
 
   </div>
-  <div class="col-md-8">
-
-    <app-device-detail></app-device-detail>
-      </div>
+ 
 </div>
