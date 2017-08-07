@@ -1,9 +1,14 @@
 
-<div class="panel panel-default">
-  
+<div class="panel panel-default"  popover="Clicca pr vedere i dettagli" [popoverOnHover]="true" popoverPlacement="left">
   <div class="panel-body">
-    <h6>{{_device.RfidDeviceCode}}</h6>
-    <span class="label label-success">{{_device.Active}}</span>
-    <span class="label  label-success">{{_device.Credit}}</span>
+    <div class="item-code">
+    <h5 class="text-center "><span class="label label-success">{{_device.RfidDeviceCode}}</span></h5>
+   
+    </div>
+   <h6 *ngIf="_device.Active" class="text-center">Debito : <span class="label  label-success">€ {{_device.Credit}}</span></h6>
+   
+   <h5 *ngIf="_device.Active" class="text-center"> <span class="label label-success">Attivo</span></h5>
+  <h5 *ngIf="!_device.Active" class="text-center"> <span class="label label-danger">Non Attivo</span></h5>
+    
   </div>
 </div>

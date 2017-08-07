@@ -7,10 +7,12 @@ import { DeviceDetailComponent } from "app/manage-rfid/devices/device-detail/dev
 import { ManageRfidService } from "app/manage-rfid/manage-rfid.service";
 import { DevicesService } from "app/manage-rfid/devices/devices.service";
 import { DeviceListItemComponent } from './devices-list/device-list-item/device-list-item.component';
+import {PopoverModule} from "ngx-popover";
 
 @NgModule({
   imports: [
     CommonModule,
+    PopoverModule
    
   ],
   declarations: [

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RfidDevice } from "app/shared/models/manage-refid.models";
 
+
 @Component({
   selector: 'app-device-list-item',
   templateUrl: './device-list-item.component.html',
@@ -13,5 +14,10 @@ export class DeviceListItemComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  ngAfterViewInit() {
+
+  }
+
 
 }

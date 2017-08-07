@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Anagrafica, RfidDevice, PaidModel, RfidDeviceTransaction, AnagraficaRfidDeviceModel } from './manage-refid.models';
+import { Anagrafica, RfidDevice, PaidModel, RfidDeviceTransaction, AnagraficaRfidDeviceModel }  from "app/shared/models/manage-refid.models";
 
 import { Headers, RequestOptions, Http } from '@angular/http';
 import { Observable } from "rxjs/Observable";
@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import { BaseService } from '../shared/services/base.service';
 import { BehaviorSubject } from 'rxjs/Rx';
 import { ConfigService } from '../shared/utils/config.service';
+
 
 
 @Injectable()

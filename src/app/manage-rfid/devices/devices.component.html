@@ -1,11 +1,42 @@
-
-
-
 <div class="row">
   <div class="col-md-10 col-md-offset-1">
-    <button class="btn btn-primary">Tutti  <span class="badge">{{_countAll}}</span></button>
-    <button class="btn btn-primary" >  Attivi <span class="badge">{{_countActive}}</span></button>
-    <button class="btn btn-primary" > Non Attivi <span class="badge">{{_countNotActive}}</span></button>
+    <h4 class="text-center">Gestione Dispositivi</h4>
+
+    <ul class="nav nav-pills">
+      <li class="pointer" [class.active]="_currentViewDevices =='active'" (click)="viewActiveDevices()">
+        <a class="pointer">
+           Attivi 
+      <span class="badge">{{_countActive}}</span>
+      </a>
+      </li>
+
+       <li class="pointer" [class.active]="_currentViewDevices =='all'" (click)="viewAllDevices()">
+        <a class="pointer">
+           Tutti 
+      <span class="badge">{{_countAll}}</span>
+      </a>
+      </li>
+       <li class="pointer" [class.active]="_currentViewDevices =='notActive'" (click)="viewNotActiveDevices()">
+        <a class="pointer">
+           Non Attivi
+      <span class="badge">{{_countNotActive}}</span>
+      </a>
+      </li>
+
+
+  <li class="pull-right">
+        
+          Debito totale
+      <span class="badge">€ {{_totalDebit}}</span>
+     
+      </li>
+
+    </ul>
+
+
+    <!--<button class="btn btn-primary" [class.active]="_currentViewDevices =='active'" (click)="viewActiveDevices()">  Attivi <span class="badge">{{_countActive}}</span></button>
+    <button class="btn btn-primary" [class.active]="_currentViewDevices =='all'" (click)="viewAllDevices()">Tutti  <span class="badge">{{_countAll}}</span></button>
+    <button class="btn btn-primary" [class.active]="_currentViewDevices =='notActive'" (click)="viewNotActiveDevices()"> Non Attivi <span class="badge">{{_countNotActive}}</span></button>-->
   </div>
 </div>
 <br />
@@ -15,5 +46,5 @@
     <app-devices-list [_devicesList]="_devicesList"></app-devices-list>
 
   </div>
- 
+
 </div>
