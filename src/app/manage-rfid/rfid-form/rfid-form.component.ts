@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { ManageRfidService } from '../manage-rfid.service';
-import { RfidDevice, Anagrafica, AnagraficaRfidDeviceModel } from '../manage-refid.models';
+import { RfidDevice, Anagrafica, AnagraficaRfidDeviceModel } from "app/shared/models/manage-refid.models";
 
 import 'rxjs/add/operator/debounceTime';
 import { ConfigService } from '../../shared/utils/config.service';

@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef, Output } from '@angular/core';
 import { ManageRfidService } from '../manage-rfid.service';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
-import { UserDetailViewModel } from '../manage-refid.models';
 import { Router } from '@angular/router';
+import { UserDetailViewModel } from "app/shared/models/manage-refid.models";
 
 @Component({
   selector: 'app-manage-user',

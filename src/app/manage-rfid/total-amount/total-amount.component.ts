@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ManageRfidService } from '../manage-rfid.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RfidDeviceTransaction } from '../manage-refid.models';
-import { RfidDevice } from 'app/manage-rfid/manage-refid.models';
+import { RfidDevice, RfidDeviceTransaction} from "app/shared/models/manage-refid.models";
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NotificationType } from "app/shared/models/SharedModels";
 

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Anagrafica } from '../manage-refid.models';
+import { Anagrafica } from "app/shared/models/manage-refid.models";
+
 
 @Component({
   selector: 'app-user-info',

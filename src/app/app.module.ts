@@ -28,6 +28,8 @@ import { AuthenticateXHRBackend } from './shared/services/authenticate-xhr.backe
 import { NotificationComponent } from './shared/components/notification/notification.component';
 import { NotificationService } from './shared/services/notification.service';
 import { DeviceCodeInputDirective } from './shared/directives/device-code-input.directive';
+import { DevicesModule } from "app/manage-rfid/devices/devices.module";
+
 
 
 @NgModule({
@@ -47,7 +49,8 @@ import { DeviceCodeInputDirective } from './shared/directives/device-code-input.
     RfidDetailComponent,
     RegistrationFormComponent,
     EmailValidator, 
-    LoginFormComponent, NotificationComponent, DeviceCodeInputDirective
+    LoginFormComponent, NotificationComponent, 
+    DeviceCodeInputDirective, 
 
   ],
   imports: [
@@ -56,7 +59,8 @@ import { DeviceCodeInputDirective } from './shared/directives/device-code-input.
     HttpModule,
     AppRoutingModule,
     ReactiveFormsModule ,
-    SharedModule
+    SharedModule,
+    DevicesModule
   ],
  providers: [ManageRfidService,
   UserService,
