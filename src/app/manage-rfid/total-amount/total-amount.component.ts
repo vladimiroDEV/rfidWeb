@@ -12,8 +12,8 @@ import { NotificationType } from "app/shared/models/SharedModels";
 })
 export class TotalAmountComponent implements OnInit {
 
-  readRfidView = false;
-  TotalInfoView = false;
+  readRfidView:boolean = false;
+  TotalInfoView:boolean = false;
 
   _notificationMessage = "";
   _notificationType = NotificationType.info
