@@ -13,6 +13,7 @@ import { RegistrationFormComponent } from './account/registration-form/registrat
 import { LoginFormComponent } from './account/login-form/login-form.component';
 import { NotificationComponent } from './shared/components/notification/notification.component';
 import { DevicesComponent } from "app/manage-rfid/devices/devices.component";
+import { DeviceHistoryComponent } from "app/manage-rfid/device-history/device-history.component";
 
 
 const appRoutes: Routes = [
@@ -25,7 +26,9 @@ const appRoutes: Routes = [
     {path: 'total', component: TotalAmountComponent},
     {path: 'manage-user', component: ManageUserComponent},
     {path: 'notification', component:NotificationComponent},
-    {path: 'devices', component:DevicesComponent}
+    {path: 'devices', component:DevicesComponent},
+    {path:'device-history',component:DeviceHistoryComponent}
+  
   ] },
   { path: 'settings', component: SettingsComponent },
   { path: 'statistics', component: StatisticsComponent },

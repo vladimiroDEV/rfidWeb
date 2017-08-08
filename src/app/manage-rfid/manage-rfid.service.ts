@@ -92,6 +92,9 @@ export class ManageRfidService extends BaseService {
     getDevicesByApplicationUser() {
          return this._http.get(this.baseUrl+'/RfidDevice/GetByApplicationUser/',this._options );
     }
+    getDeviceHistory(deviceCode:string){
+        return this._http.get(this.baseUrl+'/RfidDevice/getDeviceHistory/'+deviceCode,this._options );
+    }
 
 
 }

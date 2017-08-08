@@ -5,7 +5,8 @@ import { DevicesService } from "app/manage-rfid/devices/devices.service";
 @Component({
   selector: 'app-devices-list',
   templateUrl: './devices-list.component.html',
-  styleUrls: ['./devices-list.component.css']
+  styleUrls: ['./devices-list.component.css'],
+
 })
 export class DevicesListComponent implements OnInit {
 

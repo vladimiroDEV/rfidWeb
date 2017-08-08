@@ -29,7 +29,7 @@ import { NotificationComponent } from './shared/components/notification/notifica
 import { NotificationService } from './shared/services/notification.service';
 import { DeviceCodeInputDirective } from './shared/directives/device-code-input.directive';
 import { DevicesModule } from "app/manage-rfid/devices/devices.module";
-import { DeviceHistoryComponent } from './manage-rfid/device-history/device-history.component';
+import { DeviceHistoryModule } from "app/manage-rfid/device-history/device-history.module";
 
 
 
@@ -51,7 +51,7 @@ import { DeviceHistoryComponent } from './manage-rfid/device-history/device-hist
     RegistrationFormComponent,
     EmailValidator, 
     LoginFormComponent, NotificationComponent, 
-    DeviceCodeInputDirective, DeviceHistoryComponent, 
+    DeviceCodeInputDirective,  
 
   ],
   imports: [
@@ -61,7 +61,8 @@ import { DeviceHistoryComponent } from './manage-rfid/device-history/device-hist
     AppRoutingModule,
     ReactiveFormsModule ,
     SharedModule,
-    DevicesModule
+    DevicesModule,
+    DeviceHistoryModule
   ],
  providers: [ManageRfidService,
   UserService,

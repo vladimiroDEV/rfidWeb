@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RfidDevice } from "app/shared/models/manage-refid.models";
+import {Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -10,14 +11,21 @@ import { RfidDevice } from "app/shared/models/manage-refid.models";
 export class DeviceListItemComponent implements OnInit {
 
 @Input() _device: RfidDevice;
-  constructor() { }
+  constructor(private _router: Router,
+  private _route: ActivatedRoute) { }
 
   ngOnInit() {
   }
 
-  ngAfterViewInit() {
-
-  }
+viewHistory(deviceCode: string){
+ this._router.navigate(
+       ['device-history'],
+       {
+         queryParams:{code:deviceCode},
+         relativeTo: this._route
+       
+      });
+}
 
 
 }

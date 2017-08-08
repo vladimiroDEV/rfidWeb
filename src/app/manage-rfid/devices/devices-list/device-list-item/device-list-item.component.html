@@ -1,5 +1,7 @@
 
-<div class="panel panel-default"  popover="Clicca pr vedere i dettagli" [popoverOnHover]="true" popoverPlacement="left">
+<!--(click)="viewHistory(_device.RfidDeviceCode)"-->
+
+<div class="panel panel-default">
   <div class="panel-body">
     <div class="item-code">
     <h5 class="text-center "><span class="label label-success">{{_device.RfidDeviceCode}}</span></h5>
@@ -9,6 +11,16 @@
    
    <h5 *ngIf="_device.Active" class="text-center"> <span class="label label-success">Attivo</span></h5>
   <h5 *ngIf="!_device.Active" class="text-center"> <span class="label label-danger">Non Attivo</span></h5>
-    
+  
+    <button
+     class="btn" 
+      popover="Clicca pr vedere i dettagli" 
+      [popoverOnHover]="true"
+       popoverPlacement="left"
+     routerLink="/manage-rfid/device-history" 
+     ><i class="fa fa-history" aria-hidden="true"></i>
+    </button>
   </div>
 </div>
+
+

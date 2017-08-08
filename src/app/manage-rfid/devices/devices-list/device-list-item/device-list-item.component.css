@@ -2,3 +2,6 @@
     position: absolute;
     top: -20px;
 }
+.cursor:hover {
+    cursor: pointer;
+}
