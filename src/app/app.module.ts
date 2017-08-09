@@ -30,10 +30,11 @@ import { NotificationService } from './shared/services/notification.service';
 import { DeviceCodeInputDirective } from './shared/directives/device-code-input.directive';
 import { DevicesModule } from "app/manage-rfid/devices/devices.module";
 import { DeviceHistoryModule } from "app/manage-rfid/device-history/device-history.module";
-import { AccountComponent } from './account/account.component';
 import { AdministrationModule } from "app/administration/administration.module";
 import { AuthGuard } from "app/shared/services/auth.guards";
 import { AuthRoleGuard } from "app/shared/services/auth.role.guard";
+import { DropdownDirective } from "app/shared/directives/dropdown.directive";
+import { AccountModule } from "app/account/account.module";
 
 
 
@@ -55,7 +56,8 @@ import { AuthRoleGuard } from "app/shared/services/auth.role.guard";
     RegistrationFormComponent,
     EmailValidator, 
     LoginFormComponent, NotificationComponent, 
-    DeviceCodeInputDirective,  AccountComponent,  
+    DeviceCodeInputDirective,  
+    DropdownDirective
 
   ],
   imports: [
@@ -67,7 +69,8 @@ import { AuthRoleGuard } from "app/shared/services/auth.role.guard";
     SharedModule,
     DevicesModule,
     DeviceHistoryModule,
-    AdministrationModule
+    AdministrationModule,
+    AccountModule
   ],
  providers: [
    ManageRfidService,
