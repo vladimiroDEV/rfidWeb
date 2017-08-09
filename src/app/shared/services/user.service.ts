@@ -71,7 +71,7 @@ export class UserService extends BaseService {
   logout() {
     localStorage.removeItem('auth_token');
     localStorage.removeItem('Rfid_AppliactionUserID');
-    localStorage.removeItem('userRoles';)
+    localStorage.removeItem('userRoles');
     this.loggedIn = false;
     this._authNavStatusSource.next(false);
     
@@ -79,6 +79,31 @@ export class UserService extends BaseService {
 
   isLoggedIn() {
     return this.loggedIn;
-  }  
+  }
+  
+  haveUserRole(roles : Array<string>):boolean {
+       
+        let result:boolean;
+        result = false;
+     
+      if(!localStorage.getItem('userRoles')) {
+         result = false;
+         return result;
+      }
+        
+
+        let uresRoles = localStorage.getItem('userRoles').split(',');
+         roles.slice().forEach((item:string) => {
+           console.log(item);
+            console.log(uresRoles.indexOf(item) > -1) ;
+           if(uresRoles.indexOf(item) > -1) {
+            result = true;
+          } // esiste
+
+      });
+
+      console.log("usito");
+      return result;
+  }
 }
 

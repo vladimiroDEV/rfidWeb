@@ -14,11 +14,14 @@ import { LoginFormComponent } from './account/login-form/login-form.component';
 import { NotificationComponent } from './shared/components/notification/notification.component';
 import { DevicesComponent } from "app/manage-rfid/devices/devices.component";
 import { DeviceHistoryComponent } from "app/manage-rfid/device-history/device-history.component";
+import { AdministrationComponent } from "app/administration/administration.component";
+import { AuthGuard } from "app/shared/services/auth.guards";
+import { AuthRoleGuard } from "app/shared/services/auth.role.guard";
 
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'manage-rfid', component: ManageRfidComponent, children: [
+  { path: 'manage-rfid', canActivate:[AuthGuard], component: ManageRfidComponent, children: [
     { path: '', component: ActionsComponent },
     { path: 'new', component: RfidFormComponent },
     { path: 'paid', component: PaidComponent },
@@ -30,6 +33,11 @@ const appRoutes: Routes = [
     {path:'device-history',component:DeviceHistoryComponent}
   
   ] },
+  { path:'administration', 
+   canActivate: [AuthRoleGuard],
+   data: {roles: ['Administrator', 'altro']}, 
+   component:AdministrationComponent},
+
   { path: 'settings', component: SettingsComponent },
   { path: 'statistics', component: StatisticsComponent },
     { path: 'home', component: HomeComponent },
