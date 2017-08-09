@@ -60,6 +60,7 @@ export class UserService extends BaseService {
       .map(res => {
        localStorage.setItem('Rfid_AppliactionUserID', res.Rfid_AppliactionUserID);
         localStorage.setItem('auth_token', res.auth_token);
+        localStorage.setItem('userRoles',res.userRoles);
         this.loggedIn = true;
         this._authNavStatusSource.next(true);
         return true;
@@ -70,6 +71,7 @@ export class UserService extends BaseService {
   logout() {
     localStorage.removeItem('auth_token');
     localStorage.removeItem('Rfid_AppliactionUserID');
+    localStorage.removeItem('userRoles';)
     this.loggedIn = false;
     this._authNavStatusSource.next(false);
     

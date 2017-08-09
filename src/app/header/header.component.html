@@ -18,6 +18,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">      
           <li  *ngIf="!status"><a routerLink="/login">Login</a></li>
+           <li  *ngIf="!status"><a routerLink="/register">Registrati</a></li>
            <li  *ngIf="status"><a href="#" (click)="logout()">Logout</a></li>
       </ul>
     </div>
