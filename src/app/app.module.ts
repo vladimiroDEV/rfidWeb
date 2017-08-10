@@ -26,7 +26,6 @@ import { UserService } from './shared/services/user.service';
 import { ConfigService } from './shared/utils/config.service';
 import { AuthenticateXHRBackend } from './shared/services/authenticate-xhr.backend';
 import { NotificationComponent } from './shared/components/notification/notification.component';
-import { NotificationService } from './shared/services/notification.service';
 import { DeviceCodeInputDirective } from './shared/directives/device-code-input.directive';
 import { DevicesModule } from "app/manage-rfid/devices/devices.module";
 import { DeviceHistoryModule } from "app/manage-rfid/device-history/device-history.module";
@@ -36,6 +35,7 @@ import { AuthRoleGuard } from "app/shared/services/auth.role.guard";
 import { DropdownDirective } from "app/shared/directives/dropdown.directive";
 import { AccountModule } from "app/account/account.module";
 import { NotificationModule } from "app/shared/notification/notification.module";
+
 
 
 
@@ -80,11 +80,12 @@ import { NotificationModule } from "app/shared/notification/notification.module"
    AuthGuard,
    AuthRoleGuard,
    ConfigService,
+   
    { 
     provide: XHRBackend, 
     useClass: AuthenticateXHRBackend
   },
-  NotificationService],
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

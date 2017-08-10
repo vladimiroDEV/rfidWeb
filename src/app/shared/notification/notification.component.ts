@@ -23,12 +23,11 @@ export class NotificationComponent implements OnInit {
   }
 
   ngOnInit() {
-
-   
-
-    this._notificationService.notificationevents$
-        .map(data=>this.notificationmodel)
-        .subscribe(data => console.log(data));
+    this._notificationService.getNotification()
+      
+        .subscribe(data => {
+          this.notificationmodel = data;
+          console.log(data)});
 
 
         console.log(this.notificationmodel);

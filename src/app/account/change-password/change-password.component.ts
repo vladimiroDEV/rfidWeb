@@ -5,6 +5,7 @@ import { AccountService } from "app/account/account.service";
 import { ChangePassword } from "app/account/account.models";
 import { NotificationService } from "app/shared/notification/notification.service";
 import { Router } from "@angular/router";
+import { NotificationModel } from "app/shared/notification/notification.models";
 
 
 
@@ -18,6 +19,7 @@ export class ChangePasswordComponent implements OnInit {
 
   ChangePasswordForm: FormGroup;
   errorMessage:string ='';
+  nm:NotificationModel = new NotificationModel();
 
   changPasswordModel: ChangePassword = new ChangePassword();
   constructor(
@@ -61,9 +63,10 @@ export class ChangePasswordComponent implements OnInit {
      }
     
    }
+
   })
     
-    
+   console.log(this.nm);
   }
 
 initForm(){

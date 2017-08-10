@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from "rxjs/Rx";
 import { NotificationModel, NotificationType } from "app/shared/notification/notification.models";
 import { EventEmitter } from "events";
+import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class NotificationService {
@@ -20,6 +21,9 @@ export class NotificationService {
   
     this.notificationSubject.next(this.notificationmodel);
   }
+  getNotification(): Observable<NotificationModel> {
+     return this.notificationSubject.asObservable();
+    }
 
   setSucess(){
      this.notificationmodel.notificationType = NotificationType.success;
