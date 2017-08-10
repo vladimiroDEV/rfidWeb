@@ -94,16 +94,14 @@ export class UserService extends BaseService {
 
         let uresRoles = localStorage.getItem('userRoles').split(',');
          roles.slice().forEach((item:string) => {
-           console.log(item);
-            console.log(uresRoles.indexOf(item) > -1) ;
            if(uresRoles.indexOf(item) > -1) {
             result = true;
           } // esiste
 
       });
-
-      console.log("usito");
       return result;
   }
+
+  
 }
 
