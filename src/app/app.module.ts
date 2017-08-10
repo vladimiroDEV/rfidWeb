@@ -35,6 +35,7 @@ import { AuthGuard } from "app/shared/services/auth.guards";
 import { AuthRoleGuard } from "app/shared/services/auth.role.guard";
 import { DropdownDirective } from "app/shared/directives/dropdown.directive";
 import { AccountModule } from "app/account/account.module";
+import { NotificationModule } from "app/shared/notification/notification.module";
 
 
 
@@ -70,7 +71,8 @@ import { AccountModule } from "app/account/account.module";
     DevicesModule,
     DeviceHistoryModule,
     AdministrationModule,
-    AccountModule
+    AccountModule,
+    NotificationModule
   ],
  providers: [
    ManageRfidService,

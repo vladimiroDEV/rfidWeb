@@ -11,7 +11,7 @@ import { TotalAmountComponent } from './manage-rfid/total-amount/total-amount.co
 import { ManageUserComponent } from './manage-rfid/manage-user/manage-user.component';
 import { RegistrationFormComponent } from './account/registration-form/registration-form.component';
 import { LoginFormComponent } from './account/login-form/login-form.component';
-import { NotificationComponent } from './shared/components/notification/notification.component';
+import { NotificationComponent } from './shared/notification/notification.component';
 import { DevicesComponent } from "app/manage-rfid/devices/devices.component";
 import { DeviceHistoryComponent } from "app/manage-rfid/device-history/device-history.component";
 import { AdministrationComponent } from "app/administration/administration.component";
@@ -38,7 +38,7 @@ const appRoutes: Routes = [
     {path: 'detail/:code', component: TotalAmountComponent},
     {path: 'total', component: TotalAmountComponent},
     {path: 'manage-user', component: ManageUserComponent},
-    {path: 'notification', component:NotificationComponent},
+   
     {path: 'devices', component:DevicesComponent},
     {path:'device-history',component:DeviceHistoryComponent}
   
@@ -48,6 +48,7 @@ const appRoutes: Routes = [
    data: {roles: ['Administrator', 'altro']}, 
    component:AdministrationComponent},
 
+  {path: 'notification', component:NotificationComponent},
   { path: 'settings', component: SettingsComponent },
   { path: 'statistics', component: StatisticsComponent },
     { path: 'home', component: HomeComponent },

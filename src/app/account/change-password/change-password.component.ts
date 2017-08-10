@@ -3,6 +3,10 @@ import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from
 import { Observable } from "rxjs/Observable";
 import { AccountService } from "app/account/account.service";
 import { ChangePassword } from "app/account/account.models";
+import { NotificationService } from "app/shared/notification/notification.service";
+import { Router } from "@angular/router";
+
+
 
 @Component({
   selector: 'app-change-password',
@@ -18,7 +22,9 @@ export class ChangePasswordComponent implements OnInit {
   changPasswordModel: ChangePassword = new ChangePassword();
   constructor(
     private fb:FormBuilder,
-    private _accountService: AccountService
+    private _accountService: AccountService,
+    private _notificationSevice:NotificationService,
+    private _router:Router
      ) { 
       this.initForm();
   }
@@ -37,14 +43,18 @@ export class ChangePasswordComponent implements OnInit {
     
     this._accountService.changePassword(this.changPasswordModel)
     .subscribe(res=> {
-      
-      console.log(res);
+
     },
   err=>{
-   console.log(err);
    if(err.status== 400){
      if(err._body == '2'){  // changePasswordStatus 
-         this.errorMessage = "la password non corrisponede" ;
+      this.errorMessage = "la password non corrisponede" ;
+      this._router.navigate(['/notification']);
+      this._notificationSevice.setError();
+      this._notificationSevice.setMessage("si sono verificati dei errori");
+      this._notificationSevice.CreateNotification();
+      this._notificationSevice.updateNotification.emit;
+      
      }
      else {
         ///fare redirect errore generico 
