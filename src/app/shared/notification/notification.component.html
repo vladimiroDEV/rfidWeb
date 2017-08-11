@@ -1,5 +1,18 @@
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+
+  
  <div [ngClass]="getAlertStyle()">
      <p>{{notificationmodel.notificationMessage}}</p>
       <br />
-      <button class="btn btb-default pull-right" (click)="goBack()"> Indietro  </button>
+           
     </div>
+
+     <p>
+         <button class="btn btn-success pull-left" (click)="goHome()"> Home  </button>
+      <button class="btn btn-success pull-right" (click)="goBack()"> Indietro  </button>
+     </p>
+
+      </div>
+</div>

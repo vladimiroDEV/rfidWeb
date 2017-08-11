@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from "app/shared/notification/notification.service";
 import { NotificationModel, NotificationType} from "app/shared/notification/notification.models";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
  
 
@@ -15,6 +15,7 @@ export class NotificationComponent implements OnInit {
  public  notificationmodel:NotificationModel; 
 
   constructor(private _notificationService: NotificationService,
+   private _router:Router,
    private _route: ActivatedRoute,
    private _location:Location) {
     
@@ -24,14 +25,15 @@ export class NotificationComponent implements OnInit {
     this.notificationmodel = new NotificationModel();
      this._route.params.subscribe(params => {
      this.notificationmodel.notificationType = +params['type'] as NotificationType; 
-     this.notificationmodel.notificationMessage = params['message'];
-     console.log(this.notificationmodel);
-       
+     this.notificationmodel.notificationMessage = params['message'];       
        } );
   }
 
   goBack() {
      this._location.back();
+  }
+  goHome() {
+    this._router.navigate(['/']);
   }
 
     getAlertStyle() {
