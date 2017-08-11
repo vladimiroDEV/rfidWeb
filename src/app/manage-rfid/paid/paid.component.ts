@@ -14,6 +14,7 @@ export class PaidComponent implements OnInit {
 
   _rfid = new RfidDevice();
   _paidModel = new PaidModel();
+  isProcessing = false;
 
 
 
@@ -34,7 +35,9 @@ export class PaidComponent implements OnInit {
     if (form.valid) {
       this._paidModel = this.PaidForm.value;
       
+      this.isProcessing=true;
       this.manageRfidService.paidAction(this._paidModel)
+        .finally(()=>this.isProcessing = false)
         .subscribe(result => {
        
          this._notificationService.setSucess();
