@@ -2,7 +2,7 @@
   <div class="col-md-2 col-md-offset-1">
       <button class="btn btn-success" routerLink="/manage-rfid" >Menu prinipale</button>
     </div>
-  <div class="col-md-6"  *ngIf="paidFormView">
+  <div class="col-md-6">
 
     <div class="well">
 
@@ -52,13 +52,6 @@
 
     </div>
   </div>
- <div class="col-md-6" *ngIf="!paidFormView">
-
-        <app-notification [notificationMessage]="_notificationMessage" [notifiacationType]="_notificationType">
-        </app-notification>
-
-    </div>
-
 </div>
 
 

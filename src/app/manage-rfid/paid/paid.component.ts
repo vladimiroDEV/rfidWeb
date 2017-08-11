@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { ManageRfidService } from '../manage-rfid.service';
 import { RfidDevice, PaidModel } from "app/shared/models/manage-refid.models";
 import { Router, ActivatedRoute } from '@angular/router';
-import { NotificationType } from "app/shared/models/SharedModels";
+import { NotificationService } from '../../shared/notification/notification.service';
 
 @Component({
   selector: 'app-paid',
@@ -15,9 +15,6 @@ export class PaidComponent implements OnInit {
   _rfid = new RfidDevice();
   _paidModel = new PaidModel();
 
-  _notificationMessage = "";
-  _notificationType = NotificationType.info;
-   paidFormView = false;
 
 
   PaidForm: FormGroup;
@@ -26,34 +23,34 @@ export class PaidComponent implements OnInit {
     private _router: Router,
     private _route: ActivatedRoute,
     private manageRfidService: ManageRfidService,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private _notificationService: NotificationService) { }
 
   ngOnInit() {
     this.clearForm();
-    this.paidFormView = true;
   }
   paid(form: NgForm) {
  this._paidModel = this.PaidForm.value;
-    console.log(form);
-console.log( this._paidModel);
     if (form.valid) {
       this._paidModel = this.PaidForm.value;
       
       this.manageRfidService.paidAction(this._paidModel)
         .subscribe(result => {
-         this._notificationMessage = "Il pagamento è andato a buon fine";
-         this._notificationType = NotificationType.success;
-          this.paidFormView = false;
+       
+         this._notificationService.setSucess();
+         this._notificationService.setMessage("Il pagamento è andato a buon fine")
+        this._notificationService.CreateNotification();
         },
         err => {
           if (err.status == 404) {
-            this.paidFormView = false;
-         this._notificationType = NotificationType.danger;
-          this._notificationMessage = "Il dispositivo no è stato trovato nel  oppure il dispositivo no è stato assegnato!";
+            
+        this._notificationService.setError();
+         this._notificationService.setMessage("Il dispositivo no è stato trovato nel  oppure il dispositivo no è stato assegnato!")
+        this._notificationService.CreateNotification();
           }else {
-          this._notificationMessage = "Si sono verificati dei errori durnte il pagamento";
-           this._notificationType = NotificationType.danger;
-          this.paidFormView = false;
+        this._notificationService.setError();
+         this._notificationService.setMessage("Si sono verificati dei errori durnte il pagamento!")
+        this._notificationService.CreateNotification();
           }
         }
         );
@@ -63,7 +60,6 @@ console.log( this._paidModel);
   }
 
   back() {
-    this.paidFormView = true;
     this.clearForm();
 
   }

@@ -3,7 +3,7 @@ import { ManageRfidService } from '../manage-rfid.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RfidDevice, RfidDeviceTransaction} from "app/shared/models/manage-refid.models";
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { NotificationType } from "app/shared/models/SharedModels";
+import { NotificationService } from '../../shared/notification/notification.service';
 
 @Component({
   selector: 'app-total-amount',
@@ -15,9 +15,6 @@ export class TotalAmountComponent implements OnInit {
   readRfidView:boolean = false;
   TotalInfoView:boolean = false;
 
-  _notificationMessage = "";
-  _notificationType = NotificationType.info
-  _notificationView = false;
   
   rfidCode = "";
   Totale:number = 0;
@@ -30,7 +27,8 @@ export class TotalAmountComponent implements OnInit {
     private _manageRfidService: ManageRfidService,
     private _fb: FormBuilder,
     private _route: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private _notificationService:NotificationService
 
   ) { }
 
@@ -63,18 +61,17 @@ export class TotalAmountComponent implements OnInit {
   paidTotalReset() {
     this._manageRfidService.paidTotalReset(this.rfidCode)
       .subscribe((res) => {
-        this._notificationMessage ="L'operazione è andata a buon fine";
-        this._notificationType = NotificationType.success;
+         this._notificationService.setSucess();
+         this._notificationService.setMessage("L'operazione è andata a buon fine")
+        this._notificationService.CreateNotification();
         this.TotalInfoView = false;
         this.readRfidView = false;
-        this._notificationView = true;
+
       },
       err => {
-        this._notificationMessage ="L'operazione NON è andata a buon fine!";
-        this._notificationType = NotificationType.danger;
-        this.TotalInfoView = false;
-        this.readRfidView = false;
-        this._notificationView = true;
+            this._notificationService.setError();
+         this._notificationService.setMessage("L'operazione NON è andata a buon fine!");
+        this._notificationService.CreateNotification();
       });
   }
   getAllTransaztion(rfideCode) {
@@ -92,16 +89,16 @@ export class TotalAmountComponent implements OnInit {
      
       },
       err => {
+        this._notificationService.setError();
          if (err.status == 404) {
-        this._notificationMessage ="Questo disositivo non e associato a nessun utente!";
+         this._notificationService.setMessage("Questo disositivo non e associato a nessun utente!");
          }
          else {
-         this._notificationMessage ="Si è verificato un errore!";
+     
+         this._notificationService.setMessage("Si è verificato un errore!");
          }
-         this._notificationType = NotificationType.danger;
-        this.TotalInfoView = false;
-        this.readRfidView = false;
-        this._notificationView = true;
+      
+        this._notificationService.CreateNotification()
 
          
       })

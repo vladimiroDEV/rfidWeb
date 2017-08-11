@@ -1,6 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NotificationService } from "app/shared/notification/notification.service";
 import { NotificationModel, NotificationType} from "app/shared/notification/notification.models";
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
  
 
 @Component({
@@ -11,52 +13,31 @@ import { NotificationModel, NotificationType} from "app/shared/notification/noti
 export class NotificationComponent implements OnInit {
 
  public  notificationmodel:NotificationModel; 
- 
-  //  notifiacationType:NotificationType;
-  //  notificationMessage:string ='';
-  constructor(private _notificationService: NotificationService, private _cd: ChangeDetectorRef, private _zone:NgZone) {
-    
-    this.notificationmodel = new NotificationModel();
 
-    //this.notificationmodel.notificationMessage ="Tutto OK";
+  constructor(private _notificationService: NotificationService,
+   private _route: ActivatedRoute,
+   private _location:Location) {
     
   }
 
   ngOnInit() {
-    this._notificationService.getNotification()
-      
-        .subscribe(data => {
-          this.notificationmodel = data;
-          console.log(data)});
-
-
-        console.log(this.notificationmodel);
-    // .subscribe(
-    //   (data:NotificationModel) =>{
-    //     this._zone.run(()=> {
-
-    //     this.notificationmodel = data;
+    this.notificationmodel = new NotificationModel();
+     this._route.params.subscribe(params => {
+     this.notificationmodel.notificationType = +params['type'] as NotificationType; 
+     this.notificationmodel.notificationMessage = params['message'];
+     console.log(this.notificationmodel);
        
-    //    this.notificationmodel.notificationMessage = data.notificationMessage;
-    //    this.notificationmodel.notificationType = data.notificationType;
-    //    this._cd.detectChanges();
+       } );
+  }
 
-   
-    //  this.notificationmodel.notificationMessage ="non va bene ";
-    //      console.log(data);
-    //      });
-  
-    // });
-
- 
-    console.log(this.notificationmodel.notificationMessage);
-    console.log(this.notificationmodel.notificationType);
-    
-
-
+  goBack() {
+     this._location.back();
   }
 
     getAlertStyle() {
+
+      console.log("getStyle")
+      console.log(this.notificationmodel);
   let style = "";
     switch(this.notificationmodel.notificationType) {
       case NotificationType.error:

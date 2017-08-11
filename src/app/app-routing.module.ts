@@ -48,7 +48,7 @@ const appRoutes: Routes = [
    data: {roles: ['Administrator', 'altro']}, 
    component:AdministrationComponent},
 
-  {path: 'notification', component:NotificationComponent},
+  {path: 'notification/:type/:message', component:NotificationComponent},
   { path: 'settings', component: SettingsComponent },
   { path: 'statistics', component: StatisticsComponent },
     { path: 'home', component: HomeComponent },

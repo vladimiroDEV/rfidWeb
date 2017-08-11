@@ -3,27 +3,23 @@ import { Subject } from "rxjs/Rx";
 import { NotificationModel, NotificationType } from "app/shared/notification/notification.models";
 import { EventEmitter } from "events";
 import { Observable } from "rxjs/Observable";
+import { Router } from '@angular/router';
 
 @Injectable()
 export class NotificationService {
-
-  private notificationSubject = new Subject<NotificationModel>()
   private notificationmodel: NotificationModel = new NotificationModel();
 
-   public updateNotification = new EventEmitter();
-  
 
-  constructor() { }
+  constructor(private _router:Router) { }
 
-  public notificationevents$= this.notificationSubject.asObservable();
   
   CreateNotification() {
-  
-    this.notificationSubject.next(this.notificationmodel);
+
+    this._router.navigate(['/notification', 
+        this.notificationmodel.notificationType,
+        this.notificationmodel.notificationMessage]);
   }
-  getNotification(): Observable<NotificationModel> {
-     return this.notificationSubject.asObservable();
-    }
+
 
   setSucess(){
      this.notificationmodel.notificationType = NotificationType.success;

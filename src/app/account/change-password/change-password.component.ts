@@ -45,28 +45,29 @@ export class ChangePasswordComponent implements OnInit {
     
     this._accountService.changePassword(this.changPasswordModel)
     .subscribe(res=> {
+        ///fare redirect errore generico 
+        this._notificationSevice.setSucess();
+        this._notificationSevice.setMessage("Cambio Password è andata a buon fine");
+        this._notificationSevice.CreateNotification();
 
     },
   err=>{
    if(err.status== 400){
      if(err._body == '2'){  // changePasswordStatus 
-      this.errorMessage = "la password non corrisponede" ;
-      this._router.navigate(['/notification']);
-      this._notificationSevice.setError();
-      this._notificationSevice.setMessage("si sono verificati dei errori");
-      this._notificationSevice.CreateNotification();
-      this._notificationSevice.updateNotification.emit;
-      
+      this.errorMessage = "La password non è valida" ;
+   
      }
      else {
         ///fare redirect errore generico 
+        this._notificationSevice.setError();
+        this._notificationSevice.setMessage("si sono verificati dei errori");
+        this._notificationSevice.CreateNotification();
      }
     
    }
 
   })
     
-   console.log(this.nm);
   }
 
 initForm(){
