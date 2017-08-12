@@ -24,13 +24,7 @@ import { ChangePasswordComponent } from "app/account/change-password/change-pass
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 
-  {path:'account', canActivate:[AuthGuard],canActivateChild: [AuthGuard],
-  children:[
-    {path:'', component: AccountComponent },
-    {path:'change-password',component: ChangePasswordComponent}
-  ]
-  
-  },
+ 
   { path: 'manage-rfid', canActivate:[AuthGuard], component: ManageRfidComponent, children: [
     { path: '', component: ActionsComponent },
     { path: 'new', component: RfidFormComponent },
@@ -38,15 +32,10 @@ const appRoutes: Routes = [
     {path: 'detail/:code', component: TotalAmountComponent},
     {path: 'total', component: TotalAmountComponent},
     {path: 'manage-user', component: ManageUserComponent},
-   
     {path: 'devices', component:DevicesComponent},
     {path:'device-history',component:DeviceHistoryComponent}
   
   ] },
-  { path:'administration', 
-   canActivate: [AuthRoleGuard],
-   data: {roles: ['Administrator', 'altro']}, 
-   component:AdministrationComponent},
 
   {path: 'notification/:type/:message', component:NotificationComponent},
   { path: 'settings', component: SettingsComponent },

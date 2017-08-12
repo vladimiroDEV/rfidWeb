@@ -18,7 +18,7 @@ import { TotalAmountComponent } from './manage-rfid/total-amount/total-amount.co
 import { ManageUserComponent } from './manage-rfid/manage-user/manage-user.component';
 import { UserInfoComponent } from './manage-rfid/user-info/user-info.component';
 import { RfidDetailComponent } from './manage-rfid/rfid-detail/rfid-detail.component';
-import { RegistrationFormComponent } from './account/registration-form/registration-form.component';
+
 import { LoginFormComponent } from './account/login-form/login-form.component';
 import { EmailValidator } from './directives/email.validator.directive';
 import { UserService } from './shared/services/user.service';
@@ -53,7 +53,6 @@ import { SharedModule } from './shared/shared.module';
     ManageUserComponent,
     UserInfoComponent,
     RfidDetailComponent,
-    RegistrationFormComponent,
     EmailValidator, 
     LoginFormComponent, 
     DeviceCodeInputDirective,  
@@ -66,11 +65,12 @@ import { SharedModule } from './shared/shared.module';
     HttpModule,
     AppRoutingModule,
     ReactiveFormsModule ,
+     AccountModule,
     SharedModule,
     DevicesModule,
     DeviceHistoryModule,
     AdministrationModule,
-    AccountModule,
+   
     NotificationModule
   ],
  providers: [

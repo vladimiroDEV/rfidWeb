@@ -8,6 +8,7 @@ import {BaseService} from "./base.service";
 
 import { Observable } from 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/Rx';
+import { Subject } from "rxjs/Subject";
 
 //import * as _ from 'lodash';
 
@@ -36,12 +37,12 @@ export class UserService extends BaseService {
     this.baseUrl = configService.getApiURI();
   }
 
-    register(email: string, password: string, firstName: string, lastName: string,location: string): Observable<UserRegistration> {
-    let body = JSON.stringify({ email, password, firstName, lastName,location });
+    register(email: string, password: string, firstName: string, lastName: string,role: string): Observable<UserRegistration> {
+    let body = JSON.stringify({ email, password, firstName, lastName,role });
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.post(this.baseUrl + "/accounts", body, options)
+    return this.http.post(this.baseUrl + "/accounts/register", body, options)
       .map(res => true)
       .catch(this.handleError);
   }  
@@ -80,6 +81,20 @@ export class UserService extends BaseService {
   isLoggedIn() {
     return this.loggedIn;
   }
+
+  getAvailableRoles(){
+
+    let allroles = [ "Default","Administrator","StoreAdministrator","StoreOperator" ];
+
+    if(this.isAdministrator)
+         return allroles = allroles.filter(i=>i != "StoreOperator")
+
+    else if(this.isStoreAdministrator)
+        return allroles = allroles.filter(i=>i != "Administrator" && i != "Default")
+   
+      else return [];
+      
+  }
   
   haveUserRole(roles : Array<string>):boolean {
        
@@ -101,6 +116,22 @@ export class UserService extends BaseService {
       });
       return result;
   }
+
+  isAdministrator() {
+       return this.haveUserRole(["Administrator"]);
+  }
+
+  isStoreAdministrator(){
+    return this.haveUserRole(["StoreAdministrator"]);
+  }
+
+  isStoreOperator() {
+ return this.haveUserRole(["StoreOperator"]);
+  }
+  isDefaultuser() {
+ return this.haveUserRole(["Default"]);
+  }
+
 
   
 }
