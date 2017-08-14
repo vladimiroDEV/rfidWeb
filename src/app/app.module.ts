@@ -34,6 +34,7 @@ import { DropdownDirective } from "app/shared/directives/dropdown.directive";
 import { AccountModule } from "app/account/account.module";
 import { NotificationModule } from "app/shared/notification/notification.module";
 import { SharedModule } from './shared/shared.module';
+import { ManageStoreModule } from "app/manage-store/manage-store.module";
 
 
 
@@ -70,6 +71,7 @@ import { SharedModule } from './shared/shared.module';
     DevicesModule,
     DeviceHistoryModule,
     AdministrationModule,
+    ManageStoreModule,
    
     NotificationModule
   ],
