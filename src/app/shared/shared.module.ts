@@ -17,6 +17,8 @@ import { NotificationModule } from 'app/shared/notification/notification.module'
     SpinnerComponent
     ],
     exports:[myFocus,SpinnerComponent],
+
+    
    
 })
 export class SharedModule { }

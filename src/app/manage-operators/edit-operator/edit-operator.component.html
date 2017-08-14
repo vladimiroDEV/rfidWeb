@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-md-2 col-md-offset-1">
+        <button class="btn btn-success" routerLink="/manage-rfid">Operatore</button>
+    </div>
+    <div class="col-md-6">
+        <div class="well">
+            <form class="form-group" (ngSubmit)="submit()" [formGroup]="OperatorForm" autocomplete="off">
+                <fieldset>
+                    <legend>Dati generali</legend>
+                    <div class="form-group">
+                        <label for="nome" class="col-lg-2 control-label">Email</label>
+                        <div class="col-lg-10">
+                            <input type="email"  required 
+                            class="form-control" id="email" name="email" formControlName="email">
+                           
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br>
+                    <div class="form-group">
+                        <label for="password" class="col-lg-2 control-label">Password</label>
+                        <div class="col-lg-10">
+                            <input type="password" class="form-control" id="password" name="password" formControlName="password">
+                        </div>
+                    </div>
+
+                </fieldset>
+                
+                <div class="clearfix"></div>
+                <br>
+                <div class="row">
+                    <button class="btn btn-success" [disabled]="!StoreForm.valid" type="submit">Salva</button>
+                    <button class="btn btn-danger pull-right" type="button" (click)="clearForm()">Ripulisci</button>
+
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
+</div>

@@ -11,12 +11,14 @@
            <a routerLink="home">Home</a></li>
         <li routerLinkActive="active"
          [routerLinkActiveOptions]="{exact:true}"><a routerLink="/manage-rfid">Gestione bracciali</a></li>
-        <li routerLinkActive="active"
+        <li routerLinkActive="active"  *ngIf="_userService.haveUserRole(['StoreAdministrator'])"
          [routerLinkActiveOptions]="{exact:true}"><a routerLink="/statistics">Statistiche</a></li>
         <li routerLinkActive="active"
          [routerLinkActiveOptions]="{exact:true}"><a routerLink="/settings">Impostazioni</a></li>
          <li routerLinkActive="active" *ngIf="_userService.haveUserRole(['Administrator'])"
           [routerLinkActiveOptions]="{exact:true}"><a routerLink="/administration">Amministrazione</a></li>
+           <li routerLinkActive="active" *ngIf="_userService.haveUserRole(['StoreAdministrator'])"
+          [routerLinkActiveOptions]="{exact:true}"><a routerLink="/manage-store">Gestione Sore</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">      
           <li  *ngIf="!status"><a routerLink="/login">Login</a></li>

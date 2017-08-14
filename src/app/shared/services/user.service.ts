@@ -62,6 +62,11 @@ export class UserService extends BaseService {
        localStorage.setItem('Rfid_AppliactionUserID', res.Rfid_AppliactionUserID);
         localStorage.setItem('auth_token', res.auth_token);
         localStorage.setItem('userRoles',res.userRoles);
+
+        if(res.store_id > 0)
+          localStorage.setItem('store_id', res.store_id);
+ 
+
         this.loggedIn = true;
         this._authNavStatusSource.next(true);
         return true;
@@ -73,10 +78,24 @@ export class UserService extends BaseService {
     localStorage.removeItem('auth_token');
     localStorage.removeItem('Rfid_AppliactionUserID');
     localStorage.removeItem('userRoles');
+
+    if(localStorage.getItem('store_id')) {
+      localStorage.removeItem('store_id');
+
+    }
     this.loggedIn = false;
     this._authNavStatusSource.next(false);
     
   }
+
+  createOperator(){
+
+    // id of 
+  }
+
+
+
+
 
   isLoggedIn() {
     return this.loggedIn;
