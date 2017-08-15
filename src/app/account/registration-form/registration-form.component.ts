@@ -49,7 +49,6 @@ export class RegistrationFormComponent implements OnInit {
 
      if(valid)
      {
-       console.log(value.role);
          this.userService.register(value.email,value.password,value.firstName,value.lastName,value.role)
                    .finally(() => {
                      this.isRequesting = false;

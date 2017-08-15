@@ -7,11 +7,19 @@
             <form class="form-group" (ngSubmit)="submit()" [formGroup]="OperatorForm" autocomplete="off">
                 <fieldset>
                     <legend>Dati generali</legend>
-                    <div class="form-group">
+                      <div class="form-group">
                         <label for="nome" class="col-lg-2 control-label">Email</label>
                         <div class="col-lg-10">
-                            <input type="email"  required 
-                            class="form-control" id="email" name="email" formControlName="email">
+                            <input type="email"  required class="form-control" id="email" name="email" formControlName="email">
+                           
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                <br>
+                    <div class="form-group">
+                        <label for="nome" class="col-lg-2 control-label">Name</label>
+                        <div class="col-lg-10">
+                            <input type="text"    class="form-control" id="name" name="name" formControlName="name">
                            
                         </div>
                     </div>
@@ -20,7 +28,7 @@
                     <div class="form-group">
                         <label for="password" class="col-lg-2 control-label">Password</label>
                         <div class="col-lg-10">
-                            <input type="password" class="form-control" id="password" name="password" formControlName="password">
+                            <input type="password" required class="form-control" id="password" name="password" formControlName="password">
                         </div>
                     </div>
 
@@ -29,7 +37,7 @@
                 <div class="clearfix"></div>
                 <br>
                 <div class="row">
-                    <button class="btn btn-success" [disabled]="!StoreForm.valid" type="submit">Salva</button>
+                    <button class="btn btn-success" [disabled]="!OperatorForm.valid" type="submit">Salva</button>
                     <button class="btn btn-danger pull-right" type="button" (click)="clearForm()">Ripulisci</button>
 
                 </div>
