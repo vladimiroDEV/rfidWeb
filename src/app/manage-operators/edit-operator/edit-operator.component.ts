@@ -57,8 +57,4 @@ export class EditOperatorComponent implements OnInit {
   }
   
 
-  clearForm() {
-
-  }
-
 }

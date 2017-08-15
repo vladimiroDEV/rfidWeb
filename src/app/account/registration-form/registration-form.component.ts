@@ -29,6 +29,7 @@ export class RegistrationFormComponent implements OnInit {
  }
 
   ngOnInit() {
+    this.isAdministrator = this.userService.isAdministrator();
     this.optionsRoles = this.userService.getAvailableRoles();
  
   }

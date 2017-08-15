@@ -45,7 +45,7 @@
 				<div class="clearfix"></div>
 						<br/>
 
-					<div class="form-group" *ngIf="userService.isAdministrator()">
+					<div class="form-group" *ngIf="isAdministrator">
 						<label for="choiseRole"  class="col-lg-2 control-label">Ruolo</label>
 						<div class="col-lg-10">
 						<select id="choiseRole" name="role" class="form-control" ngModel>
