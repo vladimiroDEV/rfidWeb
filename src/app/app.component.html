@@ -1,12 +1,45 @@
 <div class="wrapper">
 
+  <app-main-header></app-main-header>
+  <app-sidebar></app-sidebar>
 
-<app-header></app-header>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Page Header
+        <small>Optional description</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content container-fluid">
+ <router-outlet></router-outlet>
+      <!--------------------------
+        | Your Page Content Here |
+        -------------------------->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  
+
+<!-- <app-header></app-header>
 <div class="containe-fluid">
   <div class="row">
     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-      <router-outlet></router-outlet>
+     
     </div>
   </div>
-</div>
+</div> -->
+
+<app-footer></app-footer>
+<app-control-sidebar></app-control-sidebar>
 </div>

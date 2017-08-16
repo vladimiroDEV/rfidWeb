@@ -36,6 +36,8 @@ import { NotificationModule } from "app/shared/notification/notification.module"
 import { SharedModule } from './shared/shared.module';
 import { ManageStoreModule } from "app/manage-store/manage-store.module";
 import { ManageOperatorsModule } from "app/manage-operators/manage-operators.module";
+import { TemplateModule } from "app/template/template.module";
+
 
 
 
@@ -58,7 +60,8 @@ import { ManageOperatorsModule } from "app/manage-operators/manage-operators.mod
     EmailValidator, 
     LoginFormComponent, 
     DeviceCodeInputDirective,  
-    DropdownDirective
+    DropdownDirective,
+    
 
   ],
   imports: [
@@ -74,7 +77,8 @@ import { ManageOperatorsModule } from "app/manage-operators/manage-operators.mod
     AdministrationModule,
     ManageStoreModule,
    ManageOperatorsModule,
-    NotificationModule
+    NotificationModule,
+    TemplateModule
   ],
  providers: [
    ManageRfidService,
