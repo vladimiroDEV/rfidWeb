@@ -12,6 +12,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
  status: boolean;
  subscription:Subscription;
+ isAdministrator:boolean= false;
+ isStoreAdministrator:boolean= false;
+ isOperator:boolean= false;
+
+
  
   constructor(private _userService:UserService, private _roleGuard: AuthRoleGuard) { }
 logout() {
@@ -21,6 +26,9 @@ logout() {
   }
 
   ngOnInit() {
+    this.isAdministrator = this._userService.isAdministrator();
+    this.isStoreAdministrator = this._userService.isStoreAdministrator();
+    this.isOperator = this._userService.isStoreOperator();
    
     this.subscription = this._userService.authNavStatus$.subscribe(status => this.status = status);
   }

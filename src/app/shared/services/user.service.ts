@@ -14,6 +14,7 @@ import { Subject } from "rxjs/Subject";
 
 // Add the RxJS Observable operators we need in this app.
 //import '../../rxjs-operators';
+import { OperatorModel } from '../../manage-operators/manage-operator.models';
 
 @Injectable()
 
@@ -28,7 +29,9 @@ export class UserService extends BaseService {
 
   private loggedIn = false;
 
-  constructor(private http: Http, private configService: ConfigService) {
+  constructor(
+    private http: Http, 
+    private configService: ConfigService) {
     super();
     this.loggedIn = !!localStorage.getItem('auth_token');
     // ?? not sure if this the best way to broadcast the status but seems to resolve issue on page refresh where auth status is lost in
@@ -63,10 +66,9 @@ export class UserService extends BaseService {
         localStorage.setItem('auth_token', res.auth_token);
         localStorage.setItem('userRoles',res.userRoles);
 
-        if(res.store_id > 0)
-          localStorage.setItem('store_id', res.store_id);
- 
-
+        if(res.store_id > 0) 
+          localStorage.setItem('store_id',res.store_id);
+      
         this.loggedIn = true;
         this._authNavStatusSource.next(true);
         return true;
@@ -78,17 +80,23 @@ export class UserService extends BaseService {
     localStorage.removeItem('auth_token');
     localStorage.removeItem('Rfid_AppliactionUserID');
     localStorage.removeItem('userRoles');
-
-    if(localStorage.getItem('store_id')) {
+    if(localStorage.getItem('store_id')) 
       localStorage.removeItem('store_id');
 
-    }
     this.loggedIn = false;
     this._authNavStatusSource.next(false);
     
   }
 
-  createOperator(){
+  createOperator(operatorModel:OperatorModel){
+
+    operatorModel.storeId = +localStorage.getItem('store_id');
+    return this.http.post(
+        this.configService.getApiURI()+'/accounts/registerOperator',
+        JSON.stringify(operatorModel),
+        this.configService.getRequestOptions()
+
+    );
 
     // id of 
   }
