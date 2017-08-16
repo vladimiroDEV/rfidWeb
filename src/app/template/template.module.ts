@@ -6,11 +6,13 @@ import { MainHeaderComponent } from "app/template/main-header/main-header.compon
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
 import { ControlSidebarComponent } from './control-sidebar/control-sidebar.component';
+import { RouterModule } from "@angular/router";
 
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   declarations: [TemplateComponent, HeaderComponent, MainHeaderComponent, SidebarComponent, FooterComponent, ControlSidebarComponent],
   exports: [MainHeaderComponent,SidebarComponent,FooterComponent,ControlSidebarComponent]

@@ -16,7 +16,10 @@ input[type=number]::-webkit-outer-spin-button {
     appearance: none;
     margin: 0; 
 }
-cursore-pointer:hover {
+.cursore-pointer:hover {
     cursor: pointer;
 
+}
+.white{
+    color: white!important;
 }
