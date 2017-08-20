@@ -7,13 +7,15 @@ import { AccountService } from "app/account/account.service";
 import { ProfileComponent } from './profile/profile.component';
 import { AccountRoutingModule } from "./account-routing.module";
 import { RegistrationFormComponent } from "app/account/registration-form/registration-form.component";
+import { SharedModule } from "app/shared/shared.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AccountRoutingModule  
+    AccountRoutingModule  ,
+    SharedModule
   ],
   declarations: [
     AccountComponent,

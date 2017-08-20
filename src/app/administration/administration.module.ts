@@ -4,8 +4,8 @@ import { AdministrationComponent } from "app/administration/administration.compo
 import { AdminNavComponent } from './admin-nav/admin-nav.component';
 import { AdministrationRouterModule } from "app/administration/administration-router.module";
 import { ReactiveFormsModule } from "@angular/forms";
-import { CreateUserComponent } from './create-user/create-user.component';
 import { AccountModule } from "app/account/account.module";
+import { AdmUserComponent } from './adm-user/adm-user.component';
 
 @NgModule({
   imports: [
@@ -17,7 +17,7 @@ import { AccountModule } from "app/account/account.module";
   declarations: [
     AdministrationComponent,
     AdminNavComponent,
-    CreateUserComponent
+    AdmUserComponent
   ]
 })
 export class AdministrationModule { }

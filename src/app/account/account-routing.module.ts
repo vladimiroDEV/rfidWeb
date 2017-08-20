@@ -9,11 +9,10 @@ import { ProfileComponent } from "app/account/profile/profile.component";
 
 
 const accountRoutes: Routes =[
-   {path:'account', canActivate:[AuthGuard],canActivateChild: [AuthGuard],
-    children:[
-    {path:'', component: AccountComponent },
-    {path:'change-password',component: ChangePasswordComponent},
-    {path:'profile',component: ProfileComponent},
+   {path:'account', canActivate:[AuthGuard],canActivateChild: [AuthGuard], children:[
+      {path:'', component: AccountComponent },
+      {path:'change-password',component: ChangePasswordComponent},
+      {path:'profile',component: ProfileComponent},
   ]
   
   },
