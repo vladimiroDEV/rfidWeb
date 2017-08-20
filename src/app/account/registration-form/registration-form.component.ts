@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-
+import { Location } from '@angular/common';
 import { UserRegistration } from '../../shared/models/user.registration.interface';
 import { UserService } from '../../shared/services/user.service';
 import { NotificationService } from "app/shared/notification/notification.service";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, FormControl } from "@angular/forms";
 
 
 
@@ -38,11 +38,13 @@ export class RegistrationFormComponent implements OnInit {
     private router: Router,
     private _notificationService:NotificationService,
     private route: ActivatedRoute,
-     private fb:FormBuilder) { 
+     private fb:FormBuilder,
+    private _location:Location) { 
    
  }
 
   ngOnInit() {
+   
 
     this._userRegistration = new UserRegistration();
       this.initForm();
@@ -50,24 +52,37 @@ export class RegistrationFormComponent implements OnInit {
     this.isAdministrator = this.userService.isAdministrator();
     this.optionsRoles = this.userService.getAvailableRoles();
     
-    this.route.params.subscribe(
+    this.route.params
+    
+    .subscribe(
       (params:Params) => {
 
         console.log("Params");
         console.log(params);
         this.EditMode = params['email'] != null;
+        console.log( params['email'])
+        console.log(  this.EditMode);
 
-        if(this.EditMode)
+        if(this.EditMode){
 
-          this.userService.getUsersDetail(params['email'])
+           this.isRequesting= true;
+           this.userService.getUsersDetail(params['email'])
+           .finally(()=>{
+            this.isRequesting = false;
+          })
           .subscribe(
             res=>{
-              this._userRegistration = res.json();
+              console.log(res);
+              this._userRegistration = res;
+               console.log(this._userRegistration);
+              this.initForm();
             },
             err=> {
+               console.log(err);
               this.errors = "Errore durante il caricamento, Riprovare!";
             }
           );
+      }
 
         
       }
@@ -78,11 +93,11 @@ export class RegistrationFormComponent implements OnInit {
   initForm() {
 
     this.RegistrationForm = this.fb.group({
-       'firstname':[this._userRegistration.firstName],
-       'lastname':[this._userRegistration.lastName],
-       'email':[this._userRegistration.email],
+       'firstname':new FormControl(this._userRegistration.FirstName),
+       'lastname':new FormControl(this._userRegistration.LastName),
+       'email':new FormControl(this._userRegistration.Email),
        'password':'',
-       'role':[this._userRegistration.role]
+       'role':new FormControl(this._userRegistration.Role)
 
     });
   }
@@ -105,11 +120,11 @@ export class RegistrationFormComponent implements OnInit {
      if(this.RegistrationForm.valid)
      {
 
-      userRegistration.firstName = this.RegistrationForm.get('firstName').value;
-      userRegistration.lastName = this.RegistrationForm.get('lastName').value;
-      userRegistration.email = this.RegistrationForm.get('email').value;
-      userRegistration.password = this.RegistrationForm.get('password').value;
-      userRegistration.role = role
+      userRegistration.FirstName = this.RegistrationForm.get('firstName').value;
+      userRegistration.LastName = this.RegistrationForm.get('lastName').value;
+      userRegistration.Email = this.RegistrationForm.get('email').value;
+      userRegistration.Password = this.RegistrationForm.get('password').value;
+      userRegistration.Role = role
 
        if(this.EditMode){
           this.updateUser(userRegistration);
@@ -122,7 +137,7 @@ export class RegistrationFormComponent implements OnInit {
   }  
 
   createNewUser(value: UserRegistration) {
-     this.userService.register(value.email,value.password,value.firstName,value.lastName,value.role)
+     this.userService.register(value.Email,value.Password,value.FirstName,value.LastName,value.Role)
                    .finally(() => {
                      this.isRequesting = false;
                      this._notificationService.CreateNotification();
@@ -134,7 +149,7 @@ export class RegistrationFormComponent implements OnInit {
                        this._notificationService.setMessage("Operazione è andata a buon fine");
                        
 
-                         this.router.navigate(['/login'],{queryParams: {brandNew: true,email:value.email}});                         
+                         this.router.navigate(['/login'],{queryParams: {brandNew: true,email:value.Email}});                         
                      }},
                      errors => { 
                        this.errors = errors});
@@ -142,7 +157,7 @@ export class RegistrationFormComponent implements OnInit {
   }
   updateUser(value: UserRegistration) {
 
-    this.userService.updateUser(value.email, value.firstName, value.lastName, value.role)
+    this.userService.updateUser(value.Email, value.FirstName, value.LastName, value.Role)
           .finally(() => {
                      this.isRequesting = false;
                      this._notificationService.CreateNotification();
@@ -154,11 +169,17 @@ export class RegistrationFormComponent implements OnInit {
                        this._notificationService.setMessage("Operazione è andata a buon fine");
                        
 
-                         this.router.navigate(['/login'],{queryParams: {brandNew: true,email:value.email}});                         
+                         this.router.navigate(['/login'],{queryParams: {brandNew: true,email:value.Email}});                         
                      }},
                      errors => { 
                        this.errors = errors});
 
+
+  }
+
+  goBack(){
+      
+     this._location.back();
 
   }
 

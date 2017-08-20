@@ -12,8 +12,9 @@ const routes: Routes = [
    { path:'administration', canActivate: [AuthRoleGuard], data: {roles: ['Administrator', 'altro']}, 
                                        component:AdministrationComponent, children:[
             {path:'users', component: AdmUserComponent,children: [
+              {path:'', component:AllUsersComponent},
                {path:'new',component: RegistrationFormComponent},
-                {path:'all', component:AllUsersComponent},
+                // {path:'all', component:AllUsersComponent},
                 {path:':email/edit', component:RegistrationFormComponent},
 
             ]},

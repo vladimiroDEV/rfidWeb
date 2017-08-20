@@ -119,6 +119,7 @@ export class UserService extends BaseService {
 
   getUsersDetail(email:string) {
     return this.http.get(this.baseUrl+'/accounts/userDetail/'+email,this.configService.getRequestOptions())
+    .map((res) => res.json())
    // .map((res:ApplicationUserVM[])=>res.json())
   }
 
