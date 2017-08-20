@@ -9,12 +9,14 @@ import {BaseService} from "./base.service";
 import { Observable } from 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/Rx';
 import { Subject } from "rxjs/Subject";
+import 'rxjs/add/operator/map'
 
 //import * as _ from 'lodash';
 
 // Add the RxJS Observable operators we need in this app.
 //import '../../rxjs-operators';
 import { OperatorModel } from '../../manage-operators/manage-operator.models';
+import { ApplicationUserVM } from "app/account/account.models";
 
 @Injectable()
 
@@ -40,25 +42,34 @@ export class UserService extends BaseService {
     this.baseUrl = configService.getApiURI();
   }
 
+
+
     register(email: string, password: string, firstName: string, lastName: string,role: string): Observable<UserRegistration> {
     let body = JSON.stringify({ email, password, firstName, lastName,role });
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
 
-    return this.http.post(this.baseUrl + "/accounts/register", body, options)
+    return this.http.post(this.baseUrl + "/accounts/register", 
+            body, 
+            this.configService.getRequestOptions())
       .map(res => true)
       .catch(this.handleError);
   }  
 
+  updateUser(email: string,  firstName: string, lastName: string,role: string): Observable<UserRegistration> {
+
+     let body = JSON.stringify({ email, firstName, lastName,role });
+      return this.http.post(this.baseUrl + "/accounts/updateUser", 
+            body, 
+            this.configService.getRequestOptions())
+      .map(res => true)
+      .catch(this.handleError);
+
+  }
+
    login(userName, password) {
-    // let headers = new Headers();
-    // headers.append('Content-Type', 'application/json');
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
     return this.http
       .post(
       this.baseUrl + '/auth/login',
-      JSON.stringify({ userName, password }),options 
+      JSON.stringify({ userName, password }),this.configService.getRequestOptions() 
       )
       .map(res => res.json())
       .map(res => {
@@ -99,6 +110,16 @@ export class UserService extends BaseService {
     );
 
     // id of 
+  }
+
+  getAllUsers() {
+    return this.http.get(this.baseUrl+'/accounts/allusers',this.configService.getRequestOptions())
+   // .map((res:ApplicationUserVM[])=>res.json())
+  }
+
+  getUsersDetail(email:string) {
+    return this.http.get(this.baseUrl+'/accounts/userDetail/'+email,this.configService.getRequestOptions())
+   // .map((res:ApplicationUserVM[])=>res.json())
   }
 
 

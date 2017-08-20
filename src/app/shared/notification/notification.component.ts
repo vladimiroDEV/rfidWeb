@@ -49,7 +49,7 @@ export class NotificationComponent implements OnInit {
       style= "alert alert-info";
       break;
        case NotificationType.success:
-      style= "alert alert-success";
+      style= "alert alert-info";
       break;
       default:
       style= "alert alert-info";

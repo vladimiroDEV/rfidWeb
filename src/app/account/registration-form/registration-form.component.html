@@ -5,13 +5,16 @@
 		<h4 class="box-title">Registrazine</h4>
 
 	</div>
-	<form #f="ngForm" novalidate (ngSubmit)="registerUser(f)">
+	<form  [formGroup]="RegistrationForm"  #f="ngForm" novalidate (ngSubmit)="registerUser()">
 
 		<div class="box-body">
 			<div class="form-group">
 				<label for="first-name" class="col-lg-2 control-label">First name</label>
 				<div class="col-lg-10">
-					<input id="first-name" type="text" required name="firstName" class="form-control" placeholder="First name" tmFocus ngModel>
+					<input id="first-name" type="text"  name="firstName"
+					 class="form-control" placeholder="First name"  
+					  formControlName="firstname">
+					<span class="glyphicon glyphicon-user form-control-feedback"></span>
 				</div>
 			</div>
 
@@ -21,7 +24,8 @@
 			<div class="form-group">
 				<label for="last-name" class="col-lg-2 control-label">Last name</label>
 				<div class="col-lg-10">
-					<input id="last-name" type="text" required name="lastName" class="form-control" placeholder="Last name" ngModel>
+					<input id="last-name" type="text"  name="lastName" class="form-control" placeholder="Last name" formControlName="lastname">
+					<span class="glyphicon glyphicon-user form-control-feedback"></span>
 
 				</div>
 			</div>
@@ -31,26 +35,28 @@
 			<div class="form-group">
 				<label for="email" class="col-lg-2 control-label">Email</label>
 				<div class="col-lg-10">
-					<input id="email" type="text" required name="email" validateEmail class="form-control" placeholder="Email" ngModel #email="ngModel">
-					<small [hidden]="email.valid || (email.pristine && !submitted)" class="text-danger">Please enter a valid email</small>
+					<input id="email" type="text" required name="email" validateEmail class="form-control" placeholder="Email" formControlName="email">
+					<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+					<small [hidden]="RegistrationForm.controls.email.valid || (RegistrationForm.controls.email.pristine && !submitted)" class="text-danger">Please enter a valid email</small>
 				</div>
 			</div>
 			<div class="clearfix"></div>
 			<br/>
 
-			<div class="form-group">
+			<div class="form-group" *ngIf="!EditMode">
 				<label for="password" class="col-lg-2 control-label">Password</label>
 				<div class="col-lg-10">
-					<input id="password" type="password" required name="password" class="form-control" placeholder="Password" ngModel>
+					<input id="password" type="password" required name="password" class="form-control" placeholder="Password"  formControlName="password">
+					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div>
 			</div>
 			<div class="clearfix"></div>
-			<br/>
+			<br *ngIf="!EditMode" /> 
 
 			<div class="form-group" *ngIf="isAdministrator">
 				<label for="choiseRole" class="col-lg-2 control-label">Ruolo</label>
 				<div class="col-lg-10">
-					<select id="choiseRole" name="role" class="form-control" ngModel>
+					<select id="choiseRole" name="role" class="form-control" >
                          <option *ngFor="let opt of optionsRoles, let i=index" >{{opt}}</option>
 
 						</select>
@@ -65,7 +71,7 @@
 
 
 		<div class="box-footer">
-			<button type="submit" class="btn btn-primary" [disabled]="f.invalid || isRequesting">Crea</button>
+			<button type="submit" class="btn btn-primary btn-flat" [disabled]="f.invalid || isRequesting">Crea</button>
 			 <app-spinner [isRunning]="isRequesting"></app-spinner> 
 		</div>
 

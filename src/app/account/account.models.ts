@@ -7,3 +7,11 @@ export class ChangePassword {
         this.oldPassword= '';
     }
 }
+
+export class ApplicationUserVM {
+     Email:string;
+     FirstName:string;
+     LastName:string;
+     
+     Roles:string[];
+}

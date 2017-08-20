@@ -5,13 +5,20 @@ import { AuthRoleGuard } from "app/shared/services/auth.role.guard";
 import { AdministrationComponent } from "app/administration/administration.component";
 import { AdmUserComponent } from "app/administration/adm-user/adm-user.component";
 import { RegistrationFormComponent } from "app/account/registration-form/registration-form.component";
+import { AllUsersComponent } from "app/administration/all-users/all-users.component";
 
 
 const routes: Routes = [
    { path:'administration', canActivate: [AuthRoleGuard], data: {roles: ['Administrator', 'altro']}, 
                                        component:AdministrationComponent, children:[
-            {path:'users', component: AdmUserComponent},
-            {path:'users/new',component: RegistrationFormComponent}
+            {path:'users', component: AdmUserComponent,children: [
+               {path:'new',component: RegistrationFormComponent},
+                {path:'all', component:AllUsersComponent},
+                {path:':email/edit', component:RegistrationFormComponent},
+
+            ]},
+           
+           
    ]},
 ]
 

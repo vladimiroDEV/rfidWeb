@@ -6,6 +6,8 @@ import { AdministrationRouterModule } from "app/administration/administration-ro
 import { ReactiveFormsModule } from "@angular/forms";
 import { AccountModule } from "app/account/account.module";
 import { AdmUserComponent } from './adm-user/adm-user.component';
+import { AllUsersComponent } from './all-users/all-users.component';
+import { SharedModule } from "app/shared/shared.module";
 
 @NgModule({
   imports: [
@@ -13,11 +15,14 @@ import { AdmUserComponent } from './adm-user/adm-user.component';
     ReactiveFormsModule,
     AdministrationRouterModule,
     AccountModule,
+    SharedModule
   ],
   declarations: [
     AdministrationComponent,
     AdminNavComponent,
-    AdmUserComponent
+    AdmUserComponent,
+    AllUsersComponent,
+    
   ]
 })
 export class AdministrationModule { }
