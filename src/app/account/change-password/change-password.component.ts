@@ -16,7 +16,7 @@ import { NotificationModel } from "app/shared/notification/notification.models";
 })
 export class ChangePasswordComponent implements OnInit {
 
-
+isRequesting:boolean = false;;
   ChangePasswordForm: FormGroup;
   errorMessage:string ='';
   nm:NotificationModel = new NotificationModel();
@@ -37,6 +37,7 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   change() {
+    this.isRequesting = true;
 
    this.changPasswordModel.clear();
    this.errorMessage ='';
@@ -44,6 +45,7 @@ export class ChangePasswordComponent implements OnInit {
     this.changPasswordModel.oldPassword = this.ChangePasswordForm.get('oldPassword').value;
     
     this._accountService.changePassword(this.changPasswordModel)
+    .finally(()=>this.isRequesting = false)
     .subscribe(res=> {
         ///fare redirect errore generico 
         this._notificationSevice.setSucess();
