@@ -120,8 +120,8 @@ export class RegistrationFormComponent implements OnInit {
      if(this.RegistrationForm.valid)
      {
 
-      userRegistration.FirstName = this.RegistrationForm.get('firstName').value;
-      userRegistration.LastName = this.RegistrationForm.get('lastName').value;
+      userRegistration.FirstName = this.RegistrationForm.get('firstname').value;
+      userRegistration.LastName = this.RegistrationForm.get('lastname').value;
       userRegistration.Email = this.RegistrationForm.get('email').value;
       userRegistration.Password = this.RegistrationForm.get('password').value;
       userRegistration.Role = role

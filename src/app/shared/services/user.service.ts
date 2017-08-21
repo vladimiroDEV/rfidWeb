@@ -123,6 +123,10 @@ export class UserService extends BaseService {
    // .map((res:ApplicationUserVM[])=>res.json())
   }
 
+  DeleteUser(email:string){
+         return this.http.post(this.baseUrl+'/accounts/DeleteUser',JSON.stringify(email),this.configService.getRequestOptions())
+  }
+
 
 
 

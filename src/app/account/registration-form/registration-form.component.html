@@ -72,7 +72,8 @@
 
 		<div class="box-footer">
 		<button type="buttone" class="btn btn-primary btn-flat pull-left" *ngIf="EditMode" (click)="goBack();$event.preventDefault()">Torna</button>
-			<button type="submit" class="btn btn-primary btn-flat pull-right" [disabled]="f.invalid || isRequesting">Crea</button>
+			<button *ngIf="EditMode" type="submit" class="btn btn-primary btn-flat pull-right" [disabled]="f.invalid || isRequesting">Aggiorna</button>
+			<button *ngIf="!EditMode" type="submit" class="btn btn-primary btn-flat pull-right" [disabled]="f.invalid || isRequesting">Crea</button>
 			 <app-spinner [isRunning]="isRequesting"></app-spinner> 
 		</div>
 
