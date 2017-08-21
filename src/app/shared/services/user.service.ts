@@ -17,6 +17,7 @@ import 'rxjs/add/operator/map'
 //import '../../rxjs-operators';
 import { OperatorModel } from '../../manage-operators/manage-operator.models';
 import { ApplicationUserVM } from "app/account/account.models";
+import { Router } from "@angular/router";
 
 @Injectable()
 
@@ -33,7 +34,8 @@ export class UserService extends BaseService {
 
   constructor(
     private http: Http, 
-    private configService: ConfigService) {
+    private configService: ConfigService,
+  private _router:Router) {
     super();
     this.loggedIn = !!localStorage.getItem('auth_token');
     // ?? not sure if this the best way to broadcast the status but seems to resolve issue on page refresh where auth status is lost in
@@ -73,6 +75,7 @@ export class UserService extends BaseService {
       )
       .map(res => res.json())
       .map(res => {
+       localStorage.setItem('userMail', res.userMail);
        localStorage.setItem('Rfid_AppliactionUserID', res.Rfid_AppliactionUserID);
         localStorage.setItem('auth_token', res.auth_token);
         localStorage.setItem('userRoles',res.userRoles);
@@ -89,6 +92,7 @@ export class UserService extends BaseService {
 
   logout() {
     localStorage.removeItem('auth_token');
+     localStorage.removeItem('userMail');
     localStorage.removeItem('Rfid_AppliactionUserID');
     localStorage.removeItem('userRoles');
     if(localStorage.getItem('store_id')) 
@@ -96,6 +100,9 @@ export class UserService extends BaseService {
 
     this.loggedIn = false;
     this._authNavStatusSource.next(false);
+
+     this._router.navigate(['/login']);
+      return false;
     
   }
 
@@ -148,7 +155,38 @@ export class UserService extends BaseService {
       else return [];
       
   }
-  
+
+
+  isAdministrator() {
+       return this.haveUserRole(["Administrator"]);
+  }
+
+  isStoreAdministrator(){
+    return this.haveUserRole(["StoreAdministrator"]);
+  }
+
+  isStoreOperator() {
+ return this.haveUserRole(["StoreOperator"]);
+  }
+  isDefaultuser() {
+ return this.haveUserRole(["Default"]);
+  }
+
+  CurrentUserEmail():string {
+
+  if(localStorage.getItem('userMail'))
+     {
+         
+         return localStorage.getItem('userMail')
+      }
+        else { return 'non definito';}
+  }
+
+
+
+
+
+    
   haveUserRole(roles : Array<string>):boolean {
        
         let result:boolean;
@@ -168,21 +206,6 @@ export class UserService extends BaseService {
 
       });
       return result;
-  }
-
-  isAdministrator() {
-       return this.haveUserRole(["Administrator"]);
-  }
-
-  isStoreAdministrator(){
-    return this.haveUserRole(["StoreAdministrator"]);
-  }
-
-  isStoreOperator() {
- return this.haveUserRole(["StoreOperator"]);
-  }
-  isDefaultuser() {
- return this.haveUserRole(["Default"]);
   }
 
 

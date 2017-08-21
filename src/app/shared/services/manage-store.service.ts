@@ -21,6 +21,15 @@ export class ManageStoreService extends BaseService {
   }
 
 
+  HasID() {
+    
+   if(!localStorage.getItem('store_id')) {
+         return  false;
+       
+      }else { return true}
+  }
+
+
 
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from "@angular/forms";
-import { ManageStoreService } from "app/manage-store/manage-store.service";
 import { StoreModel } from "app/manage-store/manage-store.models";
+import { ManageStoreService } from "app/shared/services/manage-store.service";
 
 @Component({
   selector: 'app-create-store',

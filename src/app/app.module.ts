@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, XHRBackend } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
 import { SettingsComponent } from './settings/settings.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { ManageRfidComponent } from './manage-rfid/manage-rfid.component';
@@ -45,7 +44,6 @@ import { TemplateModule } from "app/template/template.module";
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     SettingsComponent,
     StatisticsComponent,
     ManageRfidComponent,

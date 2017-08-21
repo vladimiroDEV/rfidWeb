@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ManageStoreComponent } from './manage-store.component';
 import { CreateStoreComponent } from './create-store/create-store.component';
-import { ManageStoreService } from './manage-store.service';
 import { ManageStoreRouterModule } from "app/manage-store/manage-store-router.module";
 import { ReactiveFormsModule } from "@angular/forms";
+import { ManageStoreService } from "app/shared/services/manage-store.service";
+import { StoreHomeComponent } from './store-home/store-home.component';
 
 @NgModule({
   imports: [
@@ -12,7 +13,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     ReactiveFormsModule,
     ManageStoreRouterModule,
   ],
-  declarations: [ManageStoreComponent, CreateStoreComponent],
+  declarations: [ManageStoreComponent, CreateStoreComponent, StoreHomeComponent],
   providers: [ManageStoreService]
 })
 export class ManageStoreModule { }
