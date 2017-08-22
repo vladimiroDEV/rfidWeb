@@ -1,12 +1,10 @@
-<div class="row">
-    <div class="col-md-2 col-md-offset-1">
-        <button class="btn btn-success" routerLink="/manage-rfid">Operatore</button>
-    </div>
-    <div class="col-md-6">
-        <div class="well">
+
+        <div class="box box-info">
+            <div class="box-header" >
+                <h4 class="box-title">Grea operatore</h4>
+            </div>
             <form class="form-group" (ngSubmit)="submit()" [formGroup]="OperatorForm" autocomplete="off">
-                <fieldset>
-                    <legend>Dati generali</legend>
+               <div class="box-body">
                       <div class="form-group">
                         <label for="nome" class="col-lg-2 control-label">Email</label>
                         <div class="col-lg-10">
@@ -32,19 +30,17 @@
                         </div>
                     </div>
 
-                </fieldset>
+               </div>
                 
-                <div class="clearfix"></div>
-                <br>
-                <div class="row">
-                    <button class="btn btn-success" [disabled]="!OperatorForm.valid" type="submit">Salva</button>
-                    <button class="btn btn-danger pull-right" type="button" >Ripulisci</button>
+              
+                <div class="box-footer">
+                    <button class="btn btn-success btn-flat" [disabled]="!OperatorForm.valid" type="submit">Salva</button>
+                    <button class="btn btn-danger btn-flat pull-right" type="button" >Ripulisci</button>
 
                 </div>
 
 
             </form>
-        </div>
-    </div>
+     
 
 </div>

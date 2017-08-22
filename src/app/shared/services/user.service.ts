@@ -108,7 +108,7 @@ export class UserService extends BaseService {
 
     operatorModel.storeId = +localStorage.getItem('store_id');
     return this.http.post(
-        this.configService.getApiURI()+'/accounts/registerOperator',
+        this.configService.getApiURI()+'/accounts/createOperator',
         JSON.stringify(operatorModel),
         this.configService.getRequestOptions()
 

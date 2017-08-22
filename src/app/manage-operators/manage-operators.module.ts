@@ -4,10 +4,12 @@ import { ManageOperatorsComponent } from './manage-operators.component';
 import { ManageOperatorRouterModule } from "app/manage-operators/manage-operator-router.module";
 import { AccountModule } from "app/account/account.module";
 import { RequestingService } from "app/shared/services/requesting.service";
-import { ManageOperatorsService } from "app/manage-operators/manage-operators.service";
 import { EditOperatorComponent } from './edit-operator/edit-operator.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import { StoreGuard } from "app/shared/services/store.guard";
+import { OperatorsMainComponent } from './operators-main/operators-main.component';
+import { AllOperatorsComponent } from './all-operators/all-operators.component';
+import { OperatorComponent } from './operator/operator.component';
 
 
 
@@ -21,8 +23,8 @@ import { StoreGuard } from "app/shared/services/store.guard";
     ReactiveFormsModule
     
   ],
-  declarations: [ManageOperatorsComponent, EditOperatorComponent],
-  providers:[RequestingService, ManageOperatorsService, StoreGuard]
+  declarations: [ManageOperatorsComponent, EditOperatorComponent, OperatorsMainComponent, AllOperatorsComponent, OperatorComponent],
+  providers:[RequestingService,  StoreGuard]
 })
 export class ManageOperatorsModule { }
 

@@ -40,6 +40,24 @@
 
 
 
+        <!--- Store Administrator -->
+          <li class="treeview" >
+          <a routerLinkActive="active" *ngIf="isStoreAdministrator"
+           [routerLinkActiveOptions]="{exact:true}"
+           routerLink="/manage-operator">
+           <i class="fa fa-link"></i> 
+           <span>Operatori</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a routerLink="/manage-operator/operator/new">Crea Operatore</a></li>
+            <li><a routerLink="/manage-operator/operators">Tutti</a></li>
+          </ul>
+        </li>
+
+
 
         <li routerLinkActive="active" *ngIf="isStoreAdministrator"
           [routerLinkActiveOptions]="{exact:true}"><a routerLink="/manage-store">Gestione Sore</a></li>
