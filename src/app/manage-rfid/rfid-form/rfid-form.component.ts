@@ -5,7 +5,6 @@ import { RfidDevice, Anagrafica, AnagraficaRfidDeviceModel } from "app/shared/mo
 
 import 'rxjs/add/operator/debounceTime';
 import { ConfigService } from '../../shared/utils/config.service';
-import { NotificationService } from '../../shared/services/notification.service';
 import { Router } from '@angular/router';
 import { NotificationType } from '../../shared/models/SharedModels';
 

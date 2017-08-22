@@ -80,8 +80,6 @@ export class UserService extends BaseService {
         localStorage.setItem('auth_token', res.auth_token);
         localStorage.setItem('userRoles',res.userRoles);
 
-        if(res.store_id > 0) 
-          localStorage.setItem('store_id',res.store_id);
       
         this.loggedIn = true;
         this._authNavStatusSource.next(true);

@@ -21,11 +21,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    
+   
+    this.subscription = this._userService.authNavStatus$.subscribe(status =>{
     this.isAdministrator = this._userService.isAdministrator();
     this.isStoreAdministrator = this._userService.isStoreAdministrator();
     this.isOperator = this._userService.isStoreOperator();
-   
-    this.subscription = this._userService.authNavStatus$.subscribe(status => this.status = status);
+     this.status = status});
   }
 
 

@@ -7,6 +7,7 @@ import { RequestingService } from "app/shared/services/requesting.service";
 import { ManageOperatorsService } from "app/manage-operators/manage-operators.service";
 import { EditOperatorComponent } from './edit-operator/edit-operator.component';
 import { ReactiveFormsModule } from "@angular/forms";
+import { StoreGuard } from "app/shared/services/store.guard";
 
 
 
@@ -21,7 +22,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     
   ],
   declarations: [ManageOperatorsComponent, EditOperatorComponent],
-  providers:[RequestingService, ManageOperatorsService]
+  providers:[RequestingService, ManageOperatorsService, StoreGuard]
 })
 export class ManageOperatorsModule { }
 

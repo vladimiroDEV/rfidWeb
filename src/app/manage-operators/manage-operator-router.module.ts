@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from "@angular/router";
 import { ManageOperatorsComponent } from "app/manage-operators/manage-operators.component";
 import { EditOperatorComponent } from "app/manage-operators/edit-operator/edit-operator.component";
+import { StoreGuard } from "app/shared/services/store.guard";
 
 
 const routes: Routes = [
    { path:'manage-operator', 
-   component:ManageOperatorsComponent, children:[
+   component:ManageOperatorsComponent, canActivate:[StoreGuard], children:[
      {path:'new', component: EditOperatorComponent}
    ]},
 ]
