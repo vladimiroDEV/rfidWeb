@@ -1,6 +1,10 @@
 export class StoreModel {
-     Name:string;
+    Name:string;
     Telefono:string;
     Address:string; 
+    CreationDate:Date;
+    LastModifiedDate:Date;
                
 }
+
+

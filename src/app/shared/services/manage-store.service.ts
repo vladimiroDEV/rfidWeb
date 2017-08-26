@@ -21,6 +21,22 @@ export class ManageStoreService extends BaseService {
 
   }
 
+  GetStoreDetails(){
+     return this.http.
+           post(this.configService.getApiURI()+"/Store/GetStoreDetails",
+            JSON.stringify(this.GetlocalStoreid()), 
+            this.configService.getRequestOptions())
+            .map(res=>res.json());
+  }
+
+  GetStoreOperators(){
+     return this.http.
+           post(this.configService.getApiURI()+"/Store/GetOperators",
+            JSON.stringify(this.GetlocalStoreid()), 
+            this.configService.getRequestOptions())
+            .map(res=>res.json());
+  }
+
   GetStoreID(email:string){
      return this.http.
            post(this.configService.getApiURI()+"/Store/GetStoreID",
@@ -41,6 +57,9 @@ export class ManageStoreService extends BaseService {
 
   SetStoreID(id:string){
     localStorage.setItem("store_id", id);
+  }
+  GetlocalStoreid(){
+    return +localStorage.getItem("store_id");
   }
 
 

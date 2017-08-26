@@ -1,3 +1,51 @@
-<p>
-  all-operators works!
-</p>
+
+<div class="row">
+  <div class="col-md-8">
+
+
+
+    <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Lista Operatori</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered">
+                
+                <tbody>
+                  <tr>
+                    <th style="width: 10px">#</th>
+                    <th>Email</th>
+                    <th>Nome</th>                    
+                    <th>Azioni</th>
+                </tr>
+                <tr *ngFor="let user of applicationUsers; let i= index">
+
+                  <td style="width: 10px">i</td>
+                  <td>{{user.Email}}</td>
+                  <td>{{user.FirstName}}</td>
+
+                   <td>
+                     <button class="btn btn-primary btn-xs btn-flat">
+                       <i class="fa fa-pencil" aria-hidden="true"></i>
+                     </button>
+                      <button class="btn btn-danger btn-xs btn-flat">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                     </button>
+
+          
+                   </td>
+                </tr>
+        
+          
+           
+              </tbody></table>
+
+              <app-spinner [isRunning]="isRequesting"></app-spinner>
+              <div>
+                 <p *ngIf="loadingError"> Errore durente il caricamento </p>
+              </div>
+            </div>
+          </div>
+  </div>
+</div>

@@ -10,6 +10,7 @@ import { StoreGuard } from "app/shared/services/store.guard";
 import { OperatorsMainComponent } from './operators-main/operators-main.component';
 import { AllOperatorsComponent } from './all-operators/all-operators.component';
 import { OperatorComponent } from './operator/operator.component';
+import { SharedModule } from "app/shared/shared.module";
 
 
 
@@ -20,7 +21,8 @@ import { OperatorComponent } from './operator/operator.component';
     CommonModule,
     ManageOperatorRouterModule,
     AccountModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule,
     
   ],
   declarations: [ManageOperatorsComponent, EditOperatorComponent, OperatorsMainComponent, AllOperatorsComponent, OperatorComponent],
