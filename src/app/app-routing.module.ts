@@ -19,13 +19,14 @@ import { AuthGuard } from "app/shared/services/auth.guards";
 import { AuthRoleGuard } from "app/shared/services/auth.role.guard";
 import { AccountComponent } from "app/account/account.component";
 import { ChangePasswordComponent } from "app/account/change-password/change-password.component";
+import { StoreGuard } from "app/shared/services/store.guard";
 
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 
  
-  { path: 'manage-rfid', canActivate:[AuthGuard], component: ManageRfidComponent, children: [
+  { path: 'manage-rfid', canActivate:[AuthGuard,StoreGuard], component: ManageRfidComponent, children: [
     { path: '', component: ActionsComponent },
     { path: 'new', component: RfidFormComponent },
     { path: 'paid', component: PaidComponent },

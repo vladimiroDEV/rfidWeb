@@ -10,6 +10,7 @@ export class Anagrafica {
     Telefono: number;
     CreationDate:Date;
     LastModifiedDate?:Date;
+    ApplicationUserID:string;
 
 
 }
@@ -19,10 +20,12 @@ export class RfidDevice {
     ExpirationDate: Date;
     CreationDate: Date;
     LastModifiedDate:Date;
-  Credit:number;
+    Credit:number;
     ApplicationUserID:string;
     Active: boolean;
     AnagraficaID?: number;
+    StoreID:number;
+    Anagrafica:Anagrafica;
 }
 
 export class PaidModel {  

@@ -7,6 +7,8 @@ import 'rxjs/add/operator/debounceTime';
 import { ConfigService } from '../../shared/utils/config.service';
 import { Router } from '@angular/router';
 import { NotificationType } from '../../shared/models/SharedModels';
+import { ManageStoreService } from "app/shared/services/manage-store.service";
+import { NotificationService } from "app/shared/notification/notification.service";
 
 
 @Component({
@@ -18,12 +20,10 @@ import { NotificationType } from '../../shared/models/SharedModels';
 export class RfidFormComponent implements OnInit {
 
   RfidForm: FormGroup;
+  _rfidDevice :RfidDevice;
 
- _anagraficaRfidDeviceModel: AnagraficaRfidDeviceModel;
   _tipsMail :string[];
-  formView = true;
-  _enableDeviceInput = true;
- 
+
 
   _notificationMessage = "";
   _notificationType= NotificationType.info;
@@ -31,15 +31,16 @@ export class RfidFormComponent implements OnInit {
 constructor(
     private fb: FormBuilder,
     private manageRfidFormService: ManageRfidService,
+    private manageStoreService:ManageStoreService,
     private _configServices: ConfigService,
     private _elemRef: ElementRef, 
+    private _notificationservice: NotificationService
     
 
   ) {
+    this._rfidDevice = new RfidDevice();
+    this._rfidDevice.Anagrafica = new Anagrafica();
 
-     this._anagraficaRfidDeviceModel = new AnagraficaRfidDeviceModel();
-     this._anagraficaRfidDeviceModel.anagrafica = new Anagrafica();
-     this._anagraficaRfidDeviceModel.device = new RfidDevice();
   }
 
   
@@ -52,22 +53,22 @@ constructor(
 
   initForm() {
  this.RfidForm = this.fb.group({
-      'email': new FormControl(this._anagraficaRfidDeviceModel.anagrafica.Email),
-      'nome': new FormControl(this._anagraficaRfidDeviceModel.anagrafica.Nome),
-      'cognome': new FormControl(this._anagraficaRfidDeviceModel.anagrafica.Cognome),
-      'telefono': new FormControl(this._anagraficaRfidDeviceModel.anagrafica.Telefono),
-      'rfidCode': new FormControl(this._anagraficaRfidDeviceModel.device.RfidDeviceCode),
+      'email': new FormControl(this._rfidDevice.Anagrafica.Email ),
+      'nome': new FormControl(this._rfidDevice.Anagrafica.Nome),
+      'cognome': new FormControl(this._rfidDevice.Anagrafica.Cognome),
+      'telefono': new FormControl(this._rfidDevice.Anagrafica.Telefono),
+      'rfidCode': new FormControl(this._rfidDevice.RfidDeviceCode),
     });
 
     
   }
 
   loadByEmail(mail:string) {
-    this._anagraficaRfidDeviceModel.anagrafica= new Anagrafica();
-    this._anagraficaRfidDeviceModel.device = new  RfidDevice();
+    this._rfidDevice.Anagrafica= new Anagrafica();
+ 
     this.manageRfidFormService.getUserDetailByEmail(mail)
         .subscribe(data => {
-    this._anagraficaRfidDeviceModel.anagrafica = data.json().Anagrafica;
+    this._rfidDevice.Anagrafica = data.json().Anagrafica;
     this.initForm();
     this._tipsMail = [];
     this.watchEmilField();
@@ -76,33 +77,46 @@ constructor(
 
   submit() {
 
-    this._anagraficaRfidDeviceModel.anagrafica.Email = this.RfidForm.value.email;
-    this._anagraficaRfidDeviceModel.anagrafica.Nome = this.RfidForm.value.nome;
-    this._anagraficaRfidDeviceModel.anagrafica.Cognome = this.RfidForm.value.cognome;
-    this._anagraficaRfidDeviceModel.anagrafica.Telefono = this.RfidForm.value.telefono;
-    this._anagraficaRfidDeviceModel.device.RfidDeviceCode = this.RfidForm.value.rfidCode;
-    this._anagraficaRfidDeviceModel.device.ApplicationUserID = this._configServices.getApplicationUserID();
-    this._anagraficaRfidDeviceModel.device.Credit = 0;
-    this._anagraficaRfidDeviceModel.device.Active = true;
+    let storeId = this.manageStoreService.GetlocalStoreid();
+    let applicationUserID= this._configServices.getApplicationUserID();
+     this._rfidDevice.Anagrafica.Email = this.RfidForm.value.email;
+    this._rfidDevice.Anagrafica.Nome = this.RfidForm.value.nome;
+    this._rfidDevice.Anagrafica.Cognome = this.RfidForm.value.cognome;
+    this._rfidDevice.Anagrafica.Telefono = this.RfidForm.value.telefono;
+    this._rfidDevice.StoreID = storeId
+    this._rfidDevice.Anagrafica.ApplicationUserID = applicationUserID
 
-    this.manageRfidFormService.createRfid(this._anagraficaRfidDeviceModel).subscribe(res => {
-        this._notificationMessage = "Operazione e termita con successo !!!";
-        this._notificationType = NotificationType.success;
-        this.formView = false;
+    this._rfidDevice.RfidDeviceCode = this.RfidForm.value.rfidCode;
+    this._rfidDevice.ApplicationUserID =applicationUserID;
+    this._rfidDevice.StoreID = storeId;
+
+
+   this.manageRfidFormService.JoinDevicetoAnagrafica(this._rfidDevice)
+   .finally(()=>{
+     this._notificationservice.CreateNotification();
+   })
+    .subscribe(res => {
+        this._notificationservice.setMessage("Operazione e termita con successo !!!");
+         this._notificationservice.setSucess();
+     
     },
       err => {
-        this._notificationMessage = "Errori durante il salvataggio !!!";
-        this._notificationType = NotificationType.danger;
-        this.formView = false;
+       this._notificationservice.setMessage("Operazione non è andata a buon fine !!!");
+        if(err._body =="inUse")
+           this._notificationservice.setMessage("Questo disposistivo è già assegnato ad un altro utente !!!");
+           
+       
+         this._notificationservice.setError();
+
       });
   }
 
   clearForm() {
 
  this.ngOnInit();
-
-    this._anagraficaRfidDeviceModel.anagrafica = new Anagrafica();
-    this._anagraficaRfidDeviceModel.device = new RfidDevice();
+    this._rfidDevice = new RfidDevice();
+    this._rfidDevice.Anagrafica = new Anagrafica();
+   
      this.initForm();
 
   }

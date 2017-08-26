@@ -11,7 +11,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">Navigazione</li>
 
-         <li routerLinkActive="active" *ngIf="isStoreAdministrator"
+         <li routerLinkActive="active" *ngIf="isStoreAdministrator || isOperator"
          [routerLinkActiveOptions]="{exact:true}">
          <a routerLink="/manage-rfid">
           <i class="fa fa-cubes"></i><span>
@@ -56,14 +56,7 @@
             <li><a routerLink="/manage-operator/operators">Tutti</a></li>
           </ul>
         </li>
-
-
-
-        <li routerLinkActive="active" *ngIf="isStoreAdministrator"
-          [routerLinkActiveOptions]="{exact:true}"><a routerLink="/manage-store">Gestione Sore</a></li>
-          <li routerLinkActive="active" *ngIf="isStoreAdministrator"
-          [routerLinkActiveOptions]="{exact:true}"><a routerLink="/manage-operator">Gestione operatori</a></li>
-      
+     
       </ul>
       <!-- /.sidebar-menu -->
     </section>

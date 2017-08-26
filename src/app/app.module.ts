@@ -36,6 +36,7 @@ import { SharedModule } from './shared/shared.module';
 import { ManageStoreModule } from "app/manage-store/manage-store.module";
 import { ManageOperatorsModule } from "app/manage-operators/manage-operators.module";
 import { TemplateModule } from "app/template/template.module";
+import { StoreGuard } from "app/shared/services/store.guard";
 
 
 
@@ -83,6 +84,7 @@ import { TemplateModule } from "app/template/template.module";
    UserService,
    AuthGuard,
    AuthRoleGuard,
+   StoreGuard,
    ConfigService,
    
    { 

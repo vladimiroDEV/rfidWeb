@@ -1,16 +1,20 @@
 <div class="row">
-    <div class="col-md-2 col-md-offset-1">
-        <button class="btn btn-success" routerLink="/manage-rfid">Menu prinipale</button>
-    </div>
-    <div class="col-md-6" *ngIf="formView">
-        <div class="well">
+  
+    <div class="col-md-6 col-md-offset-3">
+        <div class="box box-primary">
+             <div class="box-header"> 
+                    <h3 class="box-title">Assiciazione Dispositivo</h3>
+                  </div>
             <form class="form-group" (ngSubmit)="submit()" [formGroup]="RfidForm" autocomplete="off">
+               
+                <div class="box-body">
                 <fieldset>
                     <legend>Dati utente</legend>
                     <div class="form-group">
                         <label for="email" class="col-lg-2 control-label">Email</label>
                         <div class="col-lg-10">
                             <input type="email" email required class="form-control" id="email" name="email" formControlName="email">
+                           
                             <span class="help-block allertMessage" *ngIf="RfidForm.controls.email.invalid && RfidForm.controls.email.touched">Campo Email è obbligatorio</span>
                             <ul *ngFor="let tipMail of _tipsMail" class="list-tipMail">
                                 <li (click)="loadByEmail(tipMail)">{{tipMail}}</li>
@@ -18,17 +22,16 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="clearfix"></div>
-                    <br>
+                    
                     <div class="form-group">
                         <label for="telefono" class="col-lg-2 control-label">Telefono</label>
                         <div class="col-lg-10">
                             <input type="number" class="form-control" id="telefono" name="telefono" formControlName="telefono">
+                   
                         </div>
                     </div>
 
-                    <div class="clearfix"></div>
-                    <br>
+                   
                     <div class="form-group">
                         <label class="nome" for="nome" class="col-lg-2 control-label">Nome</label>
                         <div class="col-lg-10">
@@ -36,8 +39,7 @@
                         </div>
 
                     </div>
-                    <div class="clearfix"></div>
-                    <br>
+                   
                     <div class="form-group">
 
                         <label for="cognome" class="col-lg-2 control-label">Cognome</label>
@@ -45,8 +47,7 @@
                             <input type="text" class="form-control " id="cognome" name="cognome" formControlName="cognome">
                         </div>
                     </div>
-                    <div class="clearfix"></div>
-                    <br>
+                 
 
                 </fieldset>
                 <fieldset class="form-group">
@@ -63,24 +64,18 @@
                         </div>
                     </div>
                 </fieldset>
-                <div class="clearfix"></div>
-                <br>
-                <div class="row">
-                    <button class="btn btn-success" [disabled]="!RfidForm.valid" type="submit">Salva</button>
-                    <button class="btn btn-danger pull-right" type="button" (click)="clearForm()">Ripulisci</button>
+             
+                </div>
+           
+                <div class="box-footer">
+                    <button class="btn btn-success btn-xs btn-flat" [disabled]="!RfidForm.valid" type="submit">Salva</button>
+                    <button class="btn btn-danger pull-right btn-xs btn-flat" type="button" (click)="clearForm()">Ripulisci</button>
 
                 </div>
 
 
             </form>
         </div>
-    </div>
-
-    <div class="col-md-6" *ngIf="!formView">
-
-        <!--<app-notification [notificationMessage]="_notificationMessage" [notifiacationType]="_notificationType">
-        </app-notification>-->
-
     </div>
 
 </div>

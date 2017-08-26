@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import { BaseService } from '../shared/services/base.service';
 import { BehaviorSubject } from 'rxjs/Rx';
 import { ConfigService } from '../shared/utils/config.service';
+import { ManageStoreService } from "app/shared/services/manage-store.service";
 
 
 
@@ -24,7 +25,8 @@ export class ManageRfidService extends BaseService {
   _options:RequestOptions;
   _applicationUserId= "";
  
-    constructor(private _http: Http, configService: ConfigService) {
+    constructor(private _http: Http, configService: ConfigService,
+      private _manageStoreservice: ManageStoreService) {
 
           super();
     this.loggedIn = !!localStorage.getItem('auth_token');
@@ -39,7 +41,13 @@ export class ManageRfidService extends BaseService {
 
 //http
 
-    createRfid(anagraficaRfidDeviceModel: AnagraficaRfidDeviceModel) {
+
+    JoinDevicetoAnagrafica(device:RfidDevice){
+        return this._http.post(this.baseUrl+"/RfidDevice/JoinDeviseToAnagrafica", JSON.stringify(device), this._options)
+    }
+
+    
+    createRfid(anagraficaRfidDeviceModel: AnagraficaRfidDeviceModel) {  //old
        
        anagraficaRfidDeviceModel.device.ApplicationUserID = this._applicationUserId;
        
@@ -85,7 +93,8 @@ export class ManageRfidService extends BaseService {
     // get mail likes 
 
     getMailLikes(email:string) {
-         return this._http.get(this.baseUrl+'/Anagrafica/emailLikes/'+ email, this._options );
+        let  storeid  = this._manageStoreservice.GetlocalStoreid();
+         return this._http.get(this.baseUrl+'/Anagrafica/emailLikes/'+storeid +'/'+ email, this._options );
     }
 
 
