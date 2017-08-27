@@ -59,8 +59,9 @@ export class ManageRfidService extends BaseService {
 
     }
     paidAction(paidModel: PaidModel) { 
-       
-        return this._http.post(this.baseUrl +'/RfidDevice/paid', JSON.stringify(paidModel), this._options);
+       paidModel.StoreId = this._manageStoreservice.GetlocalStoreid();
+       console.log(JSON.stringify(paidModel));
+        return this._http.post(this.baseUrl +'/RfidDevice/paidByDevice', JSON.stringify(paidModel), this._options);
     }
 
     getAllTransactionsToPaydOff(rfidCode: string){

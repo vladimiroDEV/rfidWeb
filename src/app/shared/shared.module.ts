@@ -6,6 +6,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { NotificationModule } from 'app/shared/notification/notification.module';
 
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -14,7 +15,8 @@ import { NotificationModule } from 'app/shared/notification/notification.module'
   declarations: [
     ShortenPipe,
     myFocus,
-    SpinnerComponent
+    SpinnerComponent,
+    
     ],
     exports:[myFocus,SpinnerComponent],
 

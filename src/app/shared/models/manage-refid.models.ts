@@ -32,6 +32,7 @@ export class PaidModel {
     RfidCode:string;
     Price:number;
     Descrizione:string;
+    StoreId:number;
 }
 
 export class RfidDeviceTransaction

@@ -4,6 +4,7 @@ import { ManageRfidService } from '../manage-rfid.service';
 import { RfidDevice, PaidModel } from "app/shared/models/manage-refid.models";
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotificationService } from '../../shared/notification/notification.service';
+import { ManageStoreService } from "app/shared/services/manage-store.service";
 
 @Component({
   selector: 'app-paid',
@@ -25,7 +26,7 @@ export class PaidComponent implements OnInit {
     private _route: ActivatedRoute,
     private manageRfidService: ManageRfidService,
     private fb: FormBuilder,
-    private _notificationService: NotificationService) { }
+    private _notificationService: NotificationService, ) { }
 
   ngOnInit() {
     this.clearForm();
@@ -33,27 +34,35 @@ export class PaidComponent implements OnInit {
   paid(form: NgForm) {
  this._paidModel = this.PaidForm.value;
     if (form.valid) {
-      this._paidModel = this.PaidForm.value;
+      /// StoreID viene settato all'interno del servizzio
+      let price:string =  this.PaidForm.get('price').value;
+      let clearPrice = parseFloat(price.toString().replace(',','.').replace(' ',''))
+      this._paidModel.RfidCode = this.PaidForm.get('rfidCode').value;
+       this._paidModel.Price = clearPrice;
+        this._paidModel.Descrizione =  this.PaidForm.get('descrizione').value;
       
       this.isProcessing=true;
       this.manageRfidService.paidAction(this._paidModel)
-        .finally(()=>this.isProcessing = false)
+        .finally(()=>{
+          this.isProcessing = false;
+          this._notificationService.CreateNotification();
+        }
+        )
         .subscribe(result => {
        
          this._notificationService.setSucess();
          this._notificationService.setMessage("Il pagamento è andato a buon fine")
-        this._notificationService.CreateNotification();
+       
         },
         err => {
-          if (err.status == 404) {
-            
-        this._notificationService.setError();
-         this._notificationService.setMessage("Il dispositivo no è stato trovato nel  oppure il dispositivo no è stato assegnato!")
-        this._notificationService.CreateNotification();
-          }else {
-        this._notificationService.setError();
-         this._notificationService.setMessage("Si sono verificati dei errori durnte il pagamento!")
-        this._notificationService.CreateNotification();
+           this._notificationService.setError();
+            this._notificationService.setMessage("Si sono verificati dei errori durnte il pagamento!")
+          if (err._body=="NoDevice") {
+             this._notificationService.setMessage("Il dispositivo no è stato trovato");
+             if(err._body=="NoAnagrafica")
+                this._notificationService.setMessage("Questo Disposistivo NON è assiciato a nessun utente!!");
+    
+        
           }
         }
         );

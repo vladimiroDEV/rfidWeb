@@ -18,7 +18,7 @@ export class DeviceCodeInputDirective implements OnInit{
 }
 
  @HostListener('input') change(eventData: Event){
-   console.log(eventData);
+
  }
 
 
