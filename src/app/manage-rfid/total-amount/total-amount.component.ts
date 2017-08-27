@@ -82,6 +82,8 @@ export class TotalAmountComponent implements OnInit {
         this.allTransactions = res.json();
         this.allTransactions.forEach(operation => {
           this.Totale += operation.Importo;
+          this.Totale = parseFloat(this.Totale.toFixed(2));
+        
         })
 
         this.TotalInfoView = true;

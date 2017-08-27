@@ -1,10 +1,7 @@
 <div class="row">
 
-  <div class="col-md-2 col-md-offset-1">
-    <button class="btn btn-success" routerLink="/manage-rfid">Menu prinipale</button>
-  </div>
   <div class="col-md-6" *ngIf="readRfidView">
-    <div class="well">
+    <div class="box box-primary">
 
       <form [formGroup]="ReadRfidForm" (ngSubmit)="getTotal(f)" #f="ngForm">
         <fieldset>
@@ -23,7 +20,7 @@
   </div>
 
   <div class="col-md-8" *ngIf="TotalInfoView">
-    <div class="well">
+    <div class="box box-primary">
 
       <table class="table table-striped">
         <thead>
