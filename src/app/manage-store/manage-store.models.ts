@@ -4,6 +4,7 @@ export class StoreModel {
     Address:string; 
     CreationDate:Date;
     LastModifiedDate:Date;
+    AdministratorID:string;
                
 }
 

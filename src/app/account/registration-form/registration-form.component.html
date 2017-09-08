@@ -56,7 +56,7 @@
 			<div class="form-group" *ngIf="isAdministrator">
 				<label for="choiseRole" class="col-lg-2 control-label">Ruolo</label>
 				<div class="col-lg-10">
-					<select id="choiseRole" name="role" class="form-control" >
+					<select id="choiseRole" formControlName="role" class="form-control" >
                          <option *ngFor="let opt of optionsRoles, let i=index" >{{opt}}</option>
 
 						</select>

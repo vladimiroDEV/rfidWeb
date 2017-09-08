@@ -12,7 +12,11 @@ export class HeaderComponent implements OnInit {
   constructor(private userService:UserService) { }
 
   ngOnInit() {
-    this.UserEmail = this.userService.CurrentUserEmail();
+
+    this.userService.authNavStatus$.subscribe(res=>{
+      this.UserEmail = this.userService.CurrentUserEmail();
+    });
+   
   }
 
   logout() {

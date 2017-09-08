@@ -60,13 +60,22 @@ export class ManageRfidService extends BaseService {
     }
     paidAction(paidModel: PaidModel) { 
        paidModel.StoreId = this._manageStoreservice.GetlocalStoreid();
-       console.log(JSON.stringify(paidModel));
+       paidModel.OperatorID = this._manageStoreservice.GetStoreOperatorID();
+      
         return this._http.post(this.baseUrl +'/RfidDevice/paidByDevice', JSON.stringify(paidModel), this._options);
     }
 
     getAllTransactionsToPaydOff(rfidCode: string){
-        
-      return this._http.get(this.baseUrl +'/RfidDevice/getAllTransactionsToPaydOff/'+ rfidCode,this._options);
+       let paidModel = new PaidModel();
+       paidModel.RfidCode = rfidCode;
+       paidModel.Price =0;
+       paidModel.Descrizione="";
+       paidModel.StoreId = this._manageStoreservice.GetlocalStoreid();
+       paidModel.OperatorID = this._manageStoreservice.GetStoreOperatorID();
+       console.log(JSON.stringify(paidModel));
+       console.log(this.baseUrl +'/RfidDevice/getAllTransactionsToPaydOff');
+       paidModel.StoreId = this._manageStoreservice.GetlocalStoreid();
+      return this._http.post(this.baseUrl +'/RfidDevice/getAllTransactionsToPaydOff', JSON.stringify(paidModel),this._options);
     }
 
     getUserDetailByEmail(email:string) {
@@ -95,6 +104,7 @@ export class ManageRfidService extends BaseService {
 
     getMailLikes(email:string) {
         let  storeid  = this._manageStoreservice.GetlocalStoreid();
+        console.log(this.baseUrl+'/Anagrafica/emailLikes/'+storeid +'/'+ email,)
          return this._http.get(this.baseUrl+'/Anagrafica/emailLikes/'+storeid +'/'+ email, this._options );
     }
 

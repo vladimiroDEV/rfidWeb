@@ -110,8 +110,10 @@ export class RegistrationFormComponent implements OnInit {
      let role = "Default";
      let userRegistration:UserRegistration = new UserRegistration();
 
-     if(this.userService.isStoreAdministrator()) 
+     if(this.userService.isAdministrator()) {
          role = this.RegistrationForm.get('role').value;
+         console.log(role);
+     }
 
 
      else if(this.userService.isStoreAdministrator())

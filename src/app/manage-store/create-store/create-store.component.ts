@@ -37,6 +37,8 @@ export class CreateStoreComponent implements OnInit {
     this.storeModel.Telefono = this.StoreForm.value.telefono;
     this.storeModel.Address = this.StoreForm.value.address;
    this.isRequesting = true;
+
+   // store adrministrator from localstorage called by service
     this._manageStoreService.CreateStore(this.storeModel)
     .finally(()=> {
       this.isRequesting = false;

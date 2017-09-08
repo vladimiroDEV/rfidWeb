@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ManageRfidService } from '../manage-rfid.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RfidDevice, RfidDeviceTransaction} from "app/shared/models/manage-refid.models";
+import { RfidDevice, RfidDeviceTransaction } from "app/shared/models/manage-refid.models";
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NotificationService } from '../../shared/notification/notification.service';
 
@@ -14,7 +14,6 @@ export class TotalAmountComponent implements OnInit {
 
   readRfidView:boolean = false;
   TotalInfoView:boolean = false;
-
   
   rfidCode = "";
   Totale:number = 0;
@@ -74,11 +73,11 @@ export class TotalAmountComponent implements OnInit {
         this._notificationService.CreateNotification();
       });
   }
-  getAllTransaztion(rfideCode) {
-    this.rfidCode = rfideCode
+  getAllTransaztion(rfideCode) {  
     this._manageRfidService.getAllTransactionsToPaydOff(rfideCode)
 
       .subscribe((res) => {
+        console.log(res);
         this.allTransactions = res.json();
         this.allTransactions.forEach(operation => {
           this.Totale += operation.Importo;

@@ -12,12 +12,16 @@ export class ManageStoreService extends BaseService {
   }
 
   CreateStore(storemodel: StoreModel){
-
+           
+           if(localStorage.getItem("Rfid_AppliactionUserID")){
+            storemodel.AdministratorID = localStorage.getItem("Rfid_AppliactionUserID");
+          
            return this.http.
            post(this.configService.getApiURI()+"/Store/create",
             JSON.stringify(storemodel), 
             this.configService.getRequestOptions())
             .map(res=>res.json());
+          }
 
   }
 
@@ -60,6 +64,9 @@ export class ManageStoreService extends BaseService {
   }
   GetlocalStoreid(){
     return +localStorage.getItem("store_id");
+  }
+  GetStoreOperatorID(){
+    return localStorage.getItem("Rfid_AppliactionUserID");
   }
 
 

@@ -1,6 +1,4 @@
 
-<div class="row">
-  <div class="col-md-8">
 
 
 
@@ -23,7 +21,7 @@
                 </tr>
                 <tr *ngFor="let user of applicationUsers; let i= index">
 
-                  <td style="width: 10px">i</td>
+                  <td style="width: 10px">{{i +1}}</td>
                   <td>{{user.Email}}</td>
                   <td>{{user.FirstName}}</td>
                    <td>{{user.LastName}}</td>
@@ -52,5 +50,3 @@
               </div>
             </div>
           </div>
-  </div>
-</div>

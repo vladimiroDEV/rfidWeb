@@ -140,6 +140,7 @@ export class UserService extends BaseService {
     return this.loggedIn;
   }
 
+
   getAvailableRoles(){
 
     let allroles = [ "Default","Administrator","StoreAdministrator","StoreOperator" ];
