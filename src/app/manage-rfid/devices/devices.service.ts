@@ -10,7 +10,7 @@ export class DevicesService {
 
 
   getDevices() {
-    return this._manageRfidDevicesSeriveices.getDevicesByApplicationUser();
+    return this._manageRfidDevicesSeriveices.getStoreDevices();
   }
   
  

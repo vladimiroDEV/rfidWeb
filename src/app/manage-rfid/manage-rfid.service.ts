@@ -115,6 +115,11 @@ export class ManageRfidService extends BaseService {
     getDevicesByApplicationUser() {
          return this._http.get(this.baseUrl+'/RfidDevice/GetByApplicationUser/',this._options );
     }
+
+    getStoreDevices() {
+        let  storeid  = this._manageStoreservice.GetlocalStoreid();
+        return this._http.get(this.baseUrl+'/Store/GetStoreDevices/'+storeid,this._options );
+   }
     getDeviceHistory(deviceCode:string){
         return this._http.get(this.baseUrl+'/RfidDevice/getDeviceHistory/'+deviceCode,this._options );
     }
