@@ -37,9 +37,6 @@ export class NotificationComponent implements OnInit {
   }
 
     getAlertStyle() {
-
-      console.log("getStyle")
-      console.log(this.notificationmodel);
   let style = "";
     switch(this.notificationmodel.notificationType) {
       case NotificationType.error:

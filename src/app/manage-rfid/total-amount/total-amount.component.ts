@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ManageRfidService } from '../manage-rfid.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RfidDevice, RfidDeviceTransaction } from "app/shared/models/manage-refid.models";
+import { RfidDevice, RfidDeviceTransaction, PaidModel } from "app/shared/models/manage-refid.models";
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NotificationService } from '../../shared/notification/notification.service';
 
@@ -52,13 +52,22 @@ export class TotalAmountComponent implements OnInit {
   }
 
   getTotal() {
-    if (this.ReadRfidForm.value.rfidCode != '')
+    if (this.ReadRfidForm.value.rfidCode != ''){
       this.getAllTransaztion(this.ReadRfidForm.value.rfidCode);
+      this.rfidCode = this.ReadRfidForm.value.rfidCode;
+
+    }
   }
 
  
   paidTotalReset() {
-    this._manageRfidService.paidTotalReset(this.rfidCode)
+    let paidModel = new PaidModel();
+    paidModel.RfidCode = this.rfidCode;
+    paidModel.Price = this.Totale;
+
+ 
+
+    this._manageRfidService.paidTotalReset(paidModel)
       .subscribe((res) => {
          this._notificationService.setSucess();
          this._notificationService.setMessage("L'operazione è andata a buon fine")
@@ -77,7 +86,7 @@ export class TotalAmountComponent implements OnInit {
     this._manageRfidService.getAllTransactionsToPaydOff(rfideCode)
 
       .subscribe((res) => {
-        console.log(res);
+       
         this.allTransactions = res.json();
         this.allTransactions.forEach(operation => {
           this.Totale += operation.Importo;
@@ -85,24 +94,25 @@ export class TotalAmountComponent implements OnInit {
         
         })
 
-        this.TotalInfoView = true;
-        this.readRfidView = false;
+       
      
       },
       err => {
-        this._notificationService.setError();
-         if (err.status == 404) {
-         this._notificationService.setMessage("Questo disositivo non e associato a nessun utente!");
-         }
-         else {
+        // this._notificationService.setError();
+        //  if (err.status == 404) {
+        //  this._notificationService.setMessage("Questo disositivo non e associato a nessun utente!");
+        //  }
+        //  else {
      
-         this._notificationService.setMessage("Si è verificato un errore!");
-         }
+        //  this._notificationService.setMessage("Si è verificato un errore!");
+        //  }
       
-        this._notificationService.CreateNotification()
+        // this._notificationService.CreateNotification()
 
          
-      })
+      });
+      this.TotalInfoView = true;
+      this.readRfidView = false;
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { ManageRfidService } from '../manage-rfid.service';
-import { RfidDeviceTransaction } from "app/shared/models/manage-refid.models";
+import { RfidDeviceTransaction, PaidModel } from "app/shared/models/manage-refid.models";
 
 
 
@@ -56,9 +56,11 @@ ngOnChanges(changes: any) {
       })
   }
  paidTotalReset() {
-
+   let paidModel = new PaidModel();
+   paidModel.RfidCode = this.rfidCode;
+   paidModel.Price = this.totalToPay;
   
-    this._manageRfidService.paidTotalReset(this.rfidCode)
+    this._manageRfidService.paidTotalReset(paidModel)
       .subscribe((res) => {
         this.ViewOperationMessagesSuccessed = true;
       },

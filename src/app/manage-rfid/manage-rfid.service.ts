@@ -72,8 +72,6 @@ export class ManageRfidService extends BaseService {
        paidModel.Descrizione="";
        paidModel.StoreId = this._manageStoreservice.GetlocalStoreid();
        paidModel.OperatorID = this._manageStoreservice.GetStoreOperatorID();
-       console.log(JSON.stringify(paidModel));
-       console.log(this.baseUrl +'/RfidDevice/getAllTransactionsToPaydOff');
        paidModel.StoreId = this._manageStoreservice.GetlocalStoreid();
       return this._http.post(this.baseUrl +'/RfidDevice/getAllTransactionsToPaydOff', JSON.stringify(paidModel),this._options);
     }
@@ -87,14 +85,19 @@ export class ManageRfidService extends BaseService {
    
   
      // esetRfid : dissassOcia il disposistivo dall'utente
-      paidTotalReset(code:string){
+      paidTotalReset(paidModel:PaidModel){
+        paidModel.Descrizione="";
+        paidModel.StoreId = this._manageStoreservice.GetlocalStoreid();
+        paidModel.OperatorID = this._manageStoreservice.GetStoreOperatorID();
+        paidModel.StoreId = this._manageStoreservice.GetlocalStoreid();
+        console.log(paidModel);
           
-         return this._http.post(this.baseUrl+ '/RfidDevice/paidTotalReset', JSON.stringify(code), this._options);
+         return this._http.post(this.baseUrl+ '/RfidDevice/paidTotalReset', JSON.stringify(paidModel), this._options);
         
     }
     
 
-    // paga il totale 
+    // paga il totale  Per anagrafica
     // 
     totalPaid(email:string){
       return this._http.post(this.baseUrl+ '/paidTotal/'+ email, this._options);

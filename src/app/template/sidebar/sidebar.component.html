@@ -37,6 +37,15 @@
           </ul>
         </li>
 
+        <li routerLinkActive="active" *ngIf="isStoreAdministrator"
+        [routerLinkActiveOptions]="{exact:true}">
+        <a routerLink="/manage-store">
+         <i class="fa fa-cubes"></i><span>
+         Gestion Attività</span></a>
+     </li>
+
+        
+
 
 
 
